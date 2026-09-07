@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#2496ff">
+
+<title>FT TRADE — Tasks</title>
+  <script src="config.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+    --blue:#2496ff;
+    --blue-dark:#1477d4;
+    --blue-light:#eaf6ff;
+    --bg:#f5faff;
+    --white:#fff;
+    --text:#152235;
+    --muted:#718096;
+    --border:#e1edf7;
+    --green:#16a34a;
+    --red:#dc2626;
+    --orange:#ea580c;
+    --shadow:0 12px 34px rgba(36,150,255,.12);
+}
+
+body{
+    min-height:100vh;
+    padding-bottom:105px;
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--text);
+    background:var(--bg);
+}
+
+/* HEADER */
+
+.header{
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    padding:17px 17px 20px;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.topbar{
+    max-width:760px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.back{
+    width:48px;
+    height:48px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    background:#fff;
+    color:var(--blue-dark);
+    font-size:31px;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(36,150,255,.08);
+}
+
+.title{
+    flex:1;
+}
+
+.title h1{
+    font-size:24px;
+    font-weight:900;
+}
+
+.title p{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.6px;
+}
+
+/* MAIN */
+
+.container{
+    width:calc(100% - 22px);
+    max-width:760px;
+    margin:22px auto;
+}
+
+/* CARD */
+
+.card{
+    margin-bottom:18px;
+    padding:23px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+}
+
+/* PRICE */
+
+.price-card{
+    position:relative;
+    overflow:hidden;
+    padding:25px;
+    background:linear-gradient(135deg,#2496ff,#1477d4);
+    color:#fff;
+    border:0;
+    box-shadow:0 17px 40px rgba(36,150,255,.25);
+}
+
+.price-card:before{
+    content:"";
+    position:absolute;
+    width:175px;
+    height:175px;
+    right:-75px;
+    top:-75px;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+}
+
+.price-card:after{
+    content:"";
+    position:absolute;
+    width:90px;
+    height:90px;
+    right:35px;
+    bottom:-55px;
+    border-radius:50%;
+    background:rgba(255,255,255,.07);
+}
+
+.price-label{
+    position:relative;
+    z-index:2;
+    font-size:12px;
+    font-weight:900;
+    opacity:.9;
+    letter-spacing:.4px;
+}
+
+.price{
+    position:relative;
+    z-index:2;
+    margin-top:7px;
+    font-size:40px;
+    font-weight:900;
+}
+
+.price-sub{
+    position:relative;
+    z-index:2;
+    margin-top:7px;
+    font-size:11px;
+    opacity:.88;
+}
+
+/* ADMIN MESSAGE */
+
+.admin-message{
+    padding:18px;
+    border-radius:19px;
+    background:#f0f8ff;
+    border:1px solid #d7ecfb;
+    margin-bottom:21px;
+}
+
+.admin-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--blue-dark);
+    font-size:12px;
+    font-weight:900;
+}
+
+.admin-icon{
+    width:36px;
+    height:36px;
+    border-radius:11px;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+}
+
+.admin-message p{
+    margin-top:11px;
+    color:#52657b;
+    font-size:12px;
+    line-height:1.7;
+}
+
+.whatsapp-number{
+    color:var(--blue-dark);
+    font-weight:900;
+}
+
+/* TASK HEADING */
+
+.task-heading{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.task-icon{
+    width:50px;
+    height:50px;
+    border-radius:15px;
+    background:var(--blue-light);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    flex-shrink:0;
+}
+
+.task-heading h2{
+    font-size:21px;
+    font-weight:900;
+}
+
+.task-heading p{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+/* TASK TYPE */
+
+.task-types{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:20px;
+}
+
+.type-box{
+    padding:16px;
+    min-height:75px;
+    border-radius:17px;
+    background:#f9fcff;
+    border:1px solid var(--border);
+}
+
+.type-box small{
+    display:block;
+    color:var(--muted);
+    font-size:9px;
+    font-weight:800;
+}
+
+.type-box strong{
+    display:block;
+    margin-top:7px;
+    color:var(--blue-dark);
+    font-size:14px;
+}
+
+/* FORM */
+
+label{
+    display:block;
+    margin-top:20px;
+    margin-bottom:8px;
+    color:#52657b;
+    font-size:11px;
+    font-weight:900;
+}
+
+input{
+    width:100%;
+    height:56px;
+    padding:0 16px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    outline:none;
+    background:#f9fcff;
+    color:var(--text);
+    font-size:14px;
+    transition:.2s;
+}
+
+input::placeholder{
+    color:#9aabba;
+}
+
+input:focus{
+    background:#fff;
+    border-color:#8acbff;
+    box-shadow:0 0 0 4px rgba(36,150,255,.08);
+}
+
+.submit{
+    width:100%;
+    height:56px;
+    margin-top:18px;
+    border:0;
+    border-radius:16px;
+    background:linear-gradient(135deg,#2496ff,#1477d4);
+    color:#fff;
+    font-size:13px;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(36,150,255,.23);
+}
+
+.submit:active{
+    transform:scale(.98);
+}
+
+.submit:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+    box-shadow:none;
+}
+
+.security-note{
+    margin-top:13px;
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.6;
+    text-align:center;
+}
+
+/* MESSAGE */
+
+.message{
+    display:none;
+    margin-top:13px;
+    padding:14px;
+    border-radius:14px;
+    font-size:11px;
+    line-height:1.5;
+}
+
+/* HISTORY */
+
+.history-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.history-title h2{
+    font-size:20px;
+}
+
+.history-badge{
+    padding:7px 11px;
+    border-radius:10px;
+    background:var(--blue-light);
+    color:var(--blue-dark);
+    font-size:9px;
+    font-weight:900;
+}
+
+.loading{
+    margin-top:18px;
+    text-align:center;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.history-item{
+    margin-top:13px;
+    padding:17px;
+    border:1px solid var(--border);
+    border-radius:17px;
+    background:#fbfdff;
+}
+
+.history-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+}
+
+.history-email{
+    color:var(--text);
+    font-size:13px;
+    font-weight:800;
+    word-break:break-word;
+}
+
+/* STATUS */
+
+.history-status{
+    padding:7px 10px;
+    border-radius:9px;
+    font-size:8px;
+    font-weight:900;
+    white-space:nowrap;
+    text-transform:uppercase;
+}
+
+/* APPROVED */
+
+.history-status.approved{
+    background:#ecfdf3;
+    color:#16a34a;
+    border:1px solid #bbf7d0;
+}
+
+/* PENDING */
+
+.history-status.pending{
+    background:#fff7ed;
+    color:#ea580c;
+    border:1px solid #fed7aa;
+}
+
+/* REJECTED */
+
+.history-status.rejected{
+    background:#fef2f2;
+    color:#dc2626;
+    border:1px solid #fecaca;
+}
+
+.history-date{
+    margin-top:9px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.empty{
+    margin-top:16px;
+    padding:32px 10px;
+    text-align:center;
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.6;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    z-index:100;
+    left:10px;
+    right:10px;
+    bottom:9px;
+    height:73px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--border);
+    border-radius:23px;
+    background:rgba(255,255,255,.97);
+    box-shadow:0 13px 38px rgba(36,80,120,.16);
+    backdrop-filter:blur(18px);
+}
+
+.nav-inner{
+    width:100%;
+    max-width:620px;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.nav-item{
+    width:23%;
+    height:56px;
+    border:0;
+    border-radius:16px;
+    background:transparent;
+    color:#8191a3;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    font-size:9px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.nav-item.active{
+    color:#fff;
+    background:linear-gradient(135deg,#2496ff,#1477d4);
+    box-shadow:0 8px 20px rgba(36,150,255,.22);
+}
+
+.nav-icon{
+    font-size:23px;
+    line-height:23px;
+}
+
+/* MOBILE */
+
+@media(max-width:380px){
+
+    .container{
+        width:calc(100% - 16px);
+        margin-top:17px;
+    }
+
+    .card{
+        padding:19px;
+        border-radius:21px;
+        margin-bottom:15px;
+    }
+
+    .price-card{
+        padding:22px;
+    }
+
+    .title h1{
+        font-size:22px;
+    }
+
+    .price{
+        font-size:36px;
+    }
+
+    .task-heading h2{
+        font-size:19px;
+    }
+
+    .task-icon{
+        width:47px;
+        height:47px;
+        font-size:23px;
+    }
+
+    .admin-message p{
+        font-size:11px;
+    }
+
+    .type-box{
+        padding:14px;
+    }
+
+}
+
+/* DESKTOP */
+
+@media(min-width:700px){
+
+    .container{
+        margin-top:30px;
+    }
+
+    .card:hover{
+        border-color:#c7e5fa;
+    }
+
+    .back:hover{
+        background:var(--blue-light);
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="topbar">
+
+        <button
+            class="back"
+            type="button"
+            onclick="navigate('dashboard.html')">
+            ‹
+        </button>
+
+        <div class="title">
+
+            <h1>Tasks</h1>
+
+            <p>
+                FT TRADE • TASK CENTER
+            </p>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <!-- PRICE -->
+
+    <section class="card price-card">
+
+        <div class="price-label">
+            TODAY CUSTOM GMAIL PRICE
+        </div>
+
+        <div class="price">
+            35 PKR
+        </div>
+
+        <div class="price-sub">
+            Current task reward rate
+        </div>
+
+    </section>
+
+
+    <!-- TASK INFO -->
+
+    <section class="card">
+
+        <div class="admin-message">
+
+            <div class="admin-title">
+
+                <div class="admin-icon">
+                    📢
+                </div>
+
+                ADMIN MESSAGE
+
+            </div>
+
+            <p>
+                Every Gmail account must have the password
+                <b>aass1122</b>; otherwise, the Gmail accounts
+                will be rejected. If any user has a problem,
+                please contact on WhatsApp at
+
+                <span class="whatsapp-number">
+                    03357007605
+                </span>.
+            </p>
+
+        </div>
+
+
+        <div class="task-heading">
+
+            <div class="task-icon">
+                📧
+            </div>
+
+            <div>
+
+                <h2>
+                    Submit Task
+                </h2>
+
+                <p>
+                    Custom Gmail submissions
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="task-types">
+
+            <div class="type-box">
+
+                <small>
+                    TASK TYPE
+                </small>
+
+                <strong>
+                    Custom Mails
+                </strong>
+
+            </div>
+
+
+            <div class="type-box">
+
+                <small>
+                    REWARD
+                </small>
+
+                <strong>
+                    35 PKR
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SUBMIT -->
+
+    <section class="card">
+
+        <div class="task-heading">
+
+            <div class="task-icon">
+                ✉️
+            </div>
+
+            <div>
+
+                <h2>
+                    Enter Gmail Address
+                </h2>
+
+                <p>
+                    Submit your Gmail for this task
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <label for="email">
+            GMAIL ADDRESS
+        </label>
+
+        <input
+            id="email"
+            type="email"
+            autocomplete="off"
+            placeholder="example@gmail.com">
+
+
+        <button
+            id="submitBtn"
+            class="submit"
+            type="button"
+            onclick="submitTask()">
+
+            SUBMIT GMAIL
+
+        </button>
+
+
+        <div
+            id="message"
+            class="message">
+        </div>
+
+
+        <p class="security-note">
+            🔒 Only submit a Gmail account you own
+            or are authorized to use. Never share
+            your Gmail password.
+        </p>
+
+    </section>
+
+
+    <!-- HISTORY -->
+
+    <section class="card">
+
+        <div class="history-title">
+
+            <h2>
+                Submission History
+            </h2>
+
+            <span class="history-badge">
+                HISTORY
+            </span>
+
+        </div>
+
+
+        <div id="history">
+
+            <div class="loading">
+                Loading history...
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+    <div class="nav-inner">
+
+        <button
+            class="nav-item"
+            type="button"
+            onclick="navigate('dashboard.html')">
+
+            <span class="nav-icon">
+                ⌂
+            </span>
+
+            HOME
+
+        </button>
+
+
+        <button
+            class="nav-item active"
+            type="button"
+            onclick="navigate('tasks.html')">
+
+            <span class="nav-icon">
+                ✓
+            </span>
+
+            TASKS
+
+        </button>
+
+
+        <button
+            class="nav-item"
+            type="button"
+            onclick="navigate('withdraw.html')">
+
+            <span class="nav-icon">
+                💳
+            </span>
+
+            WITHDRAW
+
+        </button>
+
+
+        <button
+            class="nav-item"
+            type="button"
+            onclick="navigate('profile.html')">
+
+            <span class="nav-icon">
+                👤
+            </span>
+
+            PROFILE
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+<script>
+
+/* =====================================================
+   CONFIG
+===================================================== */
+
+
+
+/* =====================================================
+   USER ID
+===================================================== */
+
+function getUserId(){
+
+    const keys = [
+        "ft_user",
+        "user",
+        "currentUser",
+        "ftUser",
+        "loggedUser"
+    ];
+
+    for(const key of keys){
+
+        try{
+
+            const raw =
+                localStorage.getItem(key);
+
+            if(!raw) continue;
+
+            const user =
+                JSON.parse(raw);
+
+            if(user && user.id){
+                return String(user.id);
+            }
+
+            if(user && user.userId){
+                return String(user.userId);
+            }
+
+        }catch(error){
+
+            console.log(
+                "User data error:",
+                error
+            );
+
+        }
+
+    }
+
+    return "";
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function navigate(page){
+
+    window.location.href = page;
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(text,type){
+
+    const box =
+        document.getElementById("message");
+
+    if(!box) return;
+
+    box.style.display = "block";
+
+    box.textContent = text;
+
+    if(type === "success"){
+
+        box.style.background = "#ecfdf3";
+        box.style.border = "1px solid #bbf7d0";
+        box.style.color = "#15803d";
+
+    }else{
+
+        box.style.background = "#fef2f2";
+        box.style.border = "1px solid #fecaca";
+        box.style.color = "#dc2626";
+
+    }
+
+}
+
+
+/* =====================================================
+   SUBMIT TASK
+===================================================== */
+
+async function submitTask(){
+
+    const userId =
+        getUserId();
+
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const button =
+        document.getElementById("submitBtn");
+
+
+    if(!userId){
+
+        showMessage(
+            "Please login first.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!email){
+
+        showMessage(
+            "Please enter a Gmail address.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!email.endsWith("@gmail.com")){
+
+        showMessage(
+            "Please enter a valid Gmail address.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "SUBMITTING...";
+
+
+    try{
+
+        const response =
+            await fetch(
+                API_BASE +
+                "/api/tasks/submit",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        userId:userId,
+
+                        email:email
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            if(data.duplicate === true){
+
+                showMessage(
+                    "❌ This Gmail has already been submitted.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            showMessage(
+                data.message ||
+                "Submission failed.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        showMessage(
+            "✓ Gmail submitted successfully.",
+            "success"
+        );
+
+
+        document.getElementById(
+            "email"
+        ).value = "";
+
+
+        loadHistory();
+
+
+    }catch(error){
+
+        console.log(
+            "Submit error:",
+            error
+        );
+
+
+        showMessage(
+            "Unable to connect to the server. Please try again.",
+            "error"
+        );
+
+    }finally{
+
+        button.disabled = false;
+
+        button.textContent =
+            "SUBMIT GMAIL";
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD HISTORY
+===================================================== */
+
+async function loadHistory(){
+
+    const historyBox =
+        document.getElementById("history");
+
+    const userId =
+        getUserId();
+
+
+    if(!userId){
+
+        historyBox.innerHTML = `
+            <div class="empty">
+                Please login to view your
+                submission history.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    historyBox.innerHTML = `
+        <div class="loading">
+            Loading history...
+        </div>
+    `;
+
+
+    try{
+
+        const response =
+            await fetch(
+                API_BASE +
+                "/api/tasks/history/" +
+                encodeURIComponent(userId)
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+                data.message ||
+                "Unable to load history."
+            );
+
+        }
+
+
+        const submissions =
+            Array.isArray(
+                data.submissions
+            )
+            ? data.submissions
+            : [];
+
+
+        if(
+            submissions.length === 0
+        ){
+
+            historyBox.innerHTML = `
+                <div class="empty">
+                    No submissions yet.<br>
+                    Your Gmail submissions
+                    will appear here.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        historyBox.innerHTML = "";
+
+
+        submissions
+        .slice()
+        .reverse()
+        .forEach(item => {
+
+            const div =
+                document.createElement("div");
+
+            div.className =
+                "history-item";
+
+
+            const top =
+                document.createElement("div");
+
+            top.className =
+                "history-top";
+
+
+            const email =
+                document.createElement("div");
+
+            email.className =
+                "history-email";
+
+            email.textContent =
+                item.email || "—";
+
+
+            /* STATUS */
+
+            const status =
+                document.createElement("div");
+
+
+            const currentStatus =
+                String(
+                    item.status ||
+                    "pending"
+                ).toLowerCase();
+
+
+            status.className =
+                "history-status " +
+                currentStatus;
+
+
+            status.textContent =
+                currentStatus.toUpperCase();
+
+
+            top.appendChild(email);
+
+            top.appendChild(status);
+
+
+            /* DATE */
+
+            const date =
+                document.createElement("div");
+
+
+            date.className =
+                "history-date";
+
+
+            date.textContent =
+                formatDate(
+                    item.createdAt
+                );
+
+
+            div.appendChild(top);
+
+            div.appendChild(date);
+
+
+            historyBox.appendChild(div);
+
+        });
+
+
+    }catch(error){
+
+        console.log(
+            "History error:",
+            error
+        );
+
+
+        historyBox.innerHTML = `
+            <div class="empty">
+                Unable to load history.<br>
+                Please check that the
+                FT TRADE server is running.
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   DATE FORMAT
+===================================================== */
+
+function formatDate(value){
+
+    if(!value){
+
+        return "Date unavailable";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Date unavailable";
+
+    }
+
+
+    return date.toLocaleString();
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadHistory();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>FT TRADE - Settings</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --blue:#1687ff;
+    --blue2:#0b6fe4;
+    --light:#f4f9ff;
+    --white:#ffffff;
+    --text:#172033;
+    --muted:#718096;
+    --border:#e5edf7;
+    --danger:#ef4444;
+    --shadow:0 10px 30px rgba(22,135,255,.10);
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:var(--light);
+    color:var(--text);
+    min-height:100vh;
+    padding-bottom:90px;
+}
+
+button,
+select,
+input{
+    font-family:inherit;
+}
+
+.header{
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        var(--blue2)
+    );
+    color:white;
+    padding:18px 18px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 5px 20px rgba(22,135,255,.20);
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.back-btn{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:rgba(255,255,255,.18);
+    color:white;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.header h1{
+    font-size:20px;
+}
+
+.header-icon{
+    font-size:22px;
+}
+
+.container{
+    width:min(700px,94%);
+    margin:0 auto;
+}
+
+.page-title{
+    padding:25px 4px 18px;
+}
+
+.page-title h2{
+    font-size:27px;
+    margin-bottom:7px;
+}
+
+.page-title p{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.5;
+}
+
+.user-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:18px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    box-shadow:var(--shadow);
+    margin-bottom:22px;
+}
+
+.avatar{
+    width:52px;
+    height:52px;
+    border-radius:16px;
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        #55b0ff
+    );
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    font-size:21px;
+}
+
+.user-info{
+    min-width:0;
+}
+
+.user-info strong{
+    display:block;
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.user-info span{
+    display:block;
+    color:var(--muted);
+    font-size:13px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.section{
+    margin-bottom:22px;
+}
+
+.section-title{
+    font-size:16px;
+    font-weight:700;
+    margin:0 4px 10px;
+}
+
+.settings-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+.setting-row{
+    min-height:78px;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    border-bottom:1px solid var(--border);
+}
+
+.setting-row:last-child{
+    border-bottom:none;
+}
+
+.setting-left{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    min-width:0;
+}
+
+.setting-icon{
+    width:43px;
+    height:43px;
+    border-radius:13px;
+    background:#edf6ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    flex-shrink:0;
+}
+
+.setting-text{
+    min-width:0;
+}
+
+.setting-text strong{
+    display:block;
+    font-size:15px;
+    margin-bottom:5px;
+}
+
+.setting-text span{
+    display:block;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.4;
+}
+
+.switch{
+    position:relative;
+    width:48px;
+    height:27px;
+    flex-shrink:0;
+}
+
+.switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+    inset:0;
+    background:#d5deea;
+    border-radius:30px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.slider:before{
+    content:"";
+    position:absolute;
+    width:21px;
+    height:21px;
+    left:3px;
+    top:3px;
+    background:white;
+    border-radius:50%;
+    box-shadow:0 2px 5px rgba(0,0,0,.15);
+    transition:.25s;
+}
+
+.switch input:checked + .slider{
+    background:var(--blue);
+}
+
+.switch input:checked + .slider:before{
+    transform:translateX(21px);
+}
+
+.language-select{
+    border:1px solid var(--border);
+    background:white;
+    border-radius:10px;
+    padding:9px 10px;
+    color:var(--text);
+    outline:none;
+}
+
+.action-btn{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:11px;
+    background:#edf6ff;
+    color:var(--blue);
+    font-size:25px;
+    cursor:pointer;
+}
+
+.balance-card{
+    background:linear-gradient(
+        135deg,
+        #1687ff,
+        #55b0ff
+    );
+    color:white;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 12px 30px rgba(22,135,255,.20);
+}
+
+.balance-label{
+    font-size:13px;
+    opacity:.9;
+    margin-bottom:8px;
+}
+
+.balance-value{
+    font-size:28px;
+    font-weight:800;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="header-left">
+
+        <a
+            href="profile.html"
+            class="back-btn">
+            ‹
+        </a>
+
+        <h1 data-i18n="settings">
+            Settings
+        </h1>
+
+    </div>
+
+    <div class="header-icon">
+        ⚙️
+    </div>
+
+</header>
+
+<main class="container">
+  <!-- PAGE TITLE -->
+
+<div class="page-title">
+
+    <h2 data-i18n="settings">
+        Settings
+    </h2>
+
+    <p data-i18n="settingsDesc">
+        Manage your account and app preferences.
+    </p>
+
+</div>
+
+
+<!-- USER -->
+
+<div class="user-card">
+
+    <div
+        class="avatar"
+        id="avatar">
+        FT
+    </div>
+
+    <div class="user-info">
+
+        <strong id="userName">
+            Loading...
+        </strong>
+
+        <span id="userEmail">
+            Loading...
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- PREFERENCES -->
+
+<section class="section">
+
+    <div
+        class="section-title"
+        data-i18n="preferences">
+        Preferences
+    </div>
+
+    <div class="settings-card">
+
+
+        <!-- HIDE BALANCE -->
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+                    💰
+                </div>
+
+                <div class="setting-text">
+
+                    <strong data-i18n="hideBalance">
+                        Hide Balance
+                    </strong>
+
+                    <span data-i18n="hideBalanceDesc">
+                        Hide your balance on dashboard and profile.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="hideBalance">
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <!-- NOTIFICATIONS -->
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+                    🔔
+                </div>
+
+                <div class="setting-text">
+
+                    <strong data-i18n="notifications">
+                        Notifications
+                    </strong>
+
+                    <span data-i18n="notificationsDesc">
+                        Allow app notifications and updates.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="notifications"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <!-- LANGUAGE -->
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+                    🌐
+                </div>
+
+                <div class="setting-text">
+
+                    <strong data-i18n="language">
+                        Language
+                    </strong>
+
+                    <span data-i18n="languageDesc">
+                        Choose your preferred language.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <select
+                id="language"
+                class="language-select">
+
+                <option value="en">
+                    English
+                </option>
+
+                <option value="ur">
+                    اردو
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ACCOUNT & SECURITY -->
+
+<section class="section">
+
+    <div
+        class="section-title"
+        data-i18n="accountSecurity">
+        Account & Security
+    </div>
+
+    <div class="settings-card">
+
+
+        <!-- CHANGE PASSWORD -->
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+                    🔒
+                </div>
+
+                <div class="setting-text">
+
+                    <strong data-i18n="changePassword">
+                        Change Password
+                    </strong>
+
+                    <span data-i18n="changePasswordDesc">
+                        Update your account password.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button
+                class="action-btn"
+                type="button"
+                onclick="openPasswordModal()">
+
+                ›
+
+            </button>
+
+        </div>
+
+
+        <!-- SECURITY -->
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+                    🛡️
+                </div>
+
+                <div class="setting-text">
+
+                    <strong data-i18n="security">
+                        Account Security
+                    </strong>
+
+                    <span data-i18n="securityDesc">
+                        Keep your account information protected.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button
+                class="action-btn"
+                type="button"
+                onclick="showSecurityInfo()">
+
+                ›
+
+            </button>
+
+        </div>
+
+
+        <!-- LOGOUT -->
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+                    🚪
+                </div>
+
+                <div class="setting-text">
+
+                    <strong data-i18n="logout">
+                        Logout
+                    </strong>
+
+                    <span data-i18n="logoutDesc">
+                        Sign out from your account.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button
+                class="action-btn"
+                type="button"
+                onclick="logoutConfirm()">
+
+                ›
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- BALANCE PREVIEW -->
+
+<section class="section">
+
+    <div
+        class="section-title"
+        data-i18n="balancePreview">
+        Balance Preview
+    </div>
+
+    <div class="balance-card">
+
+        <div
+            class="balance-label"
+            data-i18n="availableBalance">
+            Available Balance
+        </div>
+
+        <div
+            class="balance-value"
+            id="balanceValue">
+            PKR 0.00
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+    <a href="dashboard.html">
+        <span>⌂</span>
+        <small data-i18n="home">
+            Home
+        </small>
+    </a>
+
+    <a href="tasks.html">
+        <span>✓</span>
+        <small data-i18n="tasks">
+            Tasks
+        </small>
+    </a>
+
+    <a href="support.html">
+        <span>?</span>
+        <small data-i18n="support">
+            Support
+        </small>
+    </a>
+
+    <a href="profile.html">
+        <span>👤</span>
+        <small data-i18n="profile">
+            Profile
+        </small>
+    </a>
+
+</nav>
+
+
+<!-- PASSWORD MODAL -->
+
+<div
+    class="modal"
+    id="passwordModal">
+
+    <div class="modal-box">
+
+        <button
+            class="close-btn"
+            onclick="closePasswordModal()">
+            ×
+        </button>
+
+        <h3 data-i18n="changePassword">
+            Change Password
+        </h3>
+
+        <p
+            class="modal-desc"
+            data-i18n="passwordDesc">
+            Enter your current password and choose a new password.
+        </p>
+
+        <form
+            onsubmit="changePassword(event)">
+
+            <input
+                type="password"
+                id="currentPassword"
+                placeholder="Current Password"
+                required>
+
+            <input
+                type="password"
+                id="newPassword"
+                placeholder="New Password"
+                minlength="6"
+                required>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm New Password"
+                minlength="6"
+                required>
+
+            <button
+                type="submit"
+                class="primary-btn"
+                id="passwordBtn">
+
+                <span data-i18n="updatePassword">
+                    Update Password
+                </span>
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- SECURITY MODAL -->
+
+<div
+    class="modal"
+    id="securityModal">
+
+    <div class="modal-box">
+
+        <button
+            class="close-btn"
+            onclick="closeSecurityModal()">
+            ×
+        </button>
+
+        <h3 data-i18n="security">
+            Account Security
+        </h3>
+
+        <div class="security-list">
+
+            <div>✓ <span data-i18n="secureAccount">Account protection enabled</span></div>
+
+            <div>✓ <span data-i18n="securePassword">Password is securely stored</span></div>
+
+            <div>✓ <span data-i18n="secureAccess">Only you can access your account</span></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- LOGOUT MODAL -->
+
+<div
+    class="modal"
+    id="logoutModal">
+
+    <div class="modal-box">
+
+        <button
+            class="close-btn"
+            onclick="closeLogoutModal()">
+            ×
+        </button>
+
+        <h3 data-i18n="logout">
+            Logout
+        </h3>
+
+        <p
+            class="modal-desc"
+            data-i18n="logoutQuestion">
+            Are you sure you want to logout?
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                class="secondary-btn"
+                onclick="closeLogoutModal()"
+                data-i18n="cancel">
+                Cancel
+            </button>
+
+            <button
+                class="danger-btn"
+                onclick="logout()"
+                data-i18n="logout">
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast">
+</div>
+<style>
+
+/* =========================
+   MODALS
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(10,30,55,.45);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    z-index:1000;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(430px,100%);
+    background:white;
+    border-radius:22px;
+    padding:22px;
+    position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.20);
+}
+
+.modal-box h3{
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.modal-desc{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+    margin-bottom:18px;
+}
+
+.close-btn{
+    position:absolute;
+    right:15px;
+    top:12px;
+    width:34px;
+    height:34px;
+    border:none;
+    border-radius:10px;
+    background:#f1f5f9;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.modal-box input{
+    width:100%;
+    padding:13px;
+    margin-bottom:11px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    outline:none;
+    font-size:14px;
+}
+
+.modal-box input:focus{
+    border-color:var(--blue);
+}
+
+.primary-btn{
+    width:100%;
+    border:none;
+    border-radius:12px;
+    padding:13px;
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        var(--blue2)
+    );
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.secondary-btn,
+.danger-btn{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:11px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.secondary-btn{
+    background:#edf2f7;
+    color:var(--text);
+}
+
+.danger-btn{
+    background:var(--danger);
+    color:white;
+}
+
+.modal-actions{
+    display:flex;
+    gap:10px;
+}
+
+.security-list{
+    margin-top:15px;
+    display:grid;
+    gap:12px;
+}
+
+.security-list div{
+    background:#f5f9ff;
+    padding:13px;
+    border-radius:11px;
+    font-size:13px;
+}
+
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom-nav{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    height:70px;
+    background:white;
+    border-top:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    z-index:900;
+    box-shadow:0 -5px 20px rgba(0,0,0,.05);
+}
+
+.bottom-nav a{
+    text-decoration:none;
+    color:var(--muted);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    min-width:65px;
+}
+
+.bottom-nav a span{
+    font-size:20px;
+}
+
+.bottom-nav a small{
+    font-size:10px;
+}
+
+.bottom-nav a:hover{
+    color:var(--blue);
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:85px;
+    transform:translateX(-50%) translateY(20px);
+    background:#172033;
+    color:white;
+    padding:12px 18px;
+    border-radius:12px;
+    font-size:13px;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:2000;
+    max-width:90%;
+    text-align:center;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+
+/* =========================
+   RTL
+========================= */
+
+html[dir="rtl"] body{
+    direction:rtl;
+}
+
+html[dir="rtl"] .header-left{
+    flex-direction:row-reverse;
+}
+
+html[dir="rtl"] .setting-row{
+    flex-direction:row-reverse;
+}
+
+html[dir="rtl"] .setting-left{
+    flex-direction:row-reverse;
+}
+
+html[dir="rtl"] .user-card{
+    flex-direction:row-reverse;
+}
+
+html[dir="rtl"] .page-title{
+    text-align:right;
+}
+
+html[dir="rtl"] .section-title{
+    text-align:right;
+}
+
+html[dir="rtl"] .close-btn{
+    right:auto;
+    left:15px;
+}
+
+@media(max-width:480px){
+
+    .page-title h2{
+        font-size:24px;
+    }
+
+    .setting-text span{
+        max-width:230px;
+    }
+
+}
+
+</style>
+<script>
+
+/* =========================
+   API
+========================= */
+
+const API =
+    "https://cleanup-piano-printers-defeat.trycloudflare.com";
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const hideBalance =
+    document.getElementById("hideBalance");
+
+const notifications =
+    document.getElementById("notifications");
+
+const language =
+    document.getElementById("language");
+
+const balanceValue =
+    document.getElementById("balanceValue");
+
+const userName =
+    document.getElementById("userName");
+
+const userEmail =
+    document.getElementById("userEmail");
+
+const avatar =
+    document.getElementById("avatar");
+
+const toast =
+    document.getElementById("toast");
+
+
+/* =========================
+   TRANSLATIONS
+========================= */
+
+const translations = {
+
+    en: {
+
+        settings:"Settings",
+
+        settingsDesc:
+            "Manage your account and app preferences.",
+
+        preferences:"Preferences",
+
+        hideBalance:"Hide Balance",
+
+        hideBalanceDesc:
+            "Hide your balance on dashboard and profile.",
+
+        notifications:"Notifications",
+
+        notificationsDesc:
+            "Allow app notifications and updates.",
+
+        language:"Language",
+
+        languageDesc:
+            "Choose your preferred language.",
+
+        accountSecurity:
+            "Account & Security",
+
+        changePassword:
+            "Change Password",
+
+        changePasswordDesc:
+            "Update your account password.",
+
+        security:
+            "Account Security",
+
+        securityDesc:
+            "Keep your account information protected.",
+
+        logout:"Logout",
+
+        logoutDesc:
+            "Sign out from your account.",
+
+        balancePreview:
+            "Balance Preview",
+
+        availableBalance:
+            "Available Balance",
+
+        home:"Home",
+
+        tasks:"Tasks",
+
+        support:"Support",
+
+        profile:"Profile",
+
+        passwordDesc:
+            "Enter your current password and choose a new password.",
+
+        updatePassword:
+            "Update Password",
+
+        secureAccount:
+            "Account protection enabled",
+
+        securePassword:
+            "Password is securely stored",
+
+        secureAccess:
+            "Only you can access your account",
+
+        logoutQuestion:
+            "Are you sure you want to logout?",
+
+        cancel:"Cancel"
+
+    },
+
+
+    ur: {
+
+        settings:"ترتیبات",
+
+        settingsDesc:
+            "اپنے اکاؤنٹ اور ایپ کی ترجیحات کا انتظام کریں۔",
+
+        preferences:"ترجیحات",
+
+        hideBalance:"بیلنس چھپائیں",
+
+        hideBalanceDesc:
+            "ڈیش بورڈ اور پروفائل پر اپنا بیلنس چھپائیں۔",
+
+        notifications:"اطلاعات",
+
+        notificationsDesc:
+            "ایپ کی اطلاعات اور اپ ڈیٹس کی اجازت دیں۔",
+
+        language:"زبان",
+
+        languageDesc:
+            "اپنی پسندیدہ زبان منتخب کریں۔",
+
+        accountSecurity:
+            "اکاؤنٹ اور سیکیورٹی",
+
+        changePassword:
+            "پاس ورڈ تبدیل کریں",
+
+        changePasswordDesc:
+            "اپنے اکاؤنٹ کا پاس ورڈ تبدیل کریں۔",
+
+        security:
+            "اکاؤنٹ سیکیورٹی",
+
+        securityDesc:
+            "اپنے اکاؤنٹ کی معلومات محفوظ رکھیں۔",
+
+        logout:"لاگ آؤٹ",
+
+        logoutDesc:
+            "اپنے اکاؤنٹ سے سائن آؤٹ کریں۔",
+
+        balancePreview:
+            "بیلنس کا جائزہ",
+
+        availableBalance:
+            "دستیاب بیلنس",
+
+        home:"ہوم",
+
+        tasks:"ٹاسکس",
+
+        support:"سپورٹ",
+
+        profile:"پروفائل",
+
+        passwordDesc:
+            "اپنا موجودہ پاس ورڈ اور نیا پاس ورڈ درج کریں۔",
+
+        updatePassword:
+            "پاس ورڈ اپ ڈیٹ کریں",
+
+        secureAccount:
+            "اکاؤنٹ کی حفاظت فعال ہے",
+
+        securePassword:
+            "پاس ورڈ محفوظ طریقے سے محفوظ ہے",
+
+        secureAccess:
+            "صرف آپ اپنے اکاؤنٹ تک رسائی حاصل کر سکتے ہیں",
+
+        logoutQuestion:
+            "کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟",
+
+        cancel:"منسوخ کریں"
+
+    }
+
+};
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    },3000);
+}
+
+
+/* =========================
+   LANGUAGE
+========================= */
+
+function applyLanguage(lang){
+
+    const selected =
+        translations[lang] ||
+        translations.en;
+
+    document
+        .querySelectorAll("[data-i18n]")
+        .forEach(element => {
+
+            const key =
+                element.getAttribute("data-i18n");
+
+            if(selected[key]){
+
+                element.textContent =
+                    selected[key];
+
+            }
+
+        });
+
+
+    document.documentElement.lang =
+        lang;
+
+    document.documentElement.dir =
+        lang === "ur"
+            ? "rtl"
+            : "ltr";
+
+
+    localStorage.setItem(
+        "ft_language",
+        lang
+    );
+
+}
+
+
+const savedLanguage =
+    localStorage.getItem(
+        "ft_language"
+    ) || "en";
+
+
+language.value =
+    savedLanguage;
+
+applyLanguage(
+    savedLanguage
+);
+
+
+language.addEventListener(
+    "change",
+    function(){
+
+        applyLanguage(
+            this.value
+        );
+
+        showToast(
+            this.value === "ur"
+                ? "اردو زبان منتخب کر لی گئی ہے۔"
+                : "Language set to English."
+        );
+
+    }
+);
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+function loadSettings(){
+
+    const savedHide =
+        localStorage.getItem(
+            "ft_hide_balance"
+        );
+
+    const savedNotifications =
+        localStorage.getItem(
+            "ft_notifications"
+        );
+
+    hideBalance.checked =
+        savedHide === "true";
+
+
+    notifications.checked =
+        savedNotifications === null
+            ? true
+            : savedNotifications === "true";
+
+}
+
+
+hideBalance.addEventListener(
+    "change",
+    function(){
+
+        localStorage.setItem(
+            "ft_hide_balance",
+            this.checked
+        );
+
+        updateBalanceDisplay();
+
+    }
+);
+
+
+notifications.addEventListener(
+    "change",
+    function(){
+
+        localStorage.setItem(
+            "ft_notifications",
+            this.checked
+        );
+
+        showToast(
+            this.checked
+                ? "Notifications enabled."
+                : "Notifications disabled."
+        );
+
+    }
+);
+  /* =========================
+   USER
+========================= */
+
+let currentUser = null;
+
+let currentBalance = 0;
+
+
+function getStoredUser(){
+
+    const keys = [
+        "ftUser",
+        "ft_user",
+        "user",
+        "currentUser",
+        "loggedUser"
+    ];
+
+    for(const key of keys){
+
+        const raw =
+            localStorage.getItem(key);
+
+        if(!raw) continue;
+
+        try{
+
+            const parsed =
+                JSON.parse(raw);
+
+            if(
+                parsed &&
+                (parsed.id || parsed.userId)
+            ){
+
+                return parsed;
+
+            }
+
+        }catch(error){
+
+            console.log(
+                "User parse error:",
+                error
+            );
+
+        }
+
+    }
+
+    return null;
+}
+
+
+async function loadUser(){
+
+    const stored =
+        getStoredUser();
+
+    if(!stored){
+
+        userName.textContent =
+            "Guest";
+
+        userEmail.textContent =
+            "Not logged in";
+
+        return;
+
+    }
+
+    const userId =
+        stored.id ||
+        stored.userId;
+
+    try{
+
+        const response =
+            await fetch(
+                `${API}/api/user/${encodeURIComponent(userId)}`
+            );
+
+        const data =
+            await response.json();
+
+        if(
+            data.success &&
+            data.user
+        ){
+
+            currentUser =
+                data.user;
+
+        }else{
+
+            currentUser =
+                stored;
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "User load error:",
+            error
+        );
+
+        currentUser =
+            stored;
+
+    }
+
+
+    const name =
+        currentUser.name ||
+        currentUser.username ||
+        "FT User";
+
+    const email =
+        currentUser.email ||
+        "";
+
+    currentBalance =
+        Number(
+            currentUser.balance
+        ) || 0;
+
+
+    userName.textContent =
+        name;
+
+    userEmail.textContent =
+        email;
+
+    avatar.textContent =
+        name
+            .trim()
+            .charAt(0)
+            .toUpperCase();
+
+
+    updateBalanceDisplay();
+
+
+    try{
+
+        localStorage.setItem(
+            "ftUser",
+            JSON.stringify(currentUser)
+        );
+
+    }catch(error){
+
+        console.log(
+            "Local storage error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================
+   BALANCE
+========================= */
+
+function updateBalanceDisplay(){
+
+    if(
+        hideBalance &&
+        hideBalance.checked
+    ){
+
+        balanceValue.textContent =
+            "PKR •••••";
+
+        return;
+
+    }
+
+
+    balanceValue.textContent =
+        "PKR " +
+        currentBalance.toFixed(2);
+
+}
+
+
+/* =========================
+   PASSWORD MODAL
+========================= */
+
+function openPasswordModal(){
+
+    document
+        .getElementById("passwordModal")
+        .classList.add("show");
+
+}
+
+
+function closePasswordModal(){
+
+    document
+        .getElementById("passwordModal")
+        .classList.remove("show");
+
+}
+
+
+async function changePassword(event){
+
+    event.preventDefault();
+
+
+    const current =
+        document
+            .getElementById(
+                "currentPassword"
+            )
+            .value
+            .trim();
+
+    const newPassword =
+        document
+            .getElementById(
+                "newPassword"
+            )
+            .value
+            .trim();
+
+    const confirmPassword =
+        document
+            .getElementById(
+                "confirmPassword"
+            )
+            .value
+            .trim();
+
+
+    if(newPassword.length < 6){
+
+        showToast(
+            "New password must contain at least 6 characters."
+        );
+
+        return;
+
+    }
+
+
+    if(newPassword !== confirmPassword){
+
+        showToast(
+            "New passwords do not match."
+        );
+
+        return;
+
+    }
+
+
+    const stored =
+        getStoredUser();
+
+    if(!stored){
+
+        showToast(
+            "User session not found."
+        );
+
+        return;
+
+    }
+
+
+    const userId =
+        stored.id ||
+        stored.userId;
+
+
+    const button =
+        document.getElementById(
+            "passwordBtn"
+        );
+
+    button.disabled = true;
+
+
+    try{
+
+        const response =
+            await fetch(
+                `${API}/api/change-password`,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        userId:String(userId),
+
+                        currentPassword:current,
+
+                        newPassword:newPassword
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(data.success){
+
+            showToast(
+                "Password changed successfully."
+            );
+
+            document
+                .getElementById(
+                    "currentPassword"
+                )
+                .value = "";
+
+            document
+                .getElementById(
+                    "newPassword"
+                )
+                .value = "";
+
+            document
+                .getElementById(
+                    "confirmPassword"
+                )
+                .value = "";
+
+            setTimeout(
+                closePasswordModal,
+                800
+            );
+
+        }else{
+
+            showToast(
+                data.message ||
+                "Unable to change password."
+            );
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "Password request error:",
+            error
+        );
+
+        showToast(
+            "Server connection failed."
+        );
+
+    }finally{
+
+        button.disabled = false;
+
+    }
+
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+function showSecurityInfo(){
+
+    document
+        .getElementById(
+            "securityModal"
+        )
+        .classList.add("show");
+
+}
+
+
+function closeSecurityModal(){
+
+    document
+        .getElementById(
+            "securityModal"
+        )
+        .classList.remove("show");
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logoutConfirm(){
+
+    document
+        .getElementById(
+            "logoutModal"
+        )
+        .classList.add("show");
+
+}
+
+
+function closeLogoutModal(){
+
+    document
+        .getElementById(
+            "logoutModal"
+        )
+        .classList.remove("show");
+
+}
+
+
+function logout(){
+
+    const keys = [
+        "ftUser",
+        "ft_user",
+        "user",
+        "currentUser",
+        "loggedUser"
+    ];
+
+    keys.forEach(
+        key =>
+            localStorage.removeItem(key)
+    );
+
+    sessionStorage.clear();
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* =========================
+   OUTSIDE CLICK
+========================= */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target.classList.contains(
+                "modal"
+            )
+        ){
+
+            event.target.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   ESCAPE
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            document
+                .querySelectorAll(".modal.show")
+                .forEach(modal => {
+
+                    modal.classList.remove(
+                        "show"
+                    );
+
+                });
+
+        }
+
+    }
+);
+
+
+/* =========================
+   START
+========================= */
+
+loadSettings();
+
+loadUser();
+
+</script>
+
+</body>
+
+</html>

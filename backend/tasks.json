@@ -1,0 +1,121 @@
+[
+  {
+    "id": "SUB1787609468363",
+    "userId": "FT79449210",
+    "email": "jindankammon21@gmail.com",
+    "reward": 30,
+    "status": "rejected",
+    "createdAt": "2026-08-24T22:11:08.363Z",
+    "updatedAt": "2026-08-25T14:36:34.434Z"
+  },
+  {
+    "id": "SUB1787653462642",
+    "userId": "FT79449210",
+    "email": "jindankammon22@gmail.com",
+    "reward": 30,
+    "status": "rejected",
+    "createdAt": "2026-08-25T10:24:22.642Z",
+    "updatedAt": "2026-08-25T14:36:36.772Z"
+  },
+  {
+    "id": "SUB1787665546696",
+    "userId": "FT79449210",
+    "email": "herefaizan6@gmail.com",
+    "reward": 30,
+    "status": "rejected",
+    "createdAt": "2026-08-25T13:45:46.696Z",
+    "updatedAt": "2026-08-25T14:36:38.832Z"
+  },
+  {
+    "id": "SUB1787666218068",
+    "userId": "FT79449210",
+    "email": "jindankammon22@gmail.com",
+    "reward": 30,
+    "status": "rejected",
+    "createdAt": "2026-08-25T13:56:58.068Z",
+    "updatedAt": "2026-08-25T14:36:41.544Z"
+  },
+  {
+    "id": "SUB1787667176583",
+    "userId": "FT79449210",
+    "email": "jindankammon22@gmail.com",
+    "reward": 30,
+    "status": "rejected",
+    "createdAt": "2026-08-25T14:12:56.583Z",
+    "updatedAt": "2026-08-25T14:36:45.607Z"
+  },
+  {
+    "id": "SUB1787667464975",
+    "userId": "FT79449210",
+    "email": "jindankammon22@gmail.com",
+    "reward": 35,
+    "status": "approved",
+    "createdAt": "2026-08-25T14:17:44.975Z",
+    "xp": 15,
+    "levelBonus": 1,
+    "updatedAt": "2026-08-25T14:36:52.174Z"
+  },
+  {
+    "id": "SUB1787667785811",
+    "userId": "FT79449210",
+    "email": "jindankammon22@gmail.com",
+    "reward": 30,
+    "status": "rejected",
+    "createdAt": "2026-08-25T14:23:05.812Z",
+    "updatedAt": "2026-08-25T14:36:55.402Z"
+  },
+  {
+    "id": "SUB1788593321569",
+    "userId": "FT72316311",
+    "email": "jindankammon20@gmail.com",
+    "reward": 35,
+    "xp": 15,
+    "status": "rejected",
+    "createdAt": "2026-09-05T07:28:41.569Z",
+    "updatedAt": "2026-09-05T11:52:01.109Z"
+  },
+  {
+    "id": "SUB1788610281193",
+    "userId": "FT79449210",
+    "email": "jindankammon1@gmail.com",
+    "reward": 35,
+    "xp": 15,
+    "status": "approved",
+    "createdAt": "2026-09-05T12:11:21.193Z",
+    "levelBonus": 0,
+    "updatedAt": "2026-09-05T12:13:16.260Z"
+  },
+  {
+    "id": "SUB1788610459349",
+    "userId": "FT79449210",
+    "email": "jindankammon2@gmail.com",
+    "reward": 35,
+    "xp": 15,
+    "status": "approved",
+    "createdAt": "2026-09-05T12:14:19.349Z",
+    "levelBonus": 0,
+    "updatedAt": "2026-09-05T12:14:48.974Z"
+  },
+  {
+    "id": "SUB1788613772001",
+    "userId": "FT79449210",
+    "email": "jindankammon50@gmail.com",
+    "reward": 35,
+    "xp": 15,
+    "status": "approved",
+    "createdAt": "2026-09-05T13:09:32.001Z",
+    "levelBonus": 0,
+    "updatedAt": "2026-09-05T13:40:42.510Z"
+  },
+  {
+    "id": "SUB1788615575387",
+    "userId": "FT79449210",
+    "email": "jindankammon24@gmail.com",
+    "reward": 35,
+    "xp": 15,
+    "status": "approved",
+    "createdAt": "2026-09-05T13:39:35.387Z",
+    "levelBonus": 0,
+    "updatedAt": "2026-09-05T13:40:44.959Z"
+  }
+]

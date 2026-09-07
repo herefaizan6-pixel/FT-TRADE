@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#f8fbff">
+
+<title>FT TRADE | Team</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    min-height:100%;
+}
+
+body{
+    min-height:100vh;
+    padding-bottom:40px;
+    color:#0f172a;
+    font-family:Arial,Helvetica,sans-serif;
+
+    background:
+        radial-gradient(circle at 100% 0%,#dbeafe 0,transparent 34%),
+        radial-gradient(circle at 0% 100%,#e0f2fe 0,transparent 36%),
+        #f8fbff;
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.bg{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:-1;
+}
+
+.circle{
+    position:absolute;
+    width:280px;
+    height:280px;
+    right:-130px;
+    top:-120px;
+    border:1px solid #38bdf830;
+    border-radius:50%;
+}
+
+.circle2{
+    position:absolute;
+    width:220px;
+    height:220px;
+    left:-120px;
+    bottom:-100px;
+    border:1px solid #2563eb25;
+    border-radius:50%;
+}
+
+/* HEADER */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:50;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:15px 18px;
+
+    background:#ffffffee;
+    border-bottom:1px solid #dbeafe;
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:0 4px 20px #2563eb0d;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.logo{
+    width:42px;
+    height:42px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:13px;
+
+    background:linear-gradient(145deg,#2563eb,#06b6d4);
+
+    color:#fff;
+    font-size:13px;
+    font-weight:900;
+
+    box-shadow:0 8px 25px #2563eb35;
+}
+
+.brandText h1{
+    font-size:17px;
+    font-weight:900;
+    color:#0f172a;
+}
+
+.brandText p{
+    margin-top:3px;
+    color:#64748b;
+    font-size:8px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.backBtn{
+    width:40px;
+    height:40px;
+
+    border:1px solid #dbeafe;
+    border-radius:12px;
+
+    background:#f8fbff;
+    color:#2563eb;
+
+    font-size:18px;
+
+    box-shadow:0 5px 15px #2563eb10;
+}
+
+/* MAIN */
+
+.container{
+    width:100%;
+    max-width:620px;
+    margin:auto;
+    padding:22px 16px;
+}
+
+.title h2{
+    font-size:28px;
+    font-weight:900;
+    color:#0f172a;
+}
+
+.title p{
+    margin-top:7px;
+    color:#64748b;
+    font-size:11px;
+    line-height:1.6;
+}
+
+.title b{
+    color:#2563eb;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:11px;
+    margin-top:20px;
+}
+
+.stat{
+    padding:17px;
+
+    border:1px solid #dbeafe;
+    border-radius:19px;
+
+    background:#ffffff;
+
+    box-shadow:0 12px 30px #2563eb10;
+}
+
+.statIcon{
+    font-size:18px;
+}
+
+.statValue{
+    margin-top:8px;
+    font-size:25px;
+    font-weight:900;
+    color:#0f172a;
+}
+
+.statLabel{
+    margin-top:4px;
+    color:#64748b;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.7px;
+    text-transform:uppercase;
+}
+
+/* CARD */
+
+.card{
+    margin-top:15px;
+    padding:18px;
+
+    border:1px solid #dbeafe;
+    border-radius:22px;
+
+    background:#ffffff;
+
+    box-shadow:0 15px 40px #2563eb12;
+}
+
+.cardTitle{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    color:#0f172a;
+    font-size:14px;
+    font-weight:900;
+}
+
+.cardIcon{
+    width:32px;
+    height:32px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:10px;
+
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.cardSub{
+    margin-top:7px;
+    color:#64748b;
+    font-size:9px;
+    line-height:1.6;
+}
+
+.linkBox{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    margin-top:15px;
+    padding:6px;
+
+    border:1px solid #dbeafe;
+    border-radius:14px;
+
+    background:#f8fbff;
+}
+
+.linkText{
+    flex:1;
+    min-width:0;
+
+    padding:9px 8px;
+
+    color:#475569;
+    font-size:9px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.copyBtn{
+    flex-shrink:0;
+
+    height:38px;
+    padding:0 14px;
+
+    border:0;
+    border-radius:10px;
+
+    color:#fff;
+
+    font-size:9px;
+    font-weight:900;
+
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+
+    box-shadow:0 7px 18px #2563eb25;
+}
+
+.shareBtn{
+    width:100%;
+    height:45px;
+
+    margin-top:10px;
+
+    border:1px solid #bfdbfe;
+    border-radius:13px;
+
+    background:#eff6ff;
+    color:#2563eb;
+
+    font-size:10px;
+    font-weight:900;
+}
+
+/* REWARD */
+
+.reward{
+    margin-top:15px;
+    padding:17px;
+
+    border:1px solid #bae6fd;
+    border-radius:20px;
+
+    background:linear-gradient(135deg,#eff6ff,#ecfeff);
+}
+
+.rewardTop{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.rewardTitle{
+    color:#0f172a;
+    font-size:12px;
+    font-weight:900;
+}
+
+.rewardAmount{
+    color:#16a34a;
+    font-size:18px;
+    font-weight:900;
+}
+
+.rewardText{
+    margin-top:7px;
+    color:#64748b;
+    font-size:9px;
+    line-height:1.6;
+}
+  /* MEMBERS */
+
+.membersHeader{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-top:26px;
+}
+
+.membersHeader h3{
+    color:#0f172a;
+    font-size:16px;
+    font-weight:900;
+}
+
+.refreshBtn{
+    border:0;
+    background:transparent;
+    color:#2563eb;
+    font-size:10px;
+    font-weight:900;
+}
+
+/* MEMBER */
+
+.member{
+    margin-top:11px;
+    padding:15px;
+
+    border:1px solid #dbeafe;
+    border-radius:19px;
+
+    background:#ffffff;
+
+    box-shadow:0 10px 25px #2563eb0b;
+}
+
+.memberTop{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:43px;
+    height:43px;
+
+    flex-shrink:0;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:13px;
+
+    background:linear-gradient(145deg,#2563eb,#06b6d4);
+
+    color:#fff;
+    font-size:14px;
+    font-weight:900;
+}
+
+.memberInfo{
+    flex:1;
+    min-width:0;
+}
+
+.memberName{
+    color:#0f172a;
+    font-size:12px;
+    font-weight:900;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.memberEmail{
+    margin-top:4px;
+    color:#64748b;
+    font-size:8px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.status{
+    padding:6px 8px;
+    border-radius:8px;
+
+    font-size:7px;
+    font-weight:900;
+
+    white-space:nowrap;
+}
+
+.status.done{
+    background:#dcfce7;
+    color:#16a34a;
+}
+
+.status.pending{
+    background:#fef3c7;
+    color:#d97706;
+}
+
+.progressArea{
+    margin-top:14px;
+}
+
+.progressTop{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    color:#64748b;
+    font-size:8px;
+    font-weight:800;
+}
+
+.progressBar{
+    width:100%;
+    height:7px;
+
+    margin-top:7px;
+
+    overflow:hidden;
+
+    border-radius:10px;
+    background:#e2e8f0;
+}
+
+.progressFill{
+    height:100%;
+
+    border-radius:10px;
+
+    background:linear-gradient(90deg,#2563eb,#06b6d4);
+
+    transition:.4s;
+}
+
+.rewardNote{
+    margin-top:9px;
+    color:#64748b;
+    font-size:8px;
+    line-height:1.5;
+}
+
+/* EMPTY */
+
+.empty{
+    margin-top:12px;
+    padding:35px 20px;
+
+    border:1px dashed #bfdbfe;
+    border-radius:18px;
+
+    background:#ffffff;
+
+    text-align:center;
+}
+
+.emptyIcon{
+    font-size:30px;
+}
+
+.emptyTitle{
+    margin-top:10px;
+    color:#0f172a;
+    font-size:12px;
+    font-weight:900;
+}
+
+.emptyText{
+    margin-top:6px;
+    color:#64748b;
+    font-size:9px;
+    line-height:1.5;
+}
+
+/* LOADING */
+
+.loading{
+    padding:35px;
+    text-align:center;
+    color:#64748b;
+    font-size:10px;
+}
+
+.spinner{
+    width:25px;
+    height:25px;
+
+    margin:0 auto 10px;
+
+    border:3px solid #dbeafe;
+    border-top-color:#2563eb;
+
+    border-radius:50%;
+
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* MESSAGE */
+
+.message{
+    position:fixed;
+
+    left:16px;
+    right:16px;
+    bottom:20px;
+
+    z-index:100;
+
+    display:none;
+
+    padding:13px 15px;
+
+    border:1px solid #dbeafe;
+    border-radius:13px;
+
+    background:#ffffffee;
+
+    text-align:center;
+
+    font-size:10px;
+    font-weight:800;
+
+    box-shadow:0 15px 40px #2563eb20;
+
+    backdrop-filter:blur(15px);
+}
+
+.message.show{
+    display:block;
+}
+
+.message.success{
+    color:#16a34a;
+}
+
+.message.error{
+    color:#dc2626;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="bg">
+    <div class="circle"></div>
+    <div class="circle2"></div>
+</div>
+
+<header class="header">
+
+    <div class="brand">
+
+        <div class="logo">
+            FT
+        </div>
+
+        <div class="brandText">
+
+            <h1>FT TRADE</h1>
+
+            <p>TEAM & REFERRALS</p>
+
+        </div>
+
+    </div>
+
+    <button
+        class="backBtn"
+        onclick="goBack()">
+
+        ←
+
+    </button>
+
+</header>
+
+<main class="container">
+
+    <section class="title">
+
+        <h2>My Team</h2>
+
+        <p>
+            Invite members and earn
+            <b>Rs 50</b> when your referred
+            member completes 3 approved tasks.
+        </p>
+
+    </section>
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <div class="statIcon">
+                👥
+            </div>
+
+            <div
+                class="statValue"
+                id="totalMembers">
+                0
+            </div>
+
+            <div class="statLabel">
+                Total Members
+            </div>
+
+        </div>
+
+        <div class="stat">
+
+            <div class="statIcon">
+                💰
+            </div>
+
+            <div
+                class="statValue"
+                id="rewardedMembers">
+                0
+            </div>
+
+            <div class="statLabel">
+                Rewards Earned
+            </div>
+
+        </div>
+
+    </section>
+    <section class="card">
+
+    <div class="cardTitle">
+
+        <div class="cardIcon">
+            🔗
+        </div>
+
+        My Referral Link
+
+    </div>
+
+    <div class="cardSub">
+
+        Share your personal referral link.
+        Your referred member must complete
+        3 approved tasks for your Rs 50 reward.
+
+    </div>
+
+    <div class="linkBox">
+
+        <div
+            class="linkText"
+            id="referralLink">
+
+            Loading...
+
+        </div>
+
+        <button
+            class="copyBtn"
+            id="copyBtn"
+            onclick="copyReferral()">
+
+            COPY
+
+        </button>
+
+    </div>
+
+    <button
+        class="shareBtn"
+        onclick="shareReferral()">
+
+        📤 SHARE REFERRAL LINK
+
+    </button>
+
+</section>
+
+<section class="reward">
+
+    <div class="rewardTop">
+
+        <div class="rewardTitle">
+            Referral Reward
+        </div>
+
+        <div class="rewardAmount">
+            Rs 50
+        </div>
+
+    </div>
+
+    <div class="rewardText">
+
+        Complete 3 approved tasks by your
+        referred member and Rs 50 will be
+        credited to your balance automatically.
+
+    </div>
+
+</section>
+
+<div class="membersHeader">
+
+    <h3>
+        Your Members
+    </h3>
+
+    <button
+        class="refreshBtn"
+        onclick="loadTeam()">
+
+        ↻ REFRESH
+
+    </button>
+
+</div>
+
+<div id="membersContainer">
+
+    <div class="loading">
+
+        <div class="spinner"></div>
+
+        Loading team...
+
+    </div>
+
+</div>
+
+</main>
+
+<div
+    class="message"
+    id="message">
+</div>
+
+<script>
+
+/* ==========================================
+   API
+========================================== */
+
+const API =
+    "https://techno-priority-meditation-enterprises.trycloudflare.com";
+
+
+/* ==========================================
+   CURRENT USER
+========================================== */
+
+let currentUser = null;
+
+try{
+
+    currentUser =
+        JSON.parse(
+            localStorage.getItem("ftUser")
+        );
+
+}catch(error){
+
+    currentUser = null;
+
+}
+
+
+/* ==========================================
+   ELEMENTS
+========================================== */
+
+const totalMembers =
+    document.getElementById(
+        "totalMembers"
+    );
+
+const rewardedMembers =
+    document.getElementById(
+        "rewardedMembers"
+    );
+
+const referralLink =
+    document.getElementById(
+        "referralLink"
+    );
+
+const membersContainer =
+    document.getElementById(
+        "membersContainer"
+    );
+
+
+/* ==========================================
+   USER ID
+========================================== */
+
+function getUserId(){
+
+    if(
+        !currentUser ||
+        !currentUser.id
+    ){
+
+        return null;
+
+    }
+
+    return String(
+        currentUser.id
+    );
+
+}
+
+
+/* ==========================================
+   MESSAGE
+========================================== */
+
+function showMessage(
+    text,
+    type="success"
+){
+
+    const box =
+        document.getElementById(
+            "message"
+        );
+
+    box.textContent =
+        text;
+
+    box.className =
+        "message show " +
+        type;
+
+    setTimeout(
+        function(){
+
+            box.classList.remove(
+                "show"
+            );
+
+        },
+        2500
+    );
+
+}
+
+
+/* ==========================================
+   ESCAPE HTML
+========================================== */
+
+function escapeHTML(
+    value
+){
+
+    return String(value)
+
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ==========================================
+   LOAD TEAM
+========================================== */
+
+async function loadTeam(){
+
+    const userId =
+        getUserId();
+
+    if(!userId){
+
+        membersContainer.innerHTML = `
+
+            <div class="empty">
+
+                <div class="emptyIcon">
+                    🔐
+                </div>
+
+                <div class="emptyTitle">
+                    Login Required
+                </div>
+
+                <div class="emptyText">
+                    Please login first to view
+                    your team.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    membersContainer.innerHTML = `
+
+        <div class="loading">
+
+            <div class="spinner"></div>
+
+            Loading team...
+
+        </div>
+
+    `;
+
+    try{
+
+        const response =
+            await fetch(
+                API +
+                "/api/team/" +
+                encodeURIComponent(userId)
+            );
+
+        const data =
+            await response.json();
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+                data.message ||
+                "Unable to load team."
+            );
+
+        }
+
+        totalMembers.textContent =
+            data.totalMembers || 0;
+
+        rewardedMembers.textContent =
+            data.rewardedMembers || 0;
+
+        referralLink.textContent =
+            data.referralLink || "";
+
+        renderMembers(
+            data.members || []
+        );
+
+    }catch(error){
+
+        console.log(
+            "Team error:",
+            error
+        );
+
+        membersContainer.innerHTML = `
+
+            <div class="empty">
+
+                <div class="emptyIcon">
+                    ⚠️
+                </div>
+
+                <div class="emptyTitle">
+                    Unable to Load Team
+                </div>
+
+                <div class="emptyText">
+                    ${escapeHTML(
+                        error.message ||
+                        "Server connection failed."
+                    )}
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ==========================================
+   RENDER MEMBERS
+========================================== */
+
+function renderMembers(
+    members
+){
+
+    if(
+        !members ||
+        members.length === 0
+    ){
+
+        membersContainer.innerHTML = `
+
+            <div class="empty">
+
+                <div class="emptyIcon">
+                    👥
+                </div>
+
+                <div class="emptyTitle">
+                    No Team Members Yet
+                </div>
+
+                <div class="emptyText">
+                    Share your referral link
+                    to invite your first member.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    let html = "";
+
+    members.forEach(
+        function(member){
+
+            const completed =
+                Math.max(
+                    0,
+                    Number(
+                        member.completedTasks
+                    ) || 0
+                );
+
+            const progress =
+                Math.min(
+                    100,
+                    (completed / 3) * 100
+                );
+
+            const rewarded =
+                Boolean(
+                    member.referralRewardPaid
+                );
+
+            let statusClass =
+                "pending";
+
+            let statusText =
+                "IN PROGRESS";
+
+            if(rewarded){
+
+                statusClass =
+                    "done";
+
+                statusText =
+                    "RS 50 PAID";
+
+            }else if(
+                completed >= 3
+            ){
+
+                statusClass =
+                    "done";
+
+                statusText =
+                    "COMPLETED";
+
+            }
+
+            const name =
+                escapeHTML(
+                    member.name ||
+                    "Member"
+                );
+
+            const email =
+                escapeHTML(
+                    member.email ||
+                    ""
+                );
+
+            const initial =
+                escapeHTML(
+                    (
+                        member.name ||
+                        "M"
+                    )
+                    .charAt(0)
+                    .toUpperCase()
+                );
+
+            html += `
+
+                <div class="member">
+
+                    <div class="memberTop">
+
+                        <div class="avatar">
+                            ${initial}
+                        </div>
+
+                        <div class="memberInfo">
+
+                            <div class="memberName">
+                                ${name}
+                            </div>
+
+                            <div class="memberEmail">
+                                ${email}
+                            </div>
+
+                        </div>
+
+                        <div class="status ${statusClass}">
+                            ${statusText}
+                        </div>
+
+                    </div>
+
+                    <div class="progressArea">
+
+                        <div class="progressTop">
+
+                            <span>
+                                Approved Tasks
+                            </span>
+
+                            <span>
+                                ${completed} / 3
+                            </span>
+
+                        </div>
+
+                        <div class="progressBar">
+
+                            <div
+                                class="progressFill"
+                                style="width:${progress}%;">
+                            </div>
+
+                        </div>
+
+                        <div class="rewardNote">
+
+                            ${
+                                rewarded
+                                ? "✓ Rs 50 referral reward has been credited."
+                                : completed >= 3
+                                ? "✓ 3 tasks completed. Referral reward eligible."
+                                : `${3 - completed} approved task${3 - completed === 1 ? "" : "s"} remaining for Rs 50 reward.`
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+    membersContainer.innerHTML =
+        html;
+
+}
+  /* ==========================================
+   COPY REFERRAL
+========================================== */
+
+async function copyReferral(){
+
+    const link =
+        referralLink.textContent.trim();
+
+    if(
+        !link ||
+        link === "Loading..."
+    ){
+
+        showMessage(
+            "Referral link is not ready.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    try{
+
+        if(
+            navigator.clipboard &&
+            navigator.clipboard.writeText
+        ){
+
+            await navigator.clipboard.writeText(
+                link
+            );
+
+        }else{
+
+            throw new Error(
+                "Clipboard unavailable"
+            );
+
+        }
+
+        const button =
+            document.getElementById(
+                "copyBtn"
+            );
+
+        button.textContent =
+            "COPIED ✓";
+
+        showMessage(
+            "Referral link copied!",
+            "success"
+        );
+
+        setTimeout(
+            function(){
+
+                button.textContent =
+                    "COPY";
+
+            },
+            1800
+        );
+
+    }catch(error){
+
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
+
+        textarea.value =
+            link;
+
+        textarea.style.position =
+            "fixed";
+
+        textarea.style.left =
+            "-9999px";
+
+        document.body.appendChild(
+            textarea
+        );
+
+        textarea.focus();
+        textarea.select();
+
+        try{
+
+            const copied =
+                document.execCommand(
+                    "copy"
+                );
+
+            if(copied){
+
+                showMessage(
+                    "Referral link copied!",
+                    "success"
+                );
+
+            }else{
+
+                throw new Error(
+                    "Copy failed"
+                );
+
+            }
+
+        }catch(copyError){
+
+            showMessage(
+                "Copy failed. Long press the link.",
+                "error"
+            );
+
+        }
+
+        document.body.removeChild(
+            textarea
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   SHARE REFERRAL
+========================================== */
+
+async function shareReferral(){
+
+    const link =
+        referralLink.textContent.trim();
+
+    if(
+        !link ||
+        link === "Loading..."
+    ){
+
+        showMessage(
+            "Referral link is not ready.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const text =
+        "Join FT TRADE using my referral link:\n\n" +
+        link +
+        "\n\nJoin now and start completing tasks.";
+
+    if(
+        navigator.share
+    ){
+
+        try{
+
+            await navigator.share({
+
+                title:
+                    "FT TRADE Referral",
+
+                text:
+                    text
+
+            });
+
+            return;
+
+        }catch(error){
+
+            if(
+                error.name ===
+                "AbortError"
+            ){
+
+                return;
+
+            }
+
+        }
+
+    }
+
+    const whatsapp =
+        "https://wa.me/?text=" +
+        encodeURIComponent(
+            text
+        );
+
+    window.open(
+        whatsapp,
+        "_blank"
+    );
+
+}
+
+
+/* ==========================================
+   BACK BUTTON
+========================================== */
+
+function goBack(){
+
+    if(
+        history.length > 1
+    ){
+
+        history.back();
+
+    }else{
+
+        window.location.href =
+            "dashboard.html";
+
+    }
+
+}
+
+
+/* ==========================================
+   START
+========================================== */
+
+loadTeam();
+
+</script>
+
+</body>
+</html>

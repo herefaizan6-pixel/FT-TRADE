@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2496ff">
+
+<title>FT TRADE | Create Account</title>
+  <script src="config.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    min-height:100%;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5faff;
+    color:#152235;
+}
+
+/* Background */
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+.circle{
+    position:absolute;
+    width:330px;
+    height:330px;
+    border-radius:50%;
+    background:#2496ff12;
+    top:-150px;
+    right:-130px;
+}
+
+.circle2{
+    position:absolute;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    background:#2496ff0d;
+    bottom:-140px;
+    left:-120px;
+}
+
+/* Main Card */
+.card{
+    position:relative;
+    width:100%;
+    max-width:430px;
+    background:#ffffff;
+    border:1px solid #e1edf7;
+    border-radius:26px;
+    padding:30px 24px 24px;
+    box-shadow:0 20px 55px rgba(36,150,255,.12);
+}
+
+/* Brand */
+.brand{
+    text-align:center;
+}
+
+.logo{
+    width:68px;
+    height:68px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:19px;
+    background:linear-gradient(135deg,#2496ff,#1477d4);
+    color:#fff;
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:1px;
+    box-shadow:0 12px 28px rgba(36,150,255,.25);
+}
+
+.brand h1{
+    margin-top:15px;
+    font-size:25px;
+    font-weight:900;
+    color:#152235;
+}
+
+.brand p{
+    margin-top:6px;
+    color:#718096;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.8px;
+}
+
+.line{
+    width:55px;
+    height:3px;
+    margin:12px auto 0;
+    border-radius:10px;
+    background:linear-gradient(90deg,#2496ff,#1477d4);
+}
+
+/* Form */
+form{
+    margin-top:21px;
+}
+
+label{
+    display:block;
+    margin:13px 0 7px;
+    color:#34445a;
+    font-size:11px;
+    font-weight:800;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+input{
+    width:100%;
+    height:49px;
+    padding:0 14px;
+    border:1px solid #dce9f5;
+    border-radius:13px;
+    outline:none;
+    background:#f8fbfe;
+    color:#152235;
+    font-size:13px;
+    transition:.2s;
+}
+
+.input-wrap input{
+    padding-right:48px;
+}
+
+input::placeholder{
+    color:#9aa9b9;
+}
+
+input:focus{
+    background:#fff;
+    border-color:#2496ff;
+    box-shadow:0 0 0 3px rgba(36,150,255,.10);
+}
+
+/* Password Button */
+.eye{
+    position:absolute;
+    right:7px;
+    top:7px;
+    width:35px;
+    height:35px;
+    border:0;
+    border-radius:9px;
+    background:#eaf6ff;
+    color:#2496ff;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* Create Button */
+.signup-btn{
+    width:100%;
+    height:51px;
+    margin-top:21px;
+    border:0;
+    border-radius:14px;
+    background:linear-gradient(135deg,#2496ff,#1477d4);
+    color:#fff;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.5px;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(36,150,255,.22);
+    transition:.18s;
+}
+
+.signup-btn:active{
+    transform:scale(.98);
+}
+
+.signup-btn:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+}
+
+/* Message */
+.message{
+    min-height:18px;
+    margin-top:11px;
+    text-align:center;
+    font-size:10px;
+    font-weight:700;
+}
+
+/* Login */
+.bottom{
+    margin-top:18px;
+    padding-top:17px;
+    border-top:1px solid #edf3f8;
+    text-align:center;
+    color:#718096;
+    font-size:10px;
+}
+
+.bottom a{
+    color:#2496ff;
+    text-decoration:none;
+    font-weight:900;
+}
+
+/* Footer */
+.secure{
+    margin-top:14px;
+    text-align:center;
+    color:#9aa9b9;
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+/* Mobile */
+@media(max-width:450px){
+
+    body{
+        padding:15px;
+    }
+
+    .card{
+        padding:27px 20px 21px;
+        border-radius:23px;
+    }
+
+    .brand h1{
+        font-size:23px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="circle"></div>
+    <div class="circle2"></div>
+</div>
+
+<div class="card">
+
+    <div class="brand">
+
+        <div class="logo">
+            FT
+        </div>
+
+        <h1>FT TRADE</h1>
+
+        <p>CREATE YOUR PREMIUM ACCOUNT</p>
+
+        <div class="line"></div>
+
+    </div>
+
+
+    <form id="signupForm">
+
+        <!-- Full Name -->
+        <label for="name">
+            Full Name
+        </label>
+
+        <input
+            id="name"
+            type="text"
+            placeholder="Enter your full name"
+            autocomplete="name"
+            required
+        >
+
+
+        <!-- Email -->
+        <label for="email">
+            Email Address
+        </label>
+
+        <input
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required
+        >
+
+
+        <!-- Password -->
+        <label for="password">
+            Password
+        </label>
+
+        <div class="input-wrap">
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Create a password"
+                autocomplete="new-password"
+                required
+            >
+
+            <button
+                type="button"
+                class="eye"
+                onclick="togglePassword('password',this)"
+                aria-label="Show password">
+                ◉
+            </button>
+
+        </div>
+
+
+        <!-- Confirm Password -->
+        <label for="confirm">
+            Confirm Password
+        </label>
+
+        <div class="input-wrap">
+
+            <input
+                id="confirm"
+                type="password"
+                placeholder="Confirm your password"
+                autocomplete="new-password"
+                required
+            >
+
+            <button
+                type="button"
+                class="eye"
+                onclick="togglePassword('confirm',this)"
+                aria-label="Show password">
+                ◉
+            </button>
+
+        </div>
+
+
+        <!-- Button -->
+        <button
+            id="signupBtn"
+            class="signup-btn"
+            type="submit">
+            CREATE ACCOUNT
+        </button>
+
+
+        <!-- Message -->
+        <div
+            id="message"
+            class="message">
+        </div>
+
+    </form>
+
+
+    <!-- Login -->
+    <div class="bottom">
+
+        Already have an account?
+
+        <a href="index.html">
+            Login
+        </a>
+
+    </div>
+
+
+    <div class="secure">
+        FT TRADE • SECURE ACCOUNT CREATION
+    </div>
+
+</div>
+
+
+<script>
+
+/* Current FT TRADE Backend */
+const API = API_BASE;
+
+const form =
+    document.getElementById("signupForm");
+
+const nameInput =
+    document.getElementById("name");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const confirmInput =
+    document.getElementById("confirm");
+
+const signupBtn =
+    document.getElementById("signupBtn");
+
+const message =
+    document.getElementById("message");
+
+
+/* Show / Hide Password */
+function togglePassword(id,button){
+
+    const input =
+        document.getElementById(id);
+
+    if(input.type === "password"){
+
+        input.type = "text";
+        button.textContent = "○";
+
+    }else{
+
+        input.type = "password";
+        button.textContent = "◉";
+
+    }
+
+}
+
+
+/* Message Helper */
+function showMessage(text,type){
+
+    message.textContent = text;
+
+    if(type === "success"){
+
+        message.style.color = "#16a34a";
+
+    }else{
+
+        message.style.color = "#dc2626";
+
+    }
+
+}
+
+
+/* Signup */
+form.addEventListener("submit",async function(e){
+
+    e.preventDefault();
+
+    message.textContent = "";
+
+    const name =
+        nameInput.value.trim();
+
+    const email =
+        emailInput.value.trim();
+
+    const password =
+        passwordInput.value;
+
+    const confirmPassword =
+        confirmInput.value;
+
+
+    /* Validation */
+
+    if(!name || !email || !password || !confirmPassword){
+
+        showMessage(
+            "Please fill all fields.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(name.length < 2){
+
+        showMessage(
+            "Please enter a valid name.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(password.length < 6){
+
+        showMessage(
+            "Password must be at least 6 characters.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(password !== confirmPassword){
+
+        showMessage(
+            "Passwords do not match.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    /* Loading */
+
+    signupBtn.disabled = true;
+    signupBtn.textContent = "CREATING ACCOUNT...";
+
+
+    try{
+
+        const response =
+            await fetch(
+                API + "/api/signup",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        name:name,
+
+                        email:email,
+
+                        password:password
+
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        /* Failed */
+
+        if(!response.ok || !data.success){
+
+            showMessage(
+                data.message ||
+                "Unable to create account.",
+                "error"
+            );
+
+            signupBtn.disabled = false;
+            signupBtn.textContent =
+                "CREATE ACCOUNT";
+
+            return;
+        }
+
+
+        /* Success */
+
+        showMessage(
+            "Account created successfully!",
+            "success"
+        );
+
+
+        /*
+          Save only the returned user data.
+          Password is NOT stored.
+        */
+
+        if(data.user){
+
+            localStorage.setItem(
+                "ftUser",
+                JSON.stringify(data.user)
+            );
+
+        }
+
+
+        signupBtn.textContent =
+            "ACCOUNT CREATED ✓";
+
+
+        /* Dashboard */
+
+        setTimeout(function(){
+
+            window.location.href =
+                "dashboard.html";
+
+        },900);
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMessage(
+            "Server connection failed.",
+            "error"
+        );
+
+        signupBtn.disabled = false;
+
+        signupBtn.textContent =
+            "CREATE ACCOUNT";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

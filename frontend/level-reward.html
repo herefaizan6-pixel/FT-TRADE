@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2496ff">
+
+<title>FT TRADE | Level Rewards</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --blue:#2496ff;
+    --blue-dark:#1477d4;
+    --blue-light:#eaf6ff;
+    --text:#152235;
+    --muted:#718096;
+    --white:#ffffff;
+    --border:#e1edf7;
+    --bg:#f5faff;
+    --shadow:0 10px 30px rgba(36,150,255,.10);
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    padding-bottom:95px;
+}
+
+/* HEADER */
+.header{
+    background:#fff;
+    padding:16px 18px;
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:50;
+}
+
+.header-row{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.back-btn{
+    width:46px;
+    height:46px;
+    border:0;
+    border-radius:14px;
+    background:var(--blue-light);
+    color:var(--blue-dark);
+    font-size:30px;
+    font-weight:900;
+    line-height:1;
+    cursor:pointer;
+}
+
+.header-icon{
+    width:52px;
+    height:52px;
+    min-width:52px;
+    border-radius:16px;
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        var(--blue-dark)
+    );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:29px;
+    box-shadow:
+        0 8px 20px rgba(36,150,255,.22);
+}
+
+.header-title{
+    font-size:21px;
+    font-weight:900;
+}
+
+.header-subtitle{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* HERO */
+.hero{
+    margin:18px;
+    padding:28px 20px;
+    border-radius:24px;
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        var(--blue-dark)
+    );
+    color:white;
+    text-align:center;
+    box-shadow:var(--shadow);
+}
+
+.hero-icon{
+    width:88px;
+    height:88px;
+    margin:0 auto 14px;
+    border-radius:26px;
+    background:rgba(255,255,255,.18);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:49px;
+}
+
+.hero h1{
+    font-size:25px;
+    font-weight:900;
+}
+
+.hero p{
+    margin-top:8px;
+    font-size:12px;
+    opacity:.94;
+}
+
+/* SECTION */
+.section-title{
+    margin:24px 18px 12px;
+    font-size:19px;
+    font-weight:900;
+}
+
+/* REWARDS */
+.rewards{
+    padding:0 18px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.reward-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    box-shadow:var(--shadow);
+    transition:.2s;
+}
+
+.reward-card:hover{
+    transform:translateY(-2px);
+}
+
+.level-icon{
+    width:62px;
+    height:62px;
+    min-width:62px;
+    border-radius:18px;
+    background:linear-gradient(
+        135deg,
+        var(--blue-light),
+        #d9efff
+    );
+    color:var(--blue-dark);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+    font-weight:900;
+}
+
+.reward-content{
+    flex:1;
+    min-width:0;
+}
+
+.level-name{
+    font-size:16px;
+    font-weight:900;
+}
+
+.task-count{
+    margin-top:6px;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.reward-box{
+    text-align:right;
+    min-width:82px;
+}
+
+.reward-label{
+    color:var(--muted);
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+
+.reward-money{
+    margin-top:4px;
+    color:var(--blue-dark);
+    font-size:17px;
+    font-weight:900;
+}
+
+/* NOTE */
+.note{
+    margin:20px 18px;
+    padding:17px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:18px;
+    text-align:center;
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.6;
+}
+
+.note strong{
+    color:var(--text);
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    height:76px;
+    background:#fff;
+    border-top:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    z-index:100;
+    box-shadow:
+        0 -8px 25px rgba(36,150,255,.08);
+}
+
+.nav-item{
+    text-decoration:none;
+    color:var(--muted);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    font-size:10px;
+    font-weight:800;
+}
+
+.nav-icon{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.nav-item.active{
+    color:var(--blue-dark);
+}
+
+.nav-item.active .nav-icon{
+    background:var(--blue-light);
+}
+
+/* DESKTOP */
+@media(min-width:700px){
+
+    .hero,
+    .section-title,
+    .note{
+        max-width:850px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .rewards{
+        max-width:850px;
+        margin:auto;
+    }
+
+    .reward-card{
+        padding:18px;
+    }
+
+    .level-icon{
+        width:68px;
+        height:68px;
+        min-width:68px;
+        font-size:19px;
+    }
+
+    .reward-money{
+        font-size:18px;
+    }
+}
+
+/* SMALL MOBILE */
+@media(max-width:380px){
+
+    .reward-card{
+        padding:12px;
+        gap:10px;
+    }
+
+    .level-icon{
+        width:55px;
+        height:55px;
+        min-width:55px;
+        font-size:15px;
+    }
+
+    .level-name{
+        font-size:14px;
+    }
+
+    .task-count{
+        font-size:10px;
+    }
+
+    .reward-box{
+        min-width:70px;
+    }
+
+    .reward-money{
+        font-size:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+
+    <div class="header-row">
+
+        <button
+            class="back-btn"
+            onclick="history.back()"
+            aria-label="Go back"
+        >
+            ‹
+        </button>
+
+        <div class="header-icon">
+            🎁
+        </div>
+
+        <div>
+            <div class="header-title">
+                Level Rewards
+            </div>
+
+            <div class="header-subtitle">
+                FT TRADE Reward Program
+            </div>
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-icon">
+        🏆
+    </div>
+
+    <h1>
+        Level Rewards
+    </h1>
+
+    <p>
+        Complete eligible authorized tasks and unlock your rewards.
+    </p>
+
+</section>
+
+
+<!-- SECTION -->
+<div class="section-title">
+    🎯 Level Rewards
+</div>
+
+
+<!-- REWARD LIST -->
+<div
+    class="rewards"
+    id="rewardList"
+></div>
+
+
+<!-- NOTE -->
+<div class="note">
+
+    🔒 <strong>Important:</strong><br>
+
+    Only complete tasks or submit accounts that you own
+    or are authorized to use.
+
+    <br>
+
+    Never share passwords or login credentials.
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+
+    <a
+        href="dashboard.html"
+        class="nav-item"
+    >
+        <div class="nav-icon">
+            🏠
+        </div>
+        Home
+    </a>
+
+
+    <a
+        href="tasks.html"
+        class="nav-item"
+    >
+        <div class="nav-icon">
+            📋
+        </div>
+        Tasks
+    </a>
+
+
+    <a
+        href="level-reward.html"
+        class="nav-item active"
+    >
+        <div class="nav-icon">
+            🎁
+        </div>
+        Rewards
+    </a>
+
+
+    <a
+        href="profile.html"
+        class="nav-item"
+    >
+        <div class="nav-icon">
+            👤
+        </div>
+        Profile
+    </a>
+
+</nav>
+
+
+<script>
+
+/*
+    FT TRADE LEVEL REWARD SYSTEM
+
+    Reward:
+    Rs 3 per eligible task
+
+    Maximum:
+    50 Levels
+
+    Each level:
+    15 additional tasks
+
+    Level 1:
+    15 tasks = Rs 45
+
+    Level 2:
+    30 tasks = Rs 90
+
+    Level 3:
+    45 tasks = Rs 135
+
+    Level 50:
+    750 tasks = Rs 2250
+*/
+
+const PRICE_PER_TASK = 3;
+const TOTAL_LEVELS = 50;
+const TASKS_PER_LEVEL = 15;
+
+const rewardList =
+    document.getElementById("rewardList");
+
+
+for(
+    let level = 1;
+    level <= TOTAL_LEVELS;
+    level++
+){
+
+    const tasks =
+        level * TASKS_PER_LEVEL;
+
+    const reward =
+        tasks * PRICE_PER_TASK;
+
+
+    const card =
+        document.createElement("div");
+
+    card.className =
+        "reward-card";
+
+
+    card.innerHTML = `
+
+        <div class="level-icon">
+            L${level}
+        </div>
+
+        <div class="reward-content">
+
+            <div class="level-name">
+                Level ${level}
+            </div>
+
+            <div class="task-count">
+                🎯 ${tasks} eligible tasks
+            </div>
+
+        </div>
+
+        <div class="reward-box">
+
+            <div class="reward-label">
+                BONUS
+            </div>
+
+            <div class="reward-money">
+                Rs ${reward.toLocaleString()}
+            </div>
+
+        </div>
+
+    `;
+
+
+    rewardList.appendChild(card);
+}
+
+</script>
+
+</body>
+</html>

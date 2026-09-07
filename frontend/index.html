@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FT TRADE | Login</title>
+  <script src="config.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+:root{
+    --blue:#2496ff;
+    --blue-dark:#1477d4;
+    --blue-light:#eaf6ff;
+    --bg:#f5faff;
+    --white:#ffffff;
+    --text:#152235;
+    --muted:#718096;
+    --border:#dfeefa;
+    --red:#dc2626;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(circle at top right, #dff2ff 0, transparent 35%),
+        radial-gradient(circle at bottom left, #eaf7ff 0, transparent 35%),
+        var(--bg);
+    color:var(--text);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+/* ================= CONTAINER ================= */
+
+.login-wrapper{
+    width:100%;
+    max-width:430px;
+}
+
+/* ================= BRAND ================= */
+
+.brand{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.logo-box{
+    width:65px;
+    height:65px;
+    margin:0 auto 13px;
+    border-radius:20px;
+    background:linear-gradient(
+        135deg,
+        #54b4ff,
+        #1679d9
+    );
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:900;
+    box-shadow:
+        0 12px 30px rgba(36,150,255,.28);
+}
+
+.brand h1{
+    font-size:27px;
+    font-weight:900;
+    color:var(--blue-dark);
+}
+
+.brand p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:6px;
+}
+
+/* ================= CARD ================= */
+
+.login-card{
+    background:rgba(255,255,255,.96);
+    border:1px solid var(--border);
+    border-radius:26px;
+    padding:28px 24px;
+    box-shadow:
+        0 20px 50px rgba(36,150,255,.12);
+}
+
+.login-title{
+    text-align:center;
+    margin-bottom:23px;
+}
+
+.login-title h2{
+    font-size:22px;
+    font-weight:800;
+}
+
+.login-title p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:6px;
+}
+
+/* ================= FORM ================= */
+
+.form-group{
+    margin-bottom:17px;
+}
+
+.form-group label{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-icon{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:17px;
+    pointer-events:none;
+}
+
+.input{
+    width:100%;
+    height:52px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    outline:none;
+    background:#fbfdff;
+    color:var(--text);
+    padding:0 45px;
+    font-size:14px;
+    transition:.2s;
+}
+
+.input:focus{
+    border-color:var(--blue);
+    background:white;
+    box-shadow:
+        0 0 0 4px rgba(36,150,255,.10);
+}
+
+.password-toggle{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    width:35px;
+    height:35px;
+    border:0;
+    border-radius:10px;
+    background:transparent;
+    cursor:pointer;
+    font-size:16px;
+}
+
+/* ================= OPTIONS ================= */
+
+.options{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:4px 1px 20px;
+}
+
+.remember{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.remember input{
+    accent-color:var(--blue);
+}
+
+.forgot{
+    color:var(--blue-dark);
+    font-size:11px;
+    font-weight:700;
+    text-decoration:none;
+}
+
+/* ================= BUTTON ================= */
+
+.login-btn{
+    width:100%;
+    height:53px;
+    border:0;
+    border-radius:16px;
+    background:
+        linear-gradient(
+            135deg,
+            #2496ff,
+            #1477d4
+        );
+    color:white;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:
+        0 12px 25px rgba(36,150,255,.25);
+    transition:.2s;
+}
+
+.login-btn:hover{
+    transform:translateY(-1px);
+}
+
+.login-btn:active{
+    transform:scale(.98);
+}
+
+.login-btn:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* ================= MESSAGE ================= */
+
+.message{
+    display:none;
+    margin-bottom:16px;
+    padding:12px 13px;
+    border-radius:13px;
+    font-size:12px;
+    line-height:1.4;
+}
+
+.message.error{
+    display:block;
+    background:#fff1f2;
+    border:1px solid #fecdd3;
+    color:var(--red);
+}
+
+.message.success{
+    display:block;
+    background:#effdf4;
+    border:1px solid #bbf7d0;
+    color:#15803d;
+}
+
+/* ================= FOOTER ================= */
+
+.signup{
+    text-align:center;
+    margin-top:21px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.signup a{
+    color:var(--blue-dark);
+    font-weight:800;
+    text-decoration:none;
+}
+
+.secure{
+    text-align:center;
+    margin-top:20px;
+    color:#9aa9b8;
+    font-size:10px;
+    letter-spacing:.5px;
+}
+
+/* ================= LOADING ================= */
+
+.spinner{
+    display:inline-block;
+    width:15px;
+    height:15px;
+    border:2px solid rgba(255,255,255,.45);
+    border-top-color:white;
+    border-radius:50%;
+    animation:spin .7s linear infinite;
+    vertical-align:-3px;
+    margin-right:7px;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* ================= DESKTOP ================= */
+
+@media(min-width:600px){
+
+    .login-card{
+        padding:32px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+    <!-- BRAND -->
+
+    <div class="brand">
+
+        <div class="logo-box">
+            FT
+        </div>
+
+        <h1>
+            FT TRADE
+        </h1>
+
+        <p>
+            Secure access to your account
+        </p>
+
+    </div>
+
+
+    <!-- LOGIN CARD -->
+
+    <div class="login-card">
+
+        <div class="login-title">
+
+            <h2>
+                Welcome Back
+            </h2>
+
+            <p>
+                Login to continue to FT TRADE
+            </p>
+
+        </div>
+
+
+        <!-- MESSAGE -->
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <!-- LOGIN FORM -->
+
+        <form
+            id="loginForm"
+            autocomplete="on"
+        >
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <div class="input-wrap">
+
+                    <span class="input-icon">
+                        ✉️
+                    </span>
+
+                    <input
+                        class="input"
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrap">
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+                    <input
+                        class="input"
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="togglePassword"
+                        aria-label="Show password"
+                    >
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- OPTIONS -->
+
+            <div class="options">
+
+                <label class="remember">
+
+                    <input
+                        type="checkbox"
+                        id="remember"
+                    >
+
+                    Remember me
+
+                </label>
+
+                <a
+                    href="#"
+                    class="forgot"
+                    id="forgotPassword"
+                >
+                    Forgot Password?
+                </a>
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginBtn"
+            >
+                Login
+            </button>
+
+        </form>
+
+
+        <!-- SIGNUP -->
+
+        <div class="signup">
+
+            Don't have an account?
+
+            <a href="signup.html">
+                Create Account
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="secure">
+        FT TRADE • SECURE ACCESS
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   FT TRADE BACKEND
+========================================= */
+
+const API = API_BASE;
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const form =
+    document.getElementById("loginForm");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const loginBtn =
+    document.getElementById("loginBtn");
+
+const message =
+    document.getElementById("message");
+
+const togglePassword =
+    document.getElementById("togglePassword");
+
+const remember =
+    document.getElementById("remember");
+
+
+/* =========================================
+   SHOW MESSAGE
+========================================= */
+
+function showMessage(text, type){
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+
+}
+
+
+/* =========================================
+   HIDE MESSAGE
+========================================= */
+
+function hideMessage(){
+
+    message.textContent = "";
+
+    message.className =
+        "message";
+
+}
+
+
+/* =========================================
+   PASSWORD TOGGLE
+========================================= */
+
+togglePassword.addEventListener(
+    "click",
+    function(){
+
+        if(
+            passwordInput.type ===
+            "password"
+        ){
+
+            passwordInput.type =
+                "text";
+
+            togglePassword.textContent =
+                "🙈";
+
+            togglePassword.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+        }else{
+
+            passwordInput.type =
+                "password";
+
+            togglePassword.textContent =
+                "👁️";
+
+            togglePassword.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   REMEMBER EMAIL
+========================================= */
+
+const savedEmail =
+    localStorage.getItem(
+        "ftRememberEmail"
+    );
+
+if(savedEmail){
+
+    emailInput.value =
+        savedEmail;
+
+    remember.checked =
+        true;
+
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+form.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+        hideMessage();
+
+
+        const email =
+            emailInput.value.trim();
+
+        const password =
+            passwordInput.value;
+
+
+        if(!email){
+
+            showMessage(
+                "Please enter your email.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(!password){
+
+            showMessage(
+                "Please enter your password.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /* BUTTON LOADING */
+
+        loginBtn.disabled =
+            true;
+
+        loginBtn.innerHTML =
+            '<span class="spinner"></span>Logging in...';
+
+
+        try{
+
+            const response =
+                await fetch(
+                    `${API}/api/login`,
+                    {
+                        method:"POST",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:JSON.stringify({
+                            email:email,
+                            password:password
+                        })
+                    }
+                );
+
+
+            let data = {};
+
+            try{
+
+                data =
+                    await response.json();
+
+            }catch(error){
+
+                data = {};
+
+            }
+
+
+            if(
+                !response.ok ||
+                data.success === false
+            ){
+
+                throw new Error(
+                    data.message ||
+                    "Invalid email or password."
+                );
+
+            }
+
+
+            /* =================================
+               USER DATA
+            ================================= */
+
+            const loggedUser =
+                data.user ||
+                data.data ||
+                data;
+
+
+            if(
+                !loggedUser ||
+                !loggedUser.id
+            ){
+
+                throw new Error(
+                    "Login successful, but user data was not returned."
+                );
+
+            }
+
+
+            /* =================================
+               SAVE USER SESSION
+
+               Password is NOT stored.
+            ================================= */
+
+            localStorage.setItem(
+                "ftUser",
+                JSON.stringify({
+                    id:loggedUser.id,
+                    name:loggedUser.name || "",
+                    email:loggedUser.email || "",
+                    balance:Number(
+                        loggedUser.balance || 0
+                    ),
+                    xp:Number(
+                        loggedUser.xp || 0
+                    ),
+                    level:Number(
+                        loggedUser.level || 1
+                    ),
+                    completedTasks:Number(
+                        loggedUser.completedTasks || 0
+                    ),
+                    status:
+                        loggedUser.status ||
+                        "active"
+                })
+            );
+
+
+            /* =================================
+               REMEMBER EMAIL
+            ================================= */
+
+            if(remember.checked){
+
+                localStorage.setItem(
+                    "ftRememberEmail",
+                    email
+                );
+
+            }else{
+
+                localStorage.removeItem(
+                    "ftRememberEmail"
+                );
+
+            }
+
+
+            /* =================================
+               SUCCESS
+            ================================= */
+
+            showMessage(
+                "Login successful. Opening dashboard...",
+                "success"
+            );
+
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                        "dashboard.html";
+
+                },
+                500
+            );
+
+
+        }catch(error){
+
+            console.log(
+                "Login error:",
+                error
+            );
+
+
+            showMessage(
+                error.message ||
+                "Unable to connect to FT TRADE server.",
+                "error"
+            );
+
+
+            loginBtn.disabled =
+                false;
+
+            loginBtn.textContent =
+                "Login";
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   FORGOT PASSWORD
+========================================= */
+
+document
+    .getElementById("forgotPassword")
+    .addEventListener(
+        "click",
+        function(event){
+
+            event.preventDefault();
+
+            showMessage(
+                "Please contact FT TRADE support to reset your password.",
+                "error"
+            );
+
+        }
+    );
+
+</script>
+
+</body>
+</html>

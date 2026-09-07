@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="theme-color" content="#eef7ff">
+
+<title>FT TRADE | Customer Support</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+    --bg:#f4f9ff;
+    --white:#ffffff;
+    --blue:#2563eb;
+    --cyan:#06b6d4;
+    --text:#102033;
+    --muted:#7890a8;
+    --border:#dcecf9;
+    --soft:#eaf6ff;
+    --green:#16a34a;
+    --red:#dc3855;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(6,182,212,.12),
+            transparent 32%
+        ),
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #f4f9ff
+        );
+
+    color:var(--text);
+    padding-bottom:100px;
+}
+
+
+/* ================= HEADER ================= */
+
+.header{
+
+    padding:18px 15px 24px;
+
+    background:
+        radial-gradient(
+            circle at 90% 0%,
+            rgba(56,189,248,.18),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eaf6ff
+        );
+
+    border-radius:0 0 30px 30px;
+
+    border-bottom:1px solid var(--border);
+
+    box-shadow:
+        0 12px 35px rgba(39,123,181,.10);
+}
+
+.topbar{
+
+    width:100%;
+    max-width:720px;
+
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+}
+
+.back{
+
+    width:45px;
+    height:45px;
+
+    flex-shrink:0;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    background:#fff;
+
+    color:#1769aa;
+
+    font-size:29px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 6px 18px rgba(25,118,210,.08);
+}
+
+.title{
+    flex:1;
+}
+
+.title h1{
+
+    color:var(--text);
+
+    font-size:20px;
+
+    font-weight:900;
+}
+
+.title p{
+
+    margin-top:4px;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:.5px;
+}
+
+.connection{
+
+    display:flex;
+    align-items:center;
+
+    gap:5px;
+
+    padding:8px 9px;
+
+    border-radius:12px;
+
+    color:var(--green);
+
+    background:#22c55e12;
+
+    border:1px solid #22c55e20;
+
+    font-size:8px;
+
+    font-weight:900;
+}
+
+.connection.offline{
+
+    color:var(--red);
+
+    background:#ef444412;
+
+    border-color:#ef444420;
+}
+
+.connection-dot{
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+}
+
+.connection.offline .connection-dot{
+
+    background:#ef4444;
+}
+
+
+/* ================= MAIN ================= */
+
+.container{
+
+    width:calc(100% - 22px);
+
+    max-width:720px;
+
+    margin:18px auto;
+}
+
+
+/* ================= HERO ================= */
+
+.hero{
+
+    padding:20px;
+
+    border:1px solid var(--border);
+
+    border-radius:25px;
+
+    background:#fff;
+
+    box-shadow:
+        0 10px 30px rgba(39,123,181,.08);
+}
+
+.hero-content{
+
+    display:flex;
+    align-items:center;
+
+    gap:14px;
+}
+
+.hero-icon{
+
+    width:56px;
+    height:56px;
+
+    flex-shrink:0;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            var(--cyan)
+        );
+
+    color:#fff;
+
+    font-size:25px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 10px 25px rgba(37,99,235,.22);
+}
+
+.hero h2{
+
+    color:var(--text);
+
+    font-size:18px;
+
+    font-weight:900;
+}
+
+.hero p{
+
+    margin-top:5px;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.5;
+
+    font-weight:600;
+}
+
+
+/* ================= QUICK INFO ================= */
+
+.quick-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:9px;
+
+    margin-top:12px;
+}
+
+.quick{
+
+    padding:14px 8px;
+
+    text-align:center;
+
+    border:1px solid var(--border);
+
+    border-radius:17px;
+
+    background:#fff;
+
+    box-shadow:
+        0 7px 20px rgba(39,123,181,.06);
+}
+
+.quick strong{
+
+    display:block;
+
+    color:var(--text);
+
+    font-size:11px;
+
+    font-weight:900;
+}
+
+.quick span{
+
+    display:block;
+
+    margin-top:5px;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    font-weight:700;
+}
+
+
+/* ================= CHAT ================= */
+
+.chat-card{
+
+    margin-top:14px;
+
+    overflow:hidden;
+
+    border:1px solid var(--border);
+
+    border-radius:27px;
+
+    background:#fff;
+
+    box-shadow:
+        0 14px 40px rgba(39,123,181,.10);
+}
+
+
+/* ================= CHAT HEADER ================= */
+
+.chat-header{
+
+    min-height:73px;
+
+    padding:13px 15px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    border-bottom:1px solid #edf4f9;
+
+    background:#fbfdff;
+}
+
+.avatar{
+
+    width:44px;
+    height:44px;
+
+    flex-shrink:0;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            var(--cyan)
+        );
+
+    color:#fff;
+
+    font-size:12px;
+
+    font-weight:900;
+}
+
+.agent-info{
+    flex:1;
+}
+
+.agent-info strong{
+
+    display:block;
+
+    color:var(--text);
+
+    font-size:14px;
+
+    font-weight:900;
+}
+
+.agent-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    margin-top:5px;
+
+    color:var(--green);
+
+    font-size:9px;
+
+    font-weight:800;
+}
+
+.agent-status i{
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+}
+
+.clear-btn{
+
+    padding:9px 10px;
+
+    border:1px solid var(--border);
+
+    border-radius:11px;
+
+    background:var(--soft);
+
+    color:#1687c7;
+
+    font-size:8px;
+
+    font-weight:900;
+}
+
+
+/* ================= MESSAGES ================= */
+
+.messages{
+
+    height:430px;
+
+    overflow-y:auto;
+
+    padding:18px 14px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:13px;
+
+    background:#f9fcff;
+}
+
+.messages::-webkit-scrollbar{
+    width:4px;
+}
+
+.messages::-webkit-scrollbar-thumb{
+
+    background:#cfe3f1;
+
+    border-radius:10px;
+}
+
+.empty-chat{
+
+    margin:auto;
+
+    max-width:280px;
+
+    text-align:center;
+
+    color:#7890a8;
+
+    font-size:11px;
+
+    line-height:1.65;
+
+    font-weight:600;
+}
+
+.empty-icon{
+
+    width:60px;
+    height:60px;
+
+    margin:0 auto 13px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:19px;
+
+    background:#eaf6ff;
+
+    color:#1687c7;
+
+    font-size:25px;
+}
+
+.empty-chat strong{
+
+    display:block;
+
+    margin-bottom:5px;
+
+    color:var(--text);
+
+    font-size:15px;
+
+    font-weight:900;
+}
+
+
+/* ================= MESSAGE BUBBLES ================= */
+
+.message{
+
+    max-width:84%;
+
+    padding:13px 15px;
+
+    border-radius:18px;
+
+    font-size:14px;
+
+    line-height:1.55;
+
+    font-weight:600;
+
+    word-break:break-word;
+
+    animation:
+        messageIn .18s ease;
+}
+
+@keyframes messageIn{
+
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.message.customer{
+
+    align-self:flex-end;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            var(--cyan)
+        );
+
+    border-bottom-right-radius:5px;
+
+    box-shadow:
+        0 8px 20px rgba(37,99,235,.15);
+}
+
+.message.support{
+
+    align-self:flex-start;
+
+    color:#183047;
+
+    background:#fff;
+
+    border:1px solid var(--border);
+
+    border-bottom-left-radius:5px;
+
+    box-shadow:
+        0 5px 15px rgba(39,123,181,.06);
+}
+
+.message small{
+
+    display:block;
+
+    margin-top:7px;
+
+    opacity:.55;
+
+    font-size:8px;
+
+    font-weight:600;
+}
+
+
+/* ================= INPUT ================= */
+
+.chat-input{
+
+    padding:13px;
+
+    border-top:1px solid #edf4f9;
+
+    background:#fff;
+}
+
+.input-row{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:8px;
+}
+
+.input-wrap{
+
+    position:relative;
+
+    flex:1;
+}
+
+.message-input{
+
+    width:100%;
+
+    min-height:56px;
+    max-height:130px;
+
+    padding:
+        15px 14px 28px;
+
+    resize:none;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    outline:none;
+
+    background:#f7fbff;
+
+    color:var(--text);
+
+    font-family:Arial,sans-serif;
+
+    font-size:15px;
+
+    line-height:1.45;
+
+    font-weight:600;
+}
+
+.message-input::placeholder{
+    color:#9aabba;
+}
+
+.message-input:focus{
+
+    border-color:#38bdf8;
+
+    box-shadow:
+        0 0 0 3px #38bdf81c;
+}
+
+.counter{
+
+    position:absolute;
+
+    right:10px;
+    bottom:7px;
+
+    color:#7890a8;
+
+    font-size:8px;
+
+    font-weight:700;
+
+    pointer-events:none;
+}
+
+.send-btn{
+
+    width:56px;
+    height:56px;
+
+    flex-shrink:0;
+
+    border:0;
+
+    border-radius:16px;
+
+    display:grid;
+    place-items:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            var(--cyan)
+        );
+
+    color:#fff;
+
+    font-size:21px;
+
+    box-shadow:
+        0 10px 24px rgba(37,99,235,.20);
+}
+
+.send-btn:active{
+    transform:scale(.94);
+}
+
+.send-btn:disabled{
+    opacity:.55;
+}
+
+.input-note{
+
+    margin-top:8px;
+
+    color:#7890a8;
+
+    font-size:8px;
+
+    font-weight:600;
+}
+
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav{
+
+    position:fixed;
+
+    z-index:100;
+
+    left:12px;
+    right:12px;
+    bottom:10px;
+
+    height:69px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-around;
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,.96);
+
+    box-shadow:
+        0 15px 40px rgba(39,123,181,.18);
+
+    backdrop-filter:blur(18px);
+}
+
+.nav-item{
+
+    width:23%;
+
+    height:53px;
+
+    border:0;
+
+    border-radius:16px;
+
+    background:transparent;
+
+    color:#7890a8;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:3px;
+
+    font-size:8px;
+
+    font-weight:900;
+}
+
+.nav-item.active{
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            var(--cyan)
+        );
+}
+
+.nav-icon{
+    font-size:20px;
+}
+
+
+/* ================= TOAST ================= */
+
+.toast{
+
+    position:fixed;
+
+    z-index:300;
+
+    left:50%;
+    bottom:92px;
+
+    transform:
+        translateX(-50%)
+        translateY(15px);
+
+    padding:11px 16px;
+
+    border-radius:13px;
+
+    background:var(--text);
+
+    color:#fff;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.18);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.2s;
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+
+@media(max-width:480px){
+
+    .messages{
+        height:420px;
+    }
+
+    .message{
+        max-width:89%;
+    }
+
+}
+
+@media(max-width:360px){
+
+    .connection{
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="topbar">
+
+        <button
+            class="back"
+            type="button"
+            onclick="go('dashboard.html')">
+            ‹
+        </button>
+
+        <div class="title">
+
+            <h1>
+                Customer Support
+            </h1>
+
+            <p>
+                FT TRADE • SUPPORT CENTER
+            </p>
+
+        </div>
+
+        <div
+            class="connection"
+            id="connectionStatus">
+
+            <span class="connection-dot"></span>
+            ONLINE
+
+        </div>
+
+    </div>
+
+</header>
+
+<main class="container">
+  <!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-icon">
+            ?
+        </div>
+
+        <div>
+
+            <h2>
+                How can we help?
+            </h2>
+
+            <p>
+                Send your issue or question directly
+                to the FT TRADE support team.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK INFO -->
+
+<div class="quick-grid">
+
+    <div class="quick">
+        <strong>24/7</strong>
+        <span>Support</span>
+    </div>
+
+    <div class="quick">
+        <strong>FAST</strong>
+        <span>Response</span>
+    </div>
+
+    <div class="quick">
+        <strong>SECURE</strong>
+        <span>Messages</span>
+    </div>
+
+</div>
+
+
+<!-- CHAT CARD -->
+
+<section class="chat-card">
+
+    <!-- CHAT HEADER -->
+
+    <div class="chat-header">
+
+        <div class="avatar">
+            FT
+        </div>
+
+        <div class="agent-info">
+
+            <strong>
+                FT TRADE Support
+            </strong>
+
+            <div class="agent-status">
+
+                <i></i>
+
+                Support team online
+
+            </div>
+
+        </div>
+
+        <button
+            class="clear-btn"
+            type="button"
+            onclick="clearChat()">
+
+            CLEAR
+
+        </button>
+
+    </div>
+
+
+    <!-- MESSAGES -->
+
+    <div
+        class="messages"
+        id="messages">
+
+        <div class="empty-chat">
+
+            <div class="empty-icon">
+                ✦
+            </div>
+
+            <strong>
+                Start a conversation
+            </strong>
+
+            Send a message below and
+            the FT TRADE support team
+            can review your request.
+
+        </div>
+
+    </div>
+
+
+    <!-- MESSAGE INPUT -->
+
+    <div class="chat-input">
+
+        <div class="input-row">
+
+            <div class="input-wrap">
+
+                <textarea
+                    id="messageInput"
+                    class="message-input"
+                    maxlength="500"
+                    rows="1"
+                    placeholder="Type your message..."
+                    autocomplete="off"></textarea>
+
+                <span
+                    class="counter"
+                    id="counter">
+                    0/500
+                </span>
+
+            </div>
+
+
+            <button
+                class="send-btn"
+                id="sendBtn"
+                type="button"
+                onclick="sendMessage()">
+
+                ➤
+
+            </button>
+
+        </div>
+
+
+        <div class="input-note">
+
+            Enter to send • Maximum 500 characters
+
+        </div>
+
+    </div>
+
+</section>
+<!-- BOTTOM NAVIGATION -->
+
+<nav class="bottom-nav">
+
+    <a href="dashboard.html" class="nav-item">
+        <span class="nav-icon">⌂</span>
+        <span>Home</span>
+    </a>
+
+    <a href="tasks.html" class="nav-item">
+        <span class="nav-icon">✓</span>
+        <span>Tasks</span>
+    </a>
+
+    <a href="support.html" class="nav-item active">
+        <span class="nav-icon">?</span>
+        <span>Support</span>
+    </a>
+
+    <a href="profile.html" class="nav-item">
+        <span class="nav-icon">♙</span>
+        <span>Profile</span>
+    </a>
+
+</nav>
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<script>
+
+/* =========================
+   CONFIG
+========================= */
+
+const API =
+    "https://humor-grain-ali-arrives.trycloudflare.com";
+
+
+/* =========================
+   USER
+========================= */
+
+let currentUser = null;
+let messages = [];
+let loading = false;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const messagesBox =
+    document.getElementById("messages");
+
+const messageInput =
+    document.getElementById("messageInput");
+
+const sendBtn =
+    document.getElementById("sendBtn");
+
+const counter =
+    document.getElementById("counter");
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+}
+
+
+/* =========================
+   GET USER
+========================= */
+
+function getUser(){
+
+    const keys = [
+        "ftUser",
+        "ft_user",
+        "user",
+        "currentUser",
+        "loggedUser"
+    ];
+
+    for(const key of keys){
+
+        try{
+
+            const raw =
+                localStorage.getItem(key);
+
+            if(!raw) continue;
+
+            const data =
+                JSON.parse(raw);
+
+            if(data && (data.id || data.userId)){
+
+                return data;
+
+            }
+
+        }catch(error){
+
+            console.log(
+                "Invalid localStorage:",
+                key
+            );
+
+        }
+
+    }
+
+    return null;
+}
+
+
+/* =========================
+   FORMAT TIME
+========================= */
+
+function formatTime(value){
+
+    if(!value) return "";
+
+    const date =
+        new Date(value);
+
+    if(Number.isNaN(date.getTime())){
+
+        return "";
+
+    }
+
+    return date.toLocaleString(
+        "en-US",
+        {
+            hour: "2-digit",
+            minute: "2-digit",
+            day: "2-digit",
+            month: "short"
+        }
+    );
+}
+
+
+/* =========================
+   EMPTY CHAT
+========================= */
+
+function showEmpty(
+    title = "Start a conversation",
+    text = "Send a message below and the FT TRADE support team can review your request."
+){
+
+    messagesBox.innerHTML = "";
+
+    const empty =
+        document.createElement("div");
+
+    empty.className =
+        "empty-chat";
+
+    const icon =
+        document.createElement("div");
+
+    icon.className =
+        "empty-icon";
+
+    icon.textContent =
+        "✦";
+
+    const heading =
+        document.createElement("strong");
+
+    heading.textContent =
+        title;
+
+    const description =
+        document.createElement("span");
+
+    description.textContent =
+        text;
+
+    empty.appendChild(icon);
+    empty.appendChild(heading);
+    empty.appendChild(description);
+
+    messagesBox.appendChild(empty);
+}
+
+
+/* =========================
+   RENDER MESSAGES
+========================= */
+
+function renderMessages(items){
+
+    messagesBox.innerHTML = "";
+
+    if(!Array.isArray(items) || items.length === 0){
+
+        showEmpty();
+
+        return;
+
+    }
+
+    items.forEach(item => {
+
+        const sender =
+            String(
+                item.sender ||
+                item.role ||
+                item.from ||
+                "user"
+            ).toLowerCase();
+
+        const isSupport =
+            sender === "support" ||
+            sender === "admin" ||
+            sender === "agent";
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            isSupport
+                ? "message-row support-row"
+                : "message-row user-row";
+
+
+        const bubble =
+            document.createElement("div");
+
+        bubble.className =
+            isSupport
+                ? "message-bubble support-message"
+                : "message-bubble user-message";
+
+
+        const text =
+            document.createElement("div");
+
+        text.className =
+            "message-text";
+
+        text.textContent =
+            item.message ||
+            item.text ||
+            "";
+
+
+        const time =
+            document.createElement("div");
+
+        time.className =
+            "message-time";
+
+        time.textContent =
+            formatTime(
+                item.createdAt ||
+                item.created_at ||
+                item.date ||
+                item.time
+            );
+
+
+        bubble.appendChild(text);
+        bubble.appendChild(time);
+
+        row.appendChild(bubble);
+
+        messagesBox.appendChild(row);
+
+    });
+
+
+    messagesBox.scrollTop =
+        messagesBox.scrollHeight;
+}
+
+
+/* =========================
+   LOAD MESSAGES
+========================= */
+
+async function loadMessages(
+    silent = false
+){
+
+    if(!currentUser) return;
+
+    const userId =
+        currentUser.id ||
+        currentUser.userId;
+
+    if(!userId) return;
+
+    try{
+
+        const response =
+            await fetch(
+                `${API}/api/support/${encodeURIComponent(userId)}`
+            );
+
+        const data =
+            await response.json();
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Unable to load messages."
+            );
+
+        }
+
+        messages =
+            Array.isArray(data.messages)
+                ? data.messages
+                : Array.isArray(data.support)
+                    ? data.support
+                    : Array.isArray(data.history)
+                        ? data.history
+                        : [];
+
+        renderMessages(messages);
+
+    }catch(error){
+
+        console.error(
+            "Support load error:",
+            error
+        );
+
+        if(!silent){
+
+            showToast(
+                "Unable to load support messages."
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =========================
+   SEND MESSAGE
+========================= */
+
+async function sendMessage(){
+
+    if(loading) return;
+
+    if(!currentUser){
+
+        showToast(
+            "Please login first."
+        );
+
+        return;
+
+    }
+
+    const text =
+        messageInput.value.trim();
+
+    if(!text){
+
+        showToast(
+            "Please enter a message."
+        );
+
+        messageInput.focus();
+
+        return;
+
+    }
+
+    if(text.length > 500){
+
+        showToast(
+            "Maximum 500 characters allowed."
+        );
+
+        return;
+
+    }
+
+    const userId =
+        currentUser.id ||
+        currentUser.userId;
+
+    loading = true;
+
+    sendBtn.disabled = true;
+
+    sendBtn.innerHTML =
+        `<span class="spinner"></span>`;
+
+    try{
+
+        const response =
+            await fetch(
+                `${API}/api/support`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        userId:
+                            String(userId),
+
+                        message:
+                            text
+
+                    })
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if(!response.ok || data.success === false){
+
+            throw new Error(
+                data.message ||
+                "Message could not be sent."
+            );
+
+        }
+
+        messageInput.value = "";
+
+        updateCounter();
+
+        showToast(
+            "Message sent successfully."
+        );
+
+        await loadMessages(true);
+
+    }catch(error){
+
+        console.error(
+            "Send message error:",
+            error
+        );
+
+        showToast(
+            error.message ||
+            "Failed to send message."
+        );
+
+    }finally{
+
+        loading = false;
+
+        sendBtn.disabled = false;
+
+        sendBtn.textContent = "➤";
+
+        messageInput.focus();
+
+    }
+
+}
+
+
+/* =========================
+   COUNTER
+========================= */
+
+function updateCounter(){
+
+    const length =
+        messageInput.value.length;
+
+    counter.textContent =
+        `${length}/500`;
+
+    if(length >= 450){
+
+        counter.classList.add(
+            "warning"
+        );
+
+    }else{
+
+        counter.classList.remove(
+            "warning"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   TEXTAREA SIZE
+========================= */
+
+function resizeTextarea(){
+
+    messageInput.style.height =
+        "auto";
+
+    messageInput.style.height =
+        Math.min(
+            messageInput.scrollHeight,
+            120
+        ) + "px";
+
+}
+
+
+/* =========================
+   CLEAR CHAT
+========================= */
+
+function clearChat(){
+
+    showEmpty(
+        "Conversation view cleared",
+        "Your messages are still saved on the server."
+    );
+
+    showToast(
+        "Chat view cleared."
+    );
+
+}
+
+
+/* =========================
+   INPUT EVENTS
+========================= */
+
+messageInput.addEventListener(
+    "input",
+    () => {
+
+        updateCounter();
+
+        resizeTextarea();
+
+    }
+);
+
+
+messageInput.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key === "Enter" &&
+            !event.shiftKey
+        ){
+
+            event.preventDefault();
+
+            sendMessage();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   ONLINE STATUS
+========================= */
+
+function updateOnlineStatus(){
+
+    const status =
+        document.querySelector(
+            ".agent-status"
+        );
+
+    if(!status) return;
+
+    const dot =
+        status.querySelector("i");
+
+    if(navigator.onLine){
+
+        if(dot){
+
+            dot.classList.remove(
+                "offline"
+            );
+
+        }
+
+        status.lastChild.textContent =
+            " Support team online";
+
+    }else{
+
+        if(dot){
+
+            dot.classList.add(
+                "offline"
+            );
+
+        }
+
+        status.lastChild.textContent =
+            " You are offline";
+
+    }
+
+}
+
+
+/* =========================
+   CONNECTION EVENTS
+========================= */
+
+window.addEventListener(
+    "online",
+    () => {
+
+        updateOnlineStatus();
+
+        showToast(
+            "Internet connection restored."
+        );
+
+        loadMessages(true);
+
+    }
+);
+
+
+window.addEventListener(
+    "offline",
+    () => {
+
+        updateOnlineStatus();
+
+        showToast(
+            "You are currently offline."
+        );
+
+    }
+);
+
+
+/* =========================
+   ESC CLOSE / RESET
+========================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(event.key === "Escape"){
+
+            messageInput.blur();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   START
+========================= */
+
+currentUser =
+    getUser();
+
+if(!currentUser){
+
+    showEmpty(
+        "Login required",
+        "Please login to use FT TRADE support."
+    );
+
+}else{
+
+    loadMessages();
+
+}
+
+updateCounter();
+
+resizeTextarea();
+
+updateOnlineStatus();
+
+
+/* =========================
+   AUTO REFRESH
+========================= */
+
+setInterval(
+    () => {
+
+        if(
+            currentUser &&
+            navigator.onLine
+        ){
+
+            loadMessages(true);
+
+        }
+
+    },
+    5000
+);
+  /* =========================
+   FINAL PAGE CHECK
+========================= */
+
+window.addEventListener("load", () => {
+
+    updateCounter();
+    resizeTextarea();
+    updateOnlineStatus();
+
+    if(currentUser){
+        loadMessages(true);
+    }
+
+});
+
+</script>
+
+</body>
+</html>

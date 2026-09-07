@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#2496ff">
+
+<title>FT TRADE — Profile</title>
+  <script src="config.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+    --blue:#2496ff;
+    --blue-dark:#1477d4;
+    --blue-light:#eaf6ff;
+    --bg:#f5faff;
+    --white:#fff;
+    --text:#152235;
+    --muted:#718096;
+    --border:#e1edf7;
+    --green:#16a34a;
+    --shadow:0 10px 30px rgba(36,150,255,.10);
+}
+
+body{
+    min-height:100vh;
+    padding-bottom:100px;
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--text);
+    background:var(--bg);
+}
+
+/* HEADER */
+
+.header{
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    padding:15px 16px 18px;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.topbar{
+    max-width:720px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.back{
+    width:44px;
+    height:44px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:#fff;
+    color:var(--blue-dark);
+    font-size:28px;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(36,150,255,.07);
+}
+
+.title{
+    flex:1;
+}
+
+.title h1{
+    font-size:21px;
+    font-weight:900;
+}
+
+.title p{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+
+/* MAIN */
+
+.container{
+    width:calc(100% - 26px);
+    max-width:720px;
+    margin:20px auto;
+}
+
+/* CARD */
+
+.card{
+    margin-bottom:15px;
+    padding:20px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+}
+
+/* PROFILE */
+
+.profile-card{
+    text-align:center;
+}
+
+.avatar{
+    width:88px;
+    height:88px;
+    margin:auto;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(
+        135deg,
+        #2496ff,
+        #1477d4
+    );
+    color:#fff;
+    font-size:32px;
+    font-weight:900;
+    box-shadow:0 10px 25px rgba(36,150,255,.23);
+}
+
+.name{
+    margin-top:13px;
+    font-size:22px;
+    font-weight:900;
+}
+
+.email{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:11px;
+    word-break:break-word;
+}
+
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:11px;
+    padding:7px 11px;
+    border-radius:20px;
+    background:#ecfdf3;
+    color:#15803d;
+    font-size:8px;
+    font-weight:900;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#16a34a;
+}
+
+/* BALANCE */
+
+.balance-card{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(
+        135deg,
+        #2496ff,
+        #1477d4
+    );
+    color:#fff;
+    border:0;
+    box-shadow:0 15px 35px rgba(36,150,255,.23);
+}
+
+.balance-card:before{
+    content:"";
+    position:absolute;
+    width:170px;
+    height:170px;
+    right:-75px;
+    top:-75px;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+}
+
+.balance-card:after{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    right:35px;
+    bottom:-70px;
+    border-radius:50%;
+    background:rgba(255,255,255,.07);
+}
+
+.balance-label{
+    position:relative;
+    z-index:2;
+    font-size:10px;
+    font-weight:900;
+    opacity:.88;
+}
+
+.balance{
+    position:relative;
+    z-index:2;
+    margin-top:7px;
+    font-size:34px;
+    font-weight:900;
+}
+
+.balance-sub{
+    position:relative;
+    z-index:2;
+    margin-top:5px;
+    font-size:9px;
+    opacity:.82;
+}
+
+/* SECTION */
+
+.section-title{
+    margin-bottom:13px;
+    font-size:17px;
+    font-weight:900;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.stat{
+    padding:16px 8px;
+    text-align:center;
+    border:1px solid var(--border);
+    border-radius:17px;
+    background:#fbfdff;
+}
+
+.stat-icon{
+    width:36px;
+    height:36px;
+    margin:auto;
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--blue-light);
+    font-size:17px;
+}
+
+.stat-value{
+    margin-top:8px;
+    color:var(--blue-dark);
+    font-size:20px;
+    font-weight:900;
+}
+
+.stat-label{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:8px;
+    font-weight:900;
+}
+
+/* INFO */
+
+.info-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:15px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.info-row:first-child{
+    padding-top:0;
+}
+
+.info-row:last-child{
+    padding-bottom:0;
+    border-bottom:0;
+}
+
+.info-icon{
+    width:40px;
+    height:40px;
+    flex-shrink:0;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--blue-light);
+    color:var(--blue-dark);
+    font-size:16px;
+    font-weight:900;
+}
+
+.info-content{
+    min-width:0;
+    flex:1;
+}
+
+.info-label{
+    color:var(--muted);
+    font-size:8px;
+    font-weight:900;
+}
+
+.info-value{
+    margin-top:4px;
+    color:var(--text);
+    font-size:12px;
+    font-weight:800;
+    word-break:break-word;
+}
+
+/* MESSAGE */
+
+.message{
+    display:none;
+    margin-bottom:15px;
+    padding:13px;
+    border-radius:15px;
+    font-size:10px;
+    line-height:1.5;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    z-index:100;
+    left:12px;
+    right:12px;
+    bottom:10px;
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--border);
+    border-radius:22px;
+    background:rgba(255,255,255,.96);
+    box-shadow:0 12px 35px rgba(36,80,120,.15);
+    backdrop-filter:blur(18px);
+}
+
+.nav-inner{
+    width:100%;
+    max-width:600px;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.nav-item{
+    width:23%;
+    height:53px;
+    border:0;
+    border-radius:15px;
+    background:transparent;
+    color:#8191a3;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    font-size:8px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.nav-item.active{
+    color:#fff;
+    background:linear-gradient(
+        135deg,
+        #2496ff,
+        #1477d4
+    );
+    box-shadow:0 7px 18px rgba(36,150,255,.20);
+}
+
+.nav-icon{
+    font-size:20px;
+    line-height:20px;
+}
+
+/* LOADING */
+
+.loading{
+    text-align:center;
+    padding:30px 10px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.loader{
+    width:35px;
+    height:35px;
+    margin:0 auto 10px;
+    border:4px solid #dceeff;
+    border-top-color:var(--blue);
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:380px){
+
+    .container{
+        width:calc(100% - 20px);
+    }
+
+    .card{
+        padding:17px;
+        border-radius:19px;
+    }
+
+    .title h1{
+        font-size:19px;
+    }
+
+    .balance{
+        font-size:30px;
+    }
+
+    .stats{
+        gap:7px;
+    }
+
+    .stat{
+        padding:14px 5px;
+    }
+
+    .stat-value{
+        font-size:18px;
+    }
+
+}
+
+@media(min-width:700px){
+
+    .container{
+        margin-top:28px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="topbar">
+
+        <button
+            class="back"
+            type="button"
+            onclick="navigate('dashboard.html')">
+            ‹
+        </button>
+
+        <div class="title">
+
+            <h1>Profile</h1>
+
+            <p>
+                FT TRADE • ACCOUNT PROFILE
+            </p>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <!-- PROFILE -->
+
+    <section class="card profile-card">
+
+        <div
+            class="avatar"
+            id="avatar">
+            F
+        </div>
+
+        <div
+            class="name"
+            id="userName">
+            Loading...
+        </div>
+
+        <div
+            class="email"
+            id="userEmail">
+            Loading...
+        </div>
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            ACCOUNT ACTIVE
+
+        </div>
+
+    </section>
+
+
+    <!-- ERROR -->
+
+    <div
+        id="message"
+        class="message">
+    </div>
+
+
+    <!-- BALANCE -->
+
+    <section class="card balance-card">
+
+        <div class="balance-label">
+            AVAILABLE BALANCE
+        </div>
+
+        <div
+            class="balance"
+            id="balance">
+            PKR 0.00
+        </div>
+
+        <div class="balance-sub">
+            Current account balance
+        </div>
+
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="card">
+
+        <div class="section-title">
+            Account Statistics
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    ⭐
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="xp">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    XP
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    🏆
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="level">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    LEVEL
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+                <div
+                    class="stat-value"
+                    id="completedTasks">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    COMPLETED
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ACCOUNT INFORMATION -->
+
+    <section class="card">
+
+        <div class="section-title">
+            Account Information
+        </div>
+
+
+        <div class="info-row">
+
+            <div class="info-icon">
+                ID
+            </div>
+
+            <div class="info-content">
+
+                <div class="info-label">
+                    USER ID
+                </div>
+
+                <div
+                    class="info-value"
+                    id="userId">
+                    —
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <div class="info-icon">
+                ✉
+            </div>
+
+            <div class="info-content">
+
+                <div class="info-label">
+                    EMAIL ADDRESS
+                </div>
+
+                <div
+                    class="info-value"
+                    id="infoEmail">
+                    —
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <div class="info-icon">
+                📅
+            </div>
+
+            <div class="info-content">
+
+                <div class="info-label">
+                    JOINED DATE
+                </div>
+
+                <div
+                    class="info-value"
+                    id="joined">
+                    —
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <div class="info-icon">
+                ●
+            </div>
+
+            <div class="info-content">
+
+                <div class="info-label">
+                    ACCOUNT STATUS
+                </div>
+
+                <div
+                    class="info-value"
+                    id="accountStatus">
+                    Active
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+    <div class="nav-inner">
+
+        <button
+            class="nav-item"
+            type="button"
+            onclick="navigate('dashboard.html')">
+
+            <span class="nav-icon">
+                ⌂
+            </span>
+
+            HOME
+
+        </button>
+
+
+        <button
+            class="nav-item"
+            type="button"
+            onclick="navigate('tasks.html')">
+
+            <span class="nav-icon">
+                ✓
+            </span>
+
+            TASKS
+
+        </button>
+
+
+        <button
+            class="nav-item"
+            type="button"
+            onclick="navigate('withdraw.html')">
+
+            <span class="nav-icon">
+                💳
+            </span>
+
+            WITHDRAW
+
+        </button>
+
+
+        <button
+            class="nav-item active"
+            type="button"
+            onclick="navigate('profile.html')">
+
+            <span class="nav-icon">
+                👤
+            </span>
+
+            PROFILE
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+<!-- LOADING -->
+
+<div
+    id="loading"
+    style="
+        position:fixed;
+        inset:0;
+        z-index:200;
+        background:rgba(255,255,255,.92);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    ">
+
+    <div class="loading">
+
+        <div class="loader"></div>
+
+        Loading profile...
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   API
+===================================================== */
+
+
+/* =====================================================
+   GET USER ID
+===================================================== */
+
+function getUserId(){
+
+    /*
+       Same localStorage system used by
+       your FT TRADE pages.
+    */
+
+    const keys = [
+        "ft_user",
+        "user",
+        "currentUser",
+        "ftUser",
+        "loggedUser"
+    ];
+
+
+    for(const key of keys){
+
+        try{
+
+            const raw =
+                localStorage.getItem(key);
+
+            if(!raw){
+                continue;
+            }
+
+
+            const user =
+                JSON.parse(raw);
+
+
+            if(user && user.id){
+
+                return String(
+                    user.id
+                );
+
+            }
+
+
+            if(user && user.userId){
+
+                return String(
+                    user.userId
+                );
+
+            }
+
+        }catch(error){
+
+            console.log(
+                "Storage read error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* Also support direct ID storage */
+
+    return (
+        localStorage.getItem("userId") ||
+        localStorage.getItem("userID") ||
+        localStorage.getItem("ft_user_id") ||
+        localStorage.getItem("id") ||
+        ""
+    );
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function navigate(page){
+
+    window.location.href =
+        page;
+
+}
+
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+function money(value){
+
+    const amount =
+        Number(value) || 0;
+
+
+    return "PKR " +
+        amount.toLocaleString(
+            "en-PK",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        );
+
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(value){
+
+    if(!value){
+        return "—";
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "—";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-PK",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SHOW ERROR
+===================================================== */
+
+function showError(text){
+
+    const box =
+        document.getElementById(
+            "message"
+        );
+
+
+    box.style.display =
+        "block";
+
+
+    box.style.background =
+        "#fef2f2";
+
+
+    box.style.border =
+        "1px solid #fecaca";
+
+
+    box.style.color =
+        "#dc2626";
+
+
+    box.textContent =
+        text;
+
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderProfile(user){
+
+    const name =
+        user.name ||
+        user.username ||
+        "User";
+
+
+    const email =
+        user.email ||
+        "—";
+
+
+    const id =
+        user.id ||
+        user.userId ||
+        getUserId();
+
+
+    const balance =
+        user.balance ?? 0;
+
+
+    const xp =
+        user.xp ?? 0;
+
+
+    const level =
+        user.level ?? 0;
+
+
+    const completed =
+        user.completedTasks ??
+        user.completed ??
+        0;
+
+
+    document.getElementById(
+        "avatar"
+    ).textContent =
+        String(name)
+        .trim()
+        .charAt(0)
+        .toUpperCase() || "F";
+
+
+    document.getElementById(
+        "userName"
+    ).textContent =
+        name;
+
+
+    document.getElementById(
+        "userEmail"
+    ).textContent =
+        email;
+
+
+    document.getElementById(
+        "balance"
+    ).textContent =
+        money(balance);
+
+
+    document.getElementById(
+        "xp"
+    ).textContent =
+        Number(xp).toLocaleString();
+
+
+    document.getElementById(
+        "level"
+    ).textContent =
+        Number(level).toLocaleString();
+
+
+    document.getElementById(
+        "completedTasks"
+    ).textContent =
+        Number(completed).toLocaleString();
+
+
+    document.getElementById(
+        "userId"
+    ).textContent =
+        id || "—";
+
+
+    document.getElementById(
+        "infoEmail"
+    ).textContent =
+        email;
+
+
+    document.getElementById(
+        "joined"
+    ).textContent =
+        formatDate(
+            user.createdAt ||
+            user.joinedAt ||
+            user.created
+        );
+
+
+    const status =
+        String(
+            user.status ||
+            "active"
+        );
+
+
+    document.getElementById(
+        "accountStatus"
+    ).textContent =
+        status.charAt(0).toUpperCase() +
+        status.slice(1);
+
+}
+
+
+/* =====================================================
+   LOAD PROFILE
+===================================================== */
+
+async function loadProfile(){
+
+    const userId =
+        getUserId();
+
+
+    if(!userId){
+
+        showError(
+            "User ID not found. Please login again."
+        );
+
+        hideLoading();
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                API_BASE +
+                "/api/user/" +
+                encodeURIComponent(
+                    userId
+                )
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+                data.message ||
+                "Unable to load profile."
+            );
+
+        }
+
+
+        const user =
+            data.user ||
+            data.profile;
+
+
+        if(!user){
+
+            throw new Error(
+                "User data not found."
+            );
+
+        }
+
+
+        renderProfile(
+            user
+        );
+
+
+    }catch(error){
+
+        console.log(
+            "Profile error:",
+            error
+        );
+
+
+        showError(
+            error.message ||
+            "Unable to connect to server."
+        );
+
+    }finally{
+
+        hideLoading();
+
+    }
+
+}
+
+
+/* =====================================================
+   HIDE LOADING
+===================================================== */
+
+function hideLoading(){
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+
+    if(loading){
+
+        loading.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadProfile();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

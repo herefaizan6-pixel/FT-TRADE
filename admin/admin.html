@@ -1,0 +1,6250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FT TRADE | Admin Control Center</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f8fc;
+    color:#172b3a;
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.app{
+    min-height:100vh;
+    display:flex;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    width:250px;
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    z-index:100;
+
+    background:#ffffff;
+    border-right:1px solid #e3edf5;
+
+    padding:20px 15px;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:8px 10px 25px;
+}
+
+.brand-logo{
+    width:42px;
+    height:42px;
+
+    border-radius:12px;
+
+    background:linear-gradient(
+        135deg,
+        #1677ff,
+        #53a5ff
+    );
+
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:16px;
+    font-weight:900;
+
+    box-shadow:
+        0 7px 18px
+        rgba(22,119,255,.20);
+}
+
+.brand-text{
+    font-size:20px;
+    font-weight:900;
+    color:#1677ff;
+}
+
+.brand-text span{
+    color:#193448;
+}
+
+.nav-title{
+    padding:0 12px;
+    margin:8px 0 7px;
+
+    color:#9aabb7;
+
+    font-size:10px;
+    font-weight:800;
+
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.nav{
+    width:100%;
+
+    border:0;
+    outline:0;
+
+    background:transparent;
+
+    color:#617989;
+
+    text-align:left;
+
+    padding:13px 14px;
+    margin:3px 0;
+
+    border-radius:11px;
+
+    font-size:13px;
+    font-weight:700;
+
+    transition:.2s;
+}
+
+.nav:hover{
+    background:#eef6ff;
+    color:#1677ff;
+}
+
+.nav.active{
+    background:#e8f3ff;
+    color:#1677ff;
+
+    box-shadow:
+        inset 3px 0 0 #1677ff;
+}
+
+.sidebar-footer{
+    margin-top:auto;
+
+    background:#f4f8fc;
+
+    border:1px solid #e6eef4;
+
+    border-radius:13px;
+
+    padding:13px;
+
+    color:#8a9da9;
+
+    font-size:11px;
+
+    line-height:1.6;
+}
+
+.sidebar-footer strong{
+    color:#405c6d;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    width:calc(100% - 250px);
+    margin-left:250px;
+
+    min-height:100vh;
+}
+
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+    height:72px;
+
+    position:sticky;
+    top:0;
+    z-index:80;
+
+    background:#fff;
+
+    border-bottom:1px solid #e3edf5;
+
+    padding:0 28px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.topbar-left{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.menu-btn{
+    display:none;
+
+    width:40px;
+    height:40px;
+
+    border:0;
+    border-radius:10px;
+
+    background:#eaf4ff;
+    color:#1677ff;
+
+    font-size:18px;
+}
+
+.page-title{
+    font-size:21px;
+    font-weight:800;
+    color:#172b3a;
+}
+
+.page-subtitle{
+    margin-top:3px;
+
+    font-size:11px;
+    color:#8ba0ae;
+}
+
+.admin-status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:9px 13px;
+
+    background:#eff9f3;
+    color:#19884e;
+
+    border:1px solid #d9f0e2;
+
+    border-radius:20px;
+
+    font-size:11px;
+    font-weight:800;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+
+    background:#22a45d;
+
+    border-radius:50%;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    padding:28px;
+}
+
+.section{
+    display:none;
+}
+
+.section.active{
+    display:block;
+}
+
+
+/* =========================
+   STAT CARDS
+========================= */
+
+.cards{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:17px;
+
+    margin-bottom:22px;
+}
+
+.stat-card{
+    position:relative;
+
+    background:#fff;
+
+    border:1px solid #e2ecf3;
+
+    border-radius:17px;
+
+    padding:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 6px 22px
+        rgba(28,73,105,.05);
+}
+
+.stat-card::after{
+    content:"";
+
+    position:absolute;
+
+    width:80px;
+    height:80px;
+
+    right:-35px;
+    bottom:-35px;
+
+    border-radius:50%;
+
+    background:#f0f7ff;
+}
+
+.stat-icon{
+    width:43px;
+    height:43px;
+
+    border-radius:12px;
+
+    background:#eaf4ff;
+    color:#1677ff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
+
+    margin-bottom:15px;
+}
+
+.stat-title{
+    color:#8498a5;
+
+    font-size:12px;
+
+    margin-bottom:7px;
+}
+
+.stat-value{
+    color:#172b3a;
+
+    font-size:25px;
+    font-weight:900;
+}
+
+
+/* =========================
+   PANELS
+========================= */
+
+.panel{
+    background:#fff;
+
+    border:1px solid #e2ecf3;
+
+    border-radius:17px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 6px 22px
+        rgba(28,73,105,.05);
+}
+
+.panel-head{
+    min-height:70px;
+
+    padding:17px 20px;
+
+    border-bottom:1px solid #e8eff4;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.panel-title{
+    font-size:17px;
+    font-weight:800;
+}
+
+.panel-description{
+    color:#8b9eaa;
+
+    font-size:11px;
+
+    margin-top:4px;
+}
+
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.toolbar{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:12px;
+
+    padding:15px 18px;
+
+    background:#fbfdff;
+
+    border-bottom:1px solid #e8eff4;
+}
+
+.search{
+    width:240px;
+
+    padding:10px 13px;
+
+    border:1px solid #dbe6ee;
+
+    background:#fff;
+
+    color:#263e4d;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:12px;
+}
+
+.search:focus{
+    border-color:#1677ff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(22,119,255,.08);
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+    border:0;
+
+    border-radius:9px;
+
+    padding:8px 12px;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    transition:.18s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    background:#1677ff;
+    color:#fff;
+}
+
+.btn-blue{
+    background:#e8f3ff;
+    color:#1677ff;
+}
+
+.btn-success{
+    background:#e7f8ee;
+    color:#17864b;
+}
+
+.btn-danger{
+    background:#ffeded;
+    color:#d43b3b;
+}
+
+.btn-gray{
+    background:#f0f4f7;
+    color:#627887;
+}
+
+
+/* =========================
+   FILTERS
+========================= */
+
+.filters{
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    flex-wrap:wrap;
+}
+
+.filter{
+    border:1px solid #dce7ef;
+
+    background:#fff;
+
+    color:#687e8d;
+
+    padding:8px 12px;
+
+    border-radius:9px;
+
+    font-size:11px;
+
+    font-weight:800;
+}
+
+.filter:hover{
+    border-color:#bcd7ed;
+}
+
+.filter.active{
+    background:#1677ff;
+    border-color:#1677ff;
+
+    color:#fff;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+
+    min-width:850px;
+
+    border-collapse:collapse;
+}
+
+th{
+    padding:13px 17px;
+
+    text-align:left;
+
+    background:#fbfdff;
+
+    color:#8b9daa;
+
+    font-size:10px;
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    letter-spacing:.6px;
+}
+
+td{
+    padding:14px 17px;
+
+    border-top:1px solid #edf2f6;
+
+    color:#405b6b;
+
+    font-size:12px;
+}
+
+tbody tr:hover td{
+    background:#fbfdff;
+}
+
+.empty{
+    padding:40px!important;
+
+    text-align:center;
+
+    color:#91a3af!important;
+}
+
+
+/* =========================
+   BADGES
+========================= */
+
+.badge{
+    display:inline-block;
+
+    padding:5px 9px;
+
+    border-radius:20px;
+
+    font-size:10px;
+    font-weight:800;
+
+    text-transform:capitalize;
+}
+
+.badge.pending{
+    background:#fff5df;
+    color:#ad7600;
+}
+
+.badge.review{
+    background:#eeeaff;
+    color:#694bc8;
+}
+
+.badge.approved{
+    background:#e7f8ee;
+    color:#17864b;
+}
+
+.badge.rejected{
+    background:#ffeded;
+    color:#d43b3b;
+}
+
+
+/* =========================
+   SUPPORT SEARCH HEADER
+========================= */
+
+.support-header{
+    margin-bottom:18px;
+}
+
+.support-title-row{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.support-search{
+    width:270px;
+}
+
+
+/* =========================
+   SUPPORT GRID
+========================= */
+
+.support-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:18px;
+}
+
+
+/* =========================
+   CHAT CARD
+========================= */
+
+.chat-card{
+    background:#fff;
+
+    border:1px solid #dfeaf2;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 7px 25px
+        rgba(28,73,105,.06);
+
+    transition:.2s;
+}
+
+.chat-card:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 10px 28px
+        rgba(28,73,105,.09);
+}
+
+
+/* CHAT HEADER */
+
+.chat-head{
+    padding:15px 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #edf7ff,
+            #ffffff
+        );
+
+    border-bottom:1px solid #e3edf4;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+}
+
+.user-info{
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    min-width:0;
+}
+
+.avatar{
+    flex:none;
+
+    width:42px;
+    height:42px;
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1677ff,
+            #5aa9ff
+        );
+
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:15px;
+    font-weight:900;
+
+    box-shadow:
+        0 5px 13px
+        rgba(22,119,255,.18);
+}
+
+.user-details{
+    min-width:0;
+}
+
+.user-id{
+    color:#203c4d;
+
+    font-size:12px;
+    font-weight:900;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.user-label{
+    color:#91a2ae;
+
+    font-size:10px;
+
+    margin-top:4px;
+}
+
+.message-count{
+    flex:none;
+
+    background:#e8f3ff;
+
+    color:#1677ff;
+
+    padding:6px 9px;
+
+    border-radius:20px;
+
+    font-size:10px;
+    font-weight:800;
+}
+
+
+/* CHAT BODY */
+
+.chat-body{
+    height:340px;
+
+    padding:15px;
+
+    overflow-y:auto;
+
+    background:#f7fafc;
+}
+
+.chat-body::-webkit-scrollbar{
+    width:5px;
+}
+
+.chat-body::-webkit-scrollbar-thumb{
+    background:#ccdce7;
+    border-radius:10px;
+}
+
+
+/* MESSAGE */
+
+.msg{
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:14px;
+}
+
+.msg.user{
+    align-items:flex-start;
+}
+
+.msg.admin{
+    align-items:flex-end;
+}
+
+.msg-label{
+    margin:0 5px 4px;
+
+    color:#8d9fa9;
+
+    font-size:9px;
+    font-weight:800;
+
+    text-transform:uppercase;
+}
+
+.bubble{
+    max-width:82%;
+
+    padding:10px 12px;
+
+    border-radius:13px;
+
+    font-size:12px;
+
+    line-height:1.5;
+
+    word-break:break-word;
+}
+
+.msg.user .bubble{
+    background:#fff;
+
+    border:1px solid #dfe9ef;
+
+    color:#425b6a;
+
+    border-top-left-radius:4px;
+}
+
+.msg.admin .bubble{
+    background:#1677ff;
+
+    color:#fff;
+
+    border-top-right-radius:4px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(22,119,255,.13);
+}
+
+.msg-time{
+    margin-top:4px;
+
+    color:#9aaab4;
+
+    font-size:8px;
+}
+
+
+/* REPLY AREA */
+
+.reply-area{
+    display:flex;
+
+    gap:8px;
+
+    padding:12px;
+
+    background:#fff;
+
+    border-top:1px solid #e5edf3;
+}
+
+.reply-input{
+    flex:1;
+
+    min-width:0;
+
+    border:1px solid #dbe6ee;
+
+    background:#f9fcff;
+
+    color:#263e4d;
+
+    border-radius:10px;
+
+    padding:10px 11px;
+
+    outline:none;
+
+    font-size:11px;
+}
+
+.reply-input:focus{
+    border-color:#1677ff;
+
+    background:#fff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(22,119,255,.07);
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    z-index:300;
+
+    background:
+        rgba(19,43,60,.45);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+
+    max-width:440px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.20);
+}
+
+.modal-head{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:20px;
+}
+
+.modal-head h2{
+    font-size:18px;
+}
+
+.close{
+    width:33px;
+    height:33px;
+
+    border:0;
+
+    border-radius:9px;
+
+    background:#f1f5f8;
+
+    color:#607786;
+}
+
+.form-group{
+    margin-bottom:13px;
+}
+
+.form-group label{
+    display:block;
+
+    margin-bottom:6px;
+
+    color:#637b8b;
+
+    font-size:11px;
+    font-weight:800;
+}
+
+.form-group input{
+    width:100%;
+
+    padding:11px;
+
+    border:1px solid #dce7ee;
+
+    border-radius:9px;
+
+    outline:none;
+
+    font-size:12px;
+}
+
+.form-group input:focus{
+    border-color:#1677ff;
+}
+
+.modal-actions{
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:7px;
+
+    margin-top:18px;
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+
+    right:22px;
+    bottom:22px;
+
+    z-index:500;
+
+    max-width:320px;
+
+    padding:12px 16px;
+
+    background:#172b3a;
+    color:#fff;
+
+    border-radius:11px;
+
+    font-size:12px;
+    font-weight:700;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.18);
+
+    opacity:0;
+
+    transform:translateY(80px);
+
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    .cards{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .support-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+
+@media(max-width:760px){
+
+    .sidebar{
+        transform:translateX(-100%);
+
+        transition:.25s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        width:100%;
+        margin-left:0;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .topbar{
+        padding:0 16px;
+    }
+
+    .content{
+        padding:16px;
+    }
+
+    .admin-status{
+        display:none;
+    }
+
+    .cards{
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:15px;
+    }
+
+    .stat-value{
+        font-size:21px;
+    }
+
+    .panel-head,
+    .toolbar{
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+    .search,
+    .support-search{
+        width:100%;
+    }
+
+    .support-title-row{
+        flex-direction:column;
+        align-items:stretch;
+    }
+}
+
+
+@media(max-width:430px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .page-title{
+        font-size:18px;
+    }
+
+    .content{
+        padding:12px;
+    }
+
+    .chat-body{
+        height:300px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-logo">
+            FT
+        </div>
+
+        <div class="brand-text">
+            FT <span>TRADE</span>
+        </div>
+
+    </div>
+
+
+    <div class="nav-title">
+        Main Menu
+    </div>
+
+
+    <button
+        class="nav active"
+        onclick="showSection('dashboard',this)">
+
+        ▦ &nbsp; Dashboard
+
+    </button>
+
+
+    <button
+        class="nav"
+        onclick="showSection('users',this)">
+
+        👥 &nbsp; Users
+
+    </button>
+
+
+    <button
+        class="nav"
+        onclick="showSection('tasks',this)">
+
+        ✓ &nbsp; Tasks
+
+    </button>
+
+
+    <button
+        class="nav"
+        onclick="showSection('withdrawals',this)">
+
+        ₨ &nbsp; Withdrawals
+
+    </button>
+
+
+    <button
+        class="nav"
+        onclick="showSection('support',this)">
+
+        💬 &nbsp; Support
+
+    </button>
+
+
+    <div class="sidebar-footer">
+
+        <strong>FT TRADE Admin</strong><br>
+
+        Control Center<br>
+
+        <span>Management Dashboard</span>
+
+    </div>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <button
+            class="menu-btn"
+            onclick="toggleSidebar()">
+
+            ☰
+
+        </button>
+
+
+        <div>
+
+            <div
+                class="page-title"
+                id="pageTitle">
+
+                Dashboard
+
+            </div>
+
+            <div class="page-subtitle">
+
+                FT TRADE Management System
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="admin-status">
+
+        <span class="status-dot"></span>
+
+        ADMIN ONLINE
+
+    </div>
+
+</header>
+
+
+<div class="content">
+  <!-- =========================
+     DASHBOARD SECTION
+========================= -->
+
+<section
+    class="section active"
+    id="dashboard">
+
+    <div class="cards">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">👥</div>
+
+            <div class="stat-title">
+                Total Users
+            </div>
+
+            <div
+                class="stat-value"
+                id="totalUsers">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">✓</div>
+
+            <div class="stat-title">
+                Completed Tasks
+            </div>
+
+            <div
+                class="stat-value"
+                id="completedTasks">
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">₨</div>
+
+            <div class="stat-title">
+                Total Balance
+            </div>
+
+            <div
+                class="stat-value"
+                id="totalBalance">
+                PKR 0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">⏳</div>
+
+            <div class="stat-title">
+                Pending Withdrawals
+            </div>
+
+            <div
+                class="stat-value"
+                id="pendingWithdrawals">
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUICK OVERVIEW -->
+
+    <div class="panel">
+
+        <div class="panel-head">
+
+            <div>
+
+                <div class="panel-title">
+                    System Overview
+                </div>
+
+                <div class="panel-description">
+                    Current FT TRADE platform activity
+                </div>
+
+            </div>
+
+            <button
+                class="btn btn-primary"
+                onclick="loadDashboard()">
+
+                ↻ Refresh
+
+            </button>
+
+        </div>
+
+
+        <div style="
+            padding:25px;
+            display:grid;
+            grid-template-columns:
+            repeat(3,minmax(0,1fr));
+            gap:15px;
+        ">
+
+            <div style="
+                background:#f7fbff;
+                border:1px solid #e4edf4;
+                border-radius:13px;
+                padding:18px;
+            ">
+
+                <div style="
+                    color:#8a9da9;
+                    font-size:11px;
+                    margin-bottom:7px;
+                ">
+                    Platform
+                </div>
+
+                <strong style="
+                    color:#1677ff;
+                    font-size:14px;
+                ">
+                    FT TRADE
+                </strong>
+
+            </div>
+
+
+            <div style="
+                background:#f7fbff;
+                border:1px solid #e4edf4;
+                border-radius:13px;
+                padding:18px;
+            ">
+
+                <div style="
+                    color:#8a9da9;
+                    font-size:11px;
+                    margin-bottom:7px;
+                ">
+                    Backend Status
+                </div>
+
+                <strong
+                    id="serverStatus"
+                    style="
+                    color:#19884e;
+                    font-size:14px;
+                ">
+                    Checking...
+                </strong>
+
+            </div>
+
+
+            <div style="
+                background:#f7fbff;
+                border:1px solid #e4edf4;
+                border-radius:13px;
+                padding:18px;
+            ">
+
+                <div style="
+                    color:#8a9da9;
+                    font-size:11px;
+                    margin-bottom:7px;
+                ">
+                    Admin Panel
+                </div>
+
+                <strong style="
+                    color:#19884e;
+                    font-size:14px;
+                ">
+                    Active
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     USERS SECTION
+========================= -->
+
+<section
+    class="section"
+    id="users">
+
+
+    <div class="panel">
+
+        <div class="panel-head">
+
+            <div>
+
+                <div class="panel-title">
+                    User Management
+                </div>
+
+                <div class="panel-description">
+                    View and manage registered FT TRADE users
+                </div>
+
+            </div>
+
+            <button
+                class="btn btn-primary"
+                onclick="loadUsers()">
+
+                ↻ Refresh Users
+
+            </button>
+
+        </div>
+
+
+        <div class="toolbar">
+
+            <input
+                type="text"
+                id="userSearch"
+                class="search"
+                placeholder="Search user, email or ID..."
+                oninput="filterUsers()"
+            >
+
+
+            <div class="filters">
+
+                <button
+                    class="filter active"
+                    onclick="setUserFilter('all',this)">
+
+                    All
+
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setUserFilter('active',this)">
+
+                    Active
+
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setUserFilter('blocked',this)">
+
+                    Blocked
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            User
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Balance
+                        </th>
+
+                        <th>
+                            XP
+                        </th>
+
+                        <th>
+                            Level
+                        </th>
+
+                        <th>
+                            Tasks
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="usersTable">
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            class="empty">
+
+                            Loading users...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     USER EDIT MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="editUserModal">
+
+
+    <div class="modal-box">
+
+
+        <div class="modal-head">
+
+            <div>
+
+                <h2>
+                    Edit User
+                </h2>
+
+                <div
+                    style="
+                    color:#8b9da8;
+                    font-size:10px;
+                    margin-top:4px;
+                "
+                    id="editUserId">
+
+                    User
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="close"
+                onclick="closeEditModal()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+
+        <input
+            type="hidden"
+            id="editId"
+        >
+
+
+        <div class="form-group">
+
+            <label>
+                Balance
+            </label>
+
+            <input
+                type="number"
+                id="editBalance"
+                placeholder="Enter balance"
+                step="0.01"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                XP
+            </label>
+
+            <input
+                type="number"
+                id="editXP"
+                placeholder="Enter XP"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Level
+            </label>
+
+            <input
+                type="number"
+                id="editLevel"
+                placeholder="Enter level"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Completed Tasks
+            </label>
+
+            <input
+                type="number"
+                id="editTasks"
+                placeholder="Enter completed tasks"
+            >
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn btn-gray"
+                onclick="closeEditModal()">
+
+                Cancel
+
+            </button>
+
+
+            <button
+                class="btn btn-primary"
+                onclick="saveUser()">
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     DELETE CONFIRM MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="deleteUserModal">
+
+
+    <div class="modal-box">
+
+
+        <div class="modal-head">
+
+            <h2>
+                Delete User
+            </h2>
+
+
+            <button
+                class="close"
+                onclick="closeDeleteModal()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+
+        <p style="
+            color:#667d8b;
+            font-size:12px;
+            line-height:1.6;
+            margin-bottom:18px;
+        ">
+
+            Are you sure you want to delete this user?
+            This action cannot be undone.
+
+        </p>
+
+
+        <input
+            type="hidden"
+            id="deleteId"
+        >
+
+
+        <div
+            id="deleteUserName"
+            style="
+            background:#fff5f5;
+            border:1px solid #ffe0e0;
+            color:#c43d3d;
+            padding:11px;
+            border-radius:9px;
+            font-size:11px;
+            font-weight:800;
+            margin-bottom:17px;
+        ">
+
+            User
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn btn-gray"
+                onclick="closeDeleteModal()">
+
+                Cancel
+
+            </button>
+
+
+            <button
+                class="btn btn-danger"
+                onclick="confirmDeleteUser()">
+
+                Delete User
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- =========================
+     TASKS SECTION
+========================= -->
+
+<section
+    class="section"
+    id="tasks">
+
+    <div class="panel">
+
+        <div class="panel-head">
+
+            <div>
+
+                <div class="panel-title">
+                    Task Management
+                </div>
+
+                <div class="panel-description">
+                    Review and manage submitted tasks
+                </div>
+
+            </div>
+
+            <button
+                class="btn btn-primary"
+                onclick="loadTasks()">
+
+                ↻ Refresh Tasks
+
+            </button>
+
+        </div>
+
+
+        <div class="toolbar">
+
+            <input
+                type="text"
+                id="taskSearch"
+                class="search"
+                placeholder="Search task or user..."
+                oninput="filterTasks()"
+            >
+
+
+            <div class="filters">
+
+                <button
+                    class="filter active"
+                    onclick="setTaskFilter('all',this)">
+
+                    All
+
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setTaskFilter('pending',this)">
+
+                    Pending
+
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setTaskFilter('review',this)">
+
+                    Review
+
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setTaskFilter('approved',this)">
+
+                    Approved
+
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setTaskFilter('rejected',this)">
+
+                    Rejected
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Task ID
+                        </th>
+
+                        <th>
+                            User ID
+                        </th>
+
+                        <th>
+                            Task
+                        </th>
+
+                        <th>
+                            Reward
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="tasksTable">
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="empty">
+
+                            Loading tasks...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     WITHDRAWALS SECTION
+========================= -->
+
+<section
+    class="section"
+    id="withdrawals">
+
+    <div class="panel">
+
+        <div class="panel-head">
+
+            <div>
+
+                <div class="panel-title">
+                    Withdrawal Management
+                </div>
+
+                <div class="panel-description">
+                    Review user withdrawal requests
+                </div>
+
+            </div>
+
+            <button
+                class="btn btn-primary"
+                onclick="loadWithdrawals()">
+
+                ↻ Refresh Withdrawals
+
+            </button>
+
+        </div>
+
+
+        <div class="toolbar">
+
+            <input
+                type="text"
+                id="withdrawSearch"
+                class="search"
+                placeholder="Search user or withdrawal..."
+                oninput="filterWithdrawals()"
+            >
+
+
+            <div class="filters">
+
+                <button
+                    class="filter active"
+                    onclick="setWithdrawFilter('all',this)">
+
+                    All
+
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setWithdrawFilter('pending',this)">
+
+                    Pending
+
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setWithdrawFilter('approved',this)">
+
+                    Approved
+
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="setWithdrawFilter('rejected',this)">
+
+                    Rejected
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Withdrawal ID
+                        </th>
+
+                        <th>
+                            User ID
+                        </th>
+
+                        <th>
+                            Method
+                        </th>
+
+                        <th>
+                            Account
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="withdrawalsTable">
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            class="empty">
+
+                            Loading withdrawals...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     TASK DETAILS MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="taskModal">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <div>
+
+                <h2>
+                    Task Details
+                </h2>
+
+                <div
+                    id="taskModalId"
+                    style="
+                    color:#8b9da8;
+                    font-size:10px;
+                    margin-top:4px;
+                ">
+                    Task
+                </div>
+
+            </div>
+
+
+            <button
+                class="close"
+                onclick="closeTaskModal()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="taskDetails"
+            style="
+            color:#536b7a;
+            font-size:12px;
+            line-height:1.8;
+        ">
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn btn-gray"
+                onclick="closeTaskModal()">
+
+                Close
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     WITHDRAWAL DETAILS MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="withdrawModal">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <div>
+
+                <h2>
+                    Withdrawal Details
+                </h2>
+
+                <div
+                    id="withdrawModalId"
+                    style="
+                    color:#8b9da8;
+                    font-size:10px;
+                    margin-top:4px;
+                ">
+                    Withdrawal
+                </div>
+
+            </div>
+
+
+            <button
+                class="close"
+                onclick="closeWithdrawModal()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="withdrawDetails"
+            style="
+            color:#536b7a;
+            font-size:12px;
+            line-height:1.8;
+        ">
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn btn-gray"
+                onclick="closeWithdrawModal()">
+
+                Close
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     SUPPORT SECTION
+========================= -->
+
+<section
+    class="section"
+    id="support">
+
+    <div class="support-header">
+
+        <div class="support-title-row">
+
+            <div>
+
+                <div class="panel-title">
+                    Customer Support
+                </div>
+
+                <div class="panel-description">
+                    Each user has a separate professional support conversation
+                </div>
+
+            </div>
+
+
+            <input
+                type="text"
+                id="supportSearch"
+                class="search support-search"
+                placeholder="Search User ID..."
+                oninput="filterSupport()"
+            >
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="support-grid"
+        id="supportGrid">
+
+        <div class="panel">
+
+            <div class="empty">
+                Loading support messages...
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     GLOBAL TOAST
+========================= -->
+
+<div
+    class="toast"
+    id="toast">
+
+    Operation completed.
+
+</div>
+<!-- =========================
+     SUPPORT CHAT TEMPLATE
+========================= -->
+
+<!--
+    Support cards JavaScript se automatically
+    generate honge.
+
+    Har User ID ka apna separate chat card hoga.
+-->
+
+<style>
+
+/* =========================
+   SUPPORT EMPTY STATE
+========================= */
+
+.support-empty{
+    grid-column:1/-1;
+
+    background:#fff;
+
+    border:1px solid #e2ecf3;
+
+    border-radius:17px;
+
+    padding:55px 20px;
+
+    text-align:center;
+
+    color:#8b9eaa;
+
+    box-shadow:
+        0 6px 22px
+        rgba(28,73,105,.05);
+}
+
+.support-empty-icon{
+    width:60px;
+    height:60px;
+
+    margin:0 auto 14px;
+
+    border-radius:17px;
+
+    background:#eaf4ff;
+
+    color:#1677ff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:25px;
+}
+
+.support-empty-title{
+    color:#3e5969;
+
+    font-size:14px;
+    font-weight:800;
+
+    margin-bottom:5px;
+}
+
+.support-empty-text{
+    font-size:11px;
+}
+
+
+/* =========================
+   CHAT CARD EXTRA
+========================= */
+
+.chat-card{
+    display:flex;
+    flex-direction:column;
+}
+
+.chat-body{
+    display:flex;
+    flex-direction:column;
+}
+
+
+/* =========================
+   CHAT DATE
+========================= */
+
+.chat-date{
+    align-self:center;
+
+    margin:2px 0 14px;
+
+    padding:5px 9px;
+
+    background:#eaf1f6;
+
+    color:#8497a3;
+
+    border-radius:20px;
+
+    font-size:8px;
+    font-weight:800;
+}
+
+
+/* =========================
+   MESSAGE STATUS
+========================= */
+
+.message-status{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:4px;
+
+    margin-top:3px;
+
+    color:#9baab4;
+
+    font-size:8px;
+}
+
+.message-status-dot{
+    width:5px;
+    height:5px;
+
+    background:#25a660;
+
+    border-radius:50%;
+}
+
+
+/* =========================
+   SUPPORT CARD FOOTER
+========================= */
+
+.chat-footer-info{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    padding:7px 12px;
+
+    background:#fbfdff;
+
+    border-top:1px solid #edf2f6;
+
+    color:#91a1ab;
+
+    font-size:8px;
+}
+
+
+/* =========================
+   REPLY BUTTON
+========================= */
+
+.reply-btn{
+    flex:none;
+
+    width:40px;
+    height:40px;
+
+    border:0;
+
+    border-radius:10px;
+
+    background:#1677ff;
+
+    color:#fff;
+
+    font-size:16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:.2s;
+}
+
+.reply-btn:hover{
+    background:#0869ec;
+
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 5px 13px
+        rgba(22,119,255,.20);
+}
+
+
+/* =========================
+   TEXTAREA REPLY
+========================= */
+
+.reply-input{
+    resize:none;
+
+    height:40px;
+
+    line-height:18px;
+}
+
+
+/* =========================
+   CHAT CARD HIGHLIGHT
+========================= */
+
+.chat-card.highlight{
+    border-color:#1677ff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(22,119,255,.07);
+}
+
+
+/* =========================
+   RESPONSIVE SUPPORT
+========================= */
+
+@media(max-width:900px){
+
+    .support-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+
+
+<!-- =========================
+     SUPPORT INFO PANEL
+========================= -->
+
+<div
+    id="supportInfoPanel"
+    style="
+    display:none;
+    margin-bottom:18px;
+    background:#fff;
+    border:1px solid #e2ecf3;
+    border-radius:15px;
+    padding:15px 17px;
+">
+
+    <div style="
+        display:flex;
+        align-items:center;
+        gap:12px;
+    ">
+
+        <div
+            style="
+            width:38px;
+            height:38px;
+            border-radius:11px;
+            background:#eaf4ff;
+            color:#1677ff;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight:900;
+        ">
+
+            💬
+
+        </div>
+
+
+        <div>
+
+            <div style="
+                font-size:12px;
+                font-weight:800;
+                color:#294454;
+            ">
+
+                Support Center
+
+            </div>
+
+            <div style="
+                font-size:10px;
+                color:#91a1ab;
+                margin-top:3px;
+            ">
+
+                Reply directly to customer conversations
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     SUPPORT MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="supportModal">
+
+    <div
+        class="modal-box"
+        style="max-width:500px;">
+
+
+        <div class="modal-head">
+
+            <div>
+
+                <h2>
+                    Support Conversation
+                </h2>
+
+                <div
+                    id="supportModalUser"
+                    style="
+                    color:#8b9da8;
+                    font-size:10px;
+                    margin-top:4px;
+                ">
+
+                    User
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="close"
+                onclick="closeSupportModal()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="supportModalMessages"
+            style="
+            max-height:330px;
+            overflow-y:auto;
+            background:#f7fafc;
+            border:1px solid #e4edf3;
+            border-radius:12px;
+            padding:13px;
+        ">
+
+        </div>
+
+
+        <div
+            style="
+            display:flex;
+            gap:8px;
+            margin-top:12px;
+        ">
+
+            <textarea
+                id="supportModalInput"
+                placeholder="Write your reply..."
+                style="
+                flex:1;
+                resize:none;
+                height:55px;
+                padding:10px;
+                border:1px solid #dbe6ee;
+                border-radius:10px;
+                outline:none;
+                font-size:11px;
+                color:#294454;
+            "></textarea>
+
+
+            <button
+                class="reply-btn"
+                onclick="sendModalReply()">
+
+                ➤
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     SUPPORT CARD HTML
+     GENERATED BY JAVASCRIPT
+========================= -->
+
+<script>
+
+/*
+    NOTE:
+
+    Ye functions Part 5 ke main JavaScript ke saath
+    kaam karenge.
+
+    Support messages:
+    user message  -> left side
+    admin reply   -> right side
+
+    Har User ID ko separate card milega.
+*/
+
+
+function getSupportUserId(message){
+
+    return String(
+        message.userId ??
+        message.user ??
+        message.uid ??
+        "Unknown User"
+    );
+
+}
+
+
+function getSupportText(message){
+
+    return String(
+        message.message ??
+        message.text ??
+        ""
+    );
+
+}
+
+
+function getSupportSender(message){
+
+    return String(
+        message.sender ??
+        message.from ??
+        "user"
+    ).toLowerCase();
+
+}
+
+
+function supportIsAdmin(message){
+
+    const sender = getSupportSender(message);
+
+    return (
+        sender === "admin" ||
+        sender === "administrator" ||
+        sender === "staff"
+    );
+
+}
+
+
+function supportDate(message){
+
+    const value =
+        message.createdAt ??
+        message.date ??
+        message.timestamp;
+
+    if(!value){
+
+        return "";
+
+    }
+
+    const date = new Date(value);
+
+    if(isNaN(date.getTime())){
+
+        return "";
+
+    }
+
+    return date.toLocaleString(
+        "en-PK",
+        {
+            day:"2-digit",
+            month:"short",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+function supportInitial(userId){
+
+    const text = String(userId || "?").trim();
+
+    return text
+        .charAt(0)
+        .toUpperCase();
+
+}
+
+
+function escapeSupportText(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   BUILD CHAT CARD
+========================= */
+
+function buildSupportCard(userId,messages){
+
+    const sorted = [...messages].sort(
+        (a,b)=>{
+
+            const da = new Date(
+                a.createdAt ??
+                a.date ??
+                a.timestamp ??
+                0
+            ).getTime();
+
+            const db = new Date(
+                b.createdAt ??
+                b.date ??
+                b.timestamp ??
+                0
+            ).getTime();
+
+            return da-db;
+
+        }
+    );
+
+
+    let html = `
+
+        <div class="chat-card">
+
+            <div class="chat-head">
+
+                <div class="user-info">
+
+                    <div class="avatar">
+
+                        ${escapeSupportText(
+                            supportInitial(userId)
+                        )}
+
+                    </div>
+
+                    <div class="user-details">
+
+                        <div class="user-id">
+
+                            User ID:
+                            ${escapeSupportText(userId)}
+
+                        </div>
+
+                        <div class="user-label">
+
+                            Customer Support Conversation
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="message-count">
+
+                    ${sorted.length}
+                    ${sorted.length === 1
+                        ? "Message"
+                        : "Messages"}
+
+                </div>
+
+            </div>
+
+
+            <div class="chat-body">
+    `;
+
+
+    if(sorted.length === 0){
+
+        html += `
+
+            <div class="support-empty">
+
+                No messages yet.
+
+            </div>
+
+        `;
+
+    }
+
+
+    sorted.forEach((message,index)=>{
+
+        const isAdmin =
+            supportIsAdmin(message);
+
+        const text =
+            getSupportText(message);
+
+        const time =
+            supportDate(message);
+
+
+        html += `
+
+            <div class="msg ${isAdmin ? "admin" : "user"}">
+
+                <div class="msg-label">
+
+                    ${isAdmin
+                        ? "ADMIN REPLY"
+                        : "USER MESSAGE"}
+
+                </div>
+
+
+                <div class="bubble">
+
+                    ${escapeSupportText(text)}
+
+                </div>
+
+
+                ${
+                    time
+                    ?
+                    `
+                    <div class="msg-time">
+
+                        ${escapeSupportText(time)}
+
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+                ${
+                    isAdmin
+                    ?
+                    `
+                    <div class="message-status">
+
+                        <span class="message-status-dot"></span>
+
+                        Sent
+
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `
+
+            </div>
+
+
+            <div class="reply-area">
+
+                <textarea
+                    class="reply-input"
+                    id="reply-${encodeURIComponent(userId)}"
+                    placeholder="Write Admin Reply..."
+                    onkeydown="
+                        if(event.key==='Enter' && !event.shiftKey){
+                            event.preventDefault();
+                            sendSupportReply(
+                                '${encodeURIComponent(userId)}'
+                            );
+                        }
+                    "
+                ></textarea>
+
+
+                <button
+                    class="reply-btn"
+                    onclick="
+                        sendSupportReply(
+                            '${encodeURIComponent(userId)}'
+                        );
+                    "
+                    title="Send Reply">
+
+                    ➤
+
+                </button>
+
+            </div>
+
+
+            <div class="chat-footer-info">
+
+                <span>
+                    FT TRADE Support
+                </span>
+
+                <span>
+                    Admin Channel
+                </span>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    return html;
+
+}
+
+
+
+/* =========================
+   SUPPORT MODAL VIEW
+========================= */
+
+function openSupportModal(userId){
+
+    if(typeof allSupport === "undefined"){
+
+        return;
+
+    }
+
+
+    const messages =
+        allSupport.filter(
+            message =>
+                getSupportUserId(message) ===
+                String(userId)
+        );
+
+
+    document.getElementById(
+        "supportModalUser"
+    ).textContent =
+        "User ID: " + userId;
+
+
+    const box =
+        document.getElementById(
+            "supportModalMessages"
+        );
+
+
+    box.innerHTML = "";
+
+
+    messages.forEach(message=>{
+
+        const isAdmin =
+            supportIsAdmin(message);
+
+        const bubble =
+            document.createElement("div");
+
+        bubble.style.marginBottom = "10px";
+        bubble.style.textAlign =
+            isAdmin ? "right" : "left";
+
+
+        bubble.innerHTML = `
+
+            <div style="
+                display:inline-block;
+                max-width:80%;
+                padding:9px 11px;
+                border-radius:11px;
+                font-size:11px;
+                line-height:1.5;
+                background:
+                    ${isAdmin
+                        ? "#1677ff"
+                        : "#ffffff"};
+                color:
+                    ${isAdmin
+                        ? "#ffffff"
+                        : "#425b6a"};
+                border:
+                    ${isAdmin
+                        ? "0"
+                        : "1px solid #dfe9ef"};
+            ">
+
+                ${escapeSupportText(
+                    getSupportText(message)
+                )}
+
+            </div>
+
+        `;
+
+
+        box.appendChild(bubble);
+
+    });
+
+
+    document.getElementById(
+        "supportModal"
+    ).classList.add("show");
+
+
+    setTimeout(()=>{
+
+        box.scrollTop =
+            box.scrollHeight;
+
+    },50);
+
+}
+
+
+function closeSupportModal(){
+
+    const modal =
+        document.getElementById(
+            "supportModal"
+        );
+
+    if(modal){
+
+        modal.classList.remove("show");
+
+    }
+
+}
+
+
+function sendModalReply(){
+
+    const userText =
+        document.getElementById(
+            "supportModalUser"
+        ).textContent
+        .replace("User ID:","")
+        .trim();
+
+
+    const input =
+        document.getElementById(
+            "supportModalInput"
+        );
+
+
+    const message =
+        input.value.trim();
+
+
+    if(!userText){
+
+        return;
+
+    }
+
+
+    if(!message){
+
+        showToast(
+            "Please write a reply."
+        );
+
+        return;
+
+    }
+
+
+    if(typeof sendSupportMessage === "function"){
+
+        sendSupportMessage(
+            userText,
+            message,
+            true
+        );
+
+    }
+
+}
+
+
+</script>
+<!-- =========================
+     PART 5 / 5
+     MAIN JAVASCRIPT
+========================= -->
+
+<script>
+
+/* =========================
+   API CONFIG
+========================= */
+
+const API =
+    "https://cleanup-piano-printers-defeat.trycloudflare.com";
+
+
+/* =========================
+   GLOBAL DATA
+========================= */
+
+let allUsers = [];
+let allTasks = [];
+let allWithdrawals = [];
+let allSupport = [];
+
+let currentUserFilter = "all";
+let currentTaskFilter = "all";
+let currentWithdrawFilter = "all";
+
+
+/* =========================
+   BASIC HELPERS
+========================= */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function formatDate(value){
+
+    if(!value){
+
+        return "-";
+
+    }
+
+    const date = new Date(value);
+
+    if(isNaN(date.getTime())){
+
+        return "-";
+
+    }
+
+    return date.toLocaleString(
+        "en-PK",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+function money(value){
+
+    const number =
+        Number(value ?? 0);
+
+    return "PKR " +
+        number.toLocaleString(
+            "en-PK",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        );
+
+}
+
+
+/* =========================
+   API REQUEST
+========================= */
+
+async function apiFetch(
+    endpoint,
+    options={}
+){
+
+    const response =
+        await fetch(
+            API + endpoint,
+            {
+                ...options,
+                headers:{
+                    "Content-Type":
+                        "application/json",
+                    ...(options.headers || {})
+                }
+            }
+        );
+
+
+    const text =
+        await response.text();
+
+
+    let data;
+
+
+    try{
+
+        data =
+            JSON.parse(text);
+
+    }catch{
+
+        data = {
+            success:false,
+            message:text
+        };
+
+    }
+
+
+    if(!response.ok){
+
+        throw new Error(
+            data.message ||
+            "Request failed"
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+
+    if(!toast){
+
+        return;
+
+    }
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add("show");
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+        setTimeout(()=>{
+
+            toast.classList.remove(
+                "show"
+            );
+
+        },2500);
+
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+function toggleSidebar(){
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+    sidebar.classList.toggle(
+        "open"
+    );
+
+}
+
+
+/* =========================
+   SECTION NAVIGATION
+========================= */
+
+function showSection(
+    sectionId,
+    button
+){
+
+    document
+        .querySelectorAll(".section")
+        .forEach(section=>{
+
+            section.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    const section =
+        document.getElementById(
+            sectionId
+        );
+
+
+    if(section){
+
+        section.classList.add(
+            "active"
+        );
+
+    }
+
+
+    document
+        .querySelectorAll(".nav")
+        .forEach(nav=>{
+
+            nav.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if(button){
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    const titles = {
+
+        dashboard:"Dashboard",
+        users:"Users",
+        tasks:"Tasks",
+        withdrawals:"Withdrawals",
+        support:"Customer Support"
+
+    };
+
+
+    document.getElementById(
+        "pageTitle"
+    ).textContent =
+        titles[sectionId] ||
+        "FT TRADE";
+
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    if(window.innerWidth <= 760){
+
+        sidebar.classList.remove(
+            "open"
+        );
+
+    }
+
+
+    if(sectionId === "dashboard"){
+
+        loadDashboard();
+
+    }
+
+    if(sectionId === "users"){
+
+        loadUsers();
+
+    }
+
+    if(sectionId === "tasks"){
+
+        loadTasks();
+
+    }
+
+    if(sectionId === "withdrawals"){
+
+        loadWithdrawals();
+
+    }
+
+    if(sectionId === "support"){
+
+        loadSupport();
+
+    }
+
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+async function loadDashboard(){
+
+    try{
+
+        const data =
+            await apiFetch(
+                "/api/admin/stats"
+            );
+
+
+        const stats =
+            data.stats ||
+            data.data ||
+            data;
+
+
+        const users =
+            stats.totalUsers ??
+            stats.users ??
+            0;
+
+
+        const tasks =
+            stats.completedTasks ??
+            stats.completed ??
+            0;
+
+
+        const balance =
+            stats.totalBalance ??
+            stats.balance ??
+            0;
+
+
+        const withdrawals =
+            stats.pendingWithdrawals ??
+            stats.pending ??
+            0;
+
+
+        document.getElementById(
+            "totalUsers"
+        ).textContent =
+            Number(users).toLocaleString();
+
+
+        document.getElementById(
+            "completedTasks"
+        ).textContent =
+            Number(tasks).toLocaleString();
+
+
+        document.getElementById(
+            "totalBalance"
+        ).textContent =
+            money(balance);
+
+
+        document.getElementById(
+            "pendingWithdrawals"
+        ).textContent =
+            Number(withdrawals).toLocaleString();
+
+
+        const status =
+            document.getElementById(
+                "serverStatus"
+            );
+
+
+        if(status){
+
+            status.textContent =
+                "Online";
+
+            status.style.color =
+                "#19884e";
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Dashboard:",
+            error
+        );
+
+
+        const status =
+            document.getElementById(
+                "serverStatus"
+            );
+
+
+        if(status){
+
+            status.textContent =
+                "Offline";
+
+            status.style.color =
+                "#d43b3b";
+
+        }
+
+    }
+
+}
+
+
+/* =========================
+   USERS
+========================= */
+
+async function loadUsers(){
+
+    const tbody =
+        document.getElementById(
+            "usersTable"
+        );
+
+
+    tbody.innerHTML = `
+
+        <tr>
+            <td colspan="8" class="empty">
+                Loading users...
+            </td>
+        </tr>
+
+    `;
+
+
+    try{
+
+        const data =
+            await apiFetch(
+                "/api/admin/users"
+            );
+
+
+        allUsers =
+            data.users ||
+            data.data ||
+            [];
+
+
+        renderUsers();
+
+    }catch(error){
+
+        console.error(
+            "Users:",
+            error
+        );
+
+
+        tbody.innerHTML = `
+
+            <tr>
+                <td colspan="8" class="empty">
+                    Failed to load users.
+                </td>
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+function getUserId(user){
+
+    return String(
+        user.id ??
+        user.userId ??
+        user.uid ??
+        "-"
+    );
+
+}
+
+
+function getUserEmail(user){
+
+    return String(
+        user.email ??
+        user.gmail ??
+        user.username ??
+        "-"
+    );
+
+}
+
+
+function getUserStatus(user){
+
+    return String(
+        user.status ??
+        "active"
+    ).toLowerCase();
+
+}
+
+
+function renderUsers(){
+
+    const tbody =
+        document.getElementById(
+            "usersTable"
+        );
+
+
+    let users =
+        [...allUsers];
+
+
+    const search =
+        (
+            document.getElementById(
+                "userSearch"
+            )?.value || ""
+        )
+        .toLowerCase()
+        .trim();
+
+
+    users =
+        users.filter(user=>{
+
+            const text = [
+
+                getUserId(user),
+                getUserEmail(user),
+                user.name ?? "",
+                user.username ?? ""
+
+            ]
+            .join(" ")
+            .toLowerCase();
+
+
+            const matchesSearch =
+                !search ||
+                text.includes(search);
+
+
+            const status =
+                getUserStatus(user);
+
+
+            const matchesFilter =
+                currentUserFilter === "all" ||
+                status === currentUserFilter;
+
+
+            return (
+                matchesSearch &&
+                matchesFilter
+            );
+
+        });
+
+
+    if(!users.length){
+
+        tbody.innerHTML = `
+
+            <tr>
+                <td colspan="8" class="empty">
+                    No users found.
+                </td>
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        users.map(user=>{
+
+            const id =
+                getUserId(user);
+
+
+            const email =
+                getUserEmail(user);
+
+
+            const status =
+                getUserStatus(user);
+
+
+            const balance =
+                user.balance ??
+                user.wallet ??
+                user.amount ??
+                0;
+
+
+            const xp =
+                user.xp ??
+                0;
+
+
+            const level =
+                user.level ??
+                1;
+
+
+            const tasks =
+                user.completedTasks ??
+                user.tasksCompleted ??
+                user.tasks ??
+                0;
+
+
+            return `
+
+                <tr>
+
+                    <td>
+
+                        <strong style="
+                            color:#294454;
+                            font-size:11px;
+                        ">
+                            ${escapeHTML(id)}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(email)}
+                    </td>
+
+
+                    <td>
+                        ${money(balance)}
+                    </td>
+
+
+                    <td>
+                        ${Number(xp).toLocaleString()}
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(level)}
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(tasks)}
+                    </td>
+
+
+                    <td>
+
+                        <span class="
+                            badge
+                            ${
+                                status === "blocked"
+                                ? "rejected"
+                                : "approved"
+                            }
+                        ">
+
+                            ${escapeHTML(status)}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div style="
+                            display:flex;
+                            gap:5px;
+                        ">
+
+                            <button
+                                class="btn btn-blue"
+                                onclick="openEditUser('${encodeURIComponent(id)}')">
+
+                                Edit
+
+                            </button>
+
+
+                            <button
+                                class="btn btn-danger"
+                                onclick="openDeleteUser('${encodeURIComponent(id)}')">
+
+                                Delete
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+function filterUsers(){
+
+    renderUsers();
+
+}
+
+
+function setUserFilter(
+    filter,
+    button
+){
+
+    currentUserFilter =
+        filter;
+
+
+    document
+        .querySelectorAll(
+            "#users .filter"
+        )
+        .forEach(btn=>{
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if(button){
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    renderUsers();
+
+}
+
+
+/* =========================
+   EDIT USER
+========================= */
+
+function openEditUser(
+    encodedId
+){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+
+    const user =
+        allUsers.find(
+            item =>
+                getUserId(item) ===
+                id
+        );
+
+
+    if(!user){
+
+        showToast(
+            "User not found."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "editId"
+    ).value =
+        id;
+
+
+    document.getElementById(
+        "editUserId"
+    ).textContent =
+        "User ID: " + id;
+
+
+    document.getElementById(
+        "editBalance"
+    ).value =
+        user.balance ??
+        user.wallet ??
+        0;
+
+
+    document.getElementById(
+        "editXP"
+    ).value =
+        user.xp ??
+        0;
+
+
+    document.getElementById(
+        "editLevel"
+    ).value =
+        user.level ??
+        1;
+
+
+    document.getElementById(
+        "editTasks"
+    ).value =
+        user.completedTasks ??
+        user.tasksCompleted ??
+        user.tasks ??
+        0;
+
+
+    document.getElementById(
+        "editUserModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+function closeEditModal(){
+
+    document.getElementById(
+        "editUserModal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+async function saveUser(){
+
+    const id =
+        document.getElementById(
+            "editId"
+        ).value;
+
+
+    const balance =
+        Number(
+            document.getElementById(
+                "editBalance"
+            ).value
+        );
+
+
+    const xp =
+        Number(
+            document.getElementById(
+                "editXP"
+            ).value
+        );
+
+
+    const level =
+        Number(
+            document.getElementById(
+                "editLevel"
+            ).value
+        );
+
+
+    const completedTasks =
+        Number(
+            document.getElementById(
+                "editTasks"
+            ).value
+        );
+
+
+    try{
+
+        const data =
+            await apiFetch(
+                "/api/admin/users/update",
+                {
+                    method:"POST",
+
+                    body:JSON.stringify({
+
+                        id,
+                        balance,
+                        xp,
+                        level,
+                        completedTasks
+
+                    })
+                }
+            );
+
+
+        if(data.success === false){
+
+            throw new Error(
+                data.message ||
+                "Update failed"
+            );
+
+        }
+
+
+        showToast(
+            "User updated successfully."
+        );
+
+
+        closeEditModal();
+
+
+        await loadUsers();
+
+        await loadDashboard();
+
+    }catch(error){
+
+        console.error(
+            "Update user:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Could not update user."
+        );
+
+    }
+
+}
+
+
+/* =========================
+   DELETE USER
+========================= */
+
+function openDeleteUser(
+    encodedId
+){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+
+    const user =
+        allUsers.find(
+            item =>
+                getUserId(item) ===
+                id
+        );
+
+
+    document.getElementById(
+        "deleteId"
+    ).value =
+        id;
+
+
+    document.getElementById(
+        "deleteUserName"
+    ).textContent =
+        "User ID: " +
+        id;
+
+
+    document.getElementById(
+        "deleteUserModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+function closeDeleteModal(){
+
+    document.getElementById(
+        "deleteUserModal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+async function confirmDeleteUser(){
+
+    const id =
+        document.getElementById(
+            "deleteId"
+        ).value;
+
+
+    if(!id){
+
+        return;
+
+    }
+
+
+    try{
+
+        const data =
+            await apiFetch(
+                "/api/admin/users/delete",
+                {
+                    method:"POST",
+
+                    body:JSON.stringify({
+                        id
+                    })
+                }
+            );
+
+
+        if(data.success === false){
+
+            throw new Error(
+                data.message ||
+                "Delete failed"
+            );
+
+        }
+
+
+        showToast(
+            "User deleted successfully."
+        );
+
+
+        closeDeleteModal();
+
+
+        await loadUsers();
+
+        await loadDashboard();
+
+    }catch(error){
+
+        console.error(
+            "Delete user:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Could not delete user."
+        );
+
+    }
+
+}
+
+
+/* =========================
+   TASKS
+========================= */
+
+async function loadTasks(){
+
+    const tbody =
+        document.getElementById(
+            "tasksTable"
+        );
+
+
+    tbody.innerHTML = `
+
+        <tr>
+            <td colspan="7" class="empty">
+                Loading tasks...
+            </td>
+        </tr>
+
+    `;
+
+
+    try{
+
+        const data =
+            await apiFetch(
+                "/api/admin/tasks"
+            );
+
+
+        allTasks =
+            data.tasks ||
+            data.data ||
+            [];
+
+
+        renderTasks();
+
+    }catch(error){
+
+        console.error(
+            "Tasks:",
+            error
+        );
+
+
+        tbody.innerHTML = `
+
+            <tr>
+                <td colspan="7" class="empty">
+                    Failed to load tasks.
+                </td>
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+function renderTasks(){
+
+    const tbody =
+        document.getElementById(
+            "tasksTable"
+        );
+
+
+    const search =
+        (
+            document.getElementById(
+                "taskSearch"
+            )?.value || ""
+        )
+        .toLowerCase()
+        .trim();
+
+
+    let tasks =
+        allTasks.filter(task=>{
+
+            const status =
+                String(
+                    task.status ??
+                    "pending"
+                ).toLowerCase();
+
+
+            const text = [
+
+                task.id,
+                task.taskId,
+                task.userId,
+                task.user,
+                task.email,
+                task.gmail,
+                task.title,
+                task.task,
+                task.name
+
+            ]
+            .join(" ")
+            .toLowerCase();
+
+
+            return (
+
+                (
+                    !search ||
+                    text.includes(search)
+                )
+
+                &&
+
+                (
+                    currentTaskFilter === "all" ||
+                    status === currentTaskFilter
+                )
+
+            );
+
+        });
+
+
+    if(!tasks.length){
+
+        tbody.innerHTML = `
+
+            <tr>
+                <td colspan="7" class="empty">
+                    No tasks found.
+                </td>
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        tasks.map(task=>{
+
+            const id =
+                String(
+                    task.id ??
+                    task.taskId ??
+                    "-"
+                );
+
+
+            const userId =
+                String(
+                    task.userId ??
+                    task.user ??
+                    "-"
+                );
+
+
+            const title =
+                String(
+                    task.title ??
+                    task.task ??
+                    task.name ??
+                    "Task"
+                );
+
+
+            const reward =
+                task.reward ??
+                task.amount ??
+                0;
+
+
+            const date =
+                task.createdAt ??
+                task.date ??
+                task.submittedAt;
+
+
+            const status =
+                String(
+                    task.status ??
+                    "pending"
+                ).toLowerCase();
+
+
+                        return (
+
+                (
+                    !search ||
+                    text.includes(search)
+                )
+
+                &&
+
+                (
+                    currentTaskFilter === "all" ||
+                    status === currentTaskFilter
+                )
+
+            );
+
+        });
+
+
+    if(!tasks.length){
+
+        tbody.innerHTML = `
+
+            <tr>
+                <td colspan="7" class="empty">
+                    No tasks found.
+                </td>
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        tasks.map(task=>{
+
+            const id =
+                String(
+                    task.id ??
+                    task.taskId ??
+                    "-"
+                );
+
+
+            const userId =
+                String(
+                    task.userId ??
+                    task.user ??
+                    "-"
+                );
+
+
+            const title =
+                String(
+                    task.title ??
+                    task.task ??
+                    task.name ??
+                    "Task"
+                );
+
+
+            const reward =
+                task.reward ??
+                task.amount ??
+                0;
+
+
+            const date =
+                task.createdAt ??
+                task.date ??
+                task.submittedAt;
+
+
+            const taskStatus =
+                String(
+                    task.status ??
+                    "pending"
+                ).toLowerCase();
+
+
+            return `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${escapeHTML(id)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${escapeHTML(userId)}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(title)}
+                    </td>
+
+                    <td>
+                        ${money(reward)}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(
+                            formatDate(date)
+                        )}
+                    </td>
+
+                    <td>
+
+                        <span class="
+                            badge
+                            ${
+                                taskStatus === "approved"
+                                ? "approved"
+                                :
+                                taskStatus === "rejected"
+                                ? "rejected"
+                                :
+                                taskStatus === "review"
+                                ? "review"
+                                :
+                                "pending"
+                            }
+                        ">
+
+                            ${escapeHTML(taskStatus)}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div style="
+                            display:flex;
+                            gap:5px;
+                            flex-wrap:wrap;
+                        ">
+
+                            <button
+                                class="btn btn-blue"
+                                onclick="viewTask('${encodeURIComponent(id)}')">
+
+                                View
+
+                            </button>
+
+
+                            ${
+                                taskStatus !== "approved"
+                                ?
+                                `
+                                <button
+                                    class="btn btn-success"
+                                    onclick="updateTaskStatus('${encodeURIComponent(id)}','approved')">
+
+                                    Approve
+
+                                </button>
+                                `
+                                :
+                                ""
+                            }
+
+
+                            ${
+                                taskStatus !== "rejected"
+                                ?
+                                `
+                                <button
+                                    class="btn btn-danger"
+                                    onclick="updateTaskStatus('${encodeURIComponent(id)}','rejected')">
+
+                                    Reject
+
+                                </button>
+                                `
+                                :
+                                ""
+                            }
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+function filterTasks(){
+
+    renderTasks();
+
+}
+
+
+function setTaskFilter(
+    filter,
+    button
+){
+
+    currentTaskFilter =
+        filter;
+
+
+    document
+        .querySelectorAll(
+            "#tasks .filter"
+        )
+        .forEach(btn=>{
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if(button){
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    renderTasks();
+
+}
+
+
+/* =========================
+   UPDATE TASK STATUS
+========================= */
+
+async function updateTaskStatus(
+    encodedId,
+    status
+){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+
+    if(!id){
+
+        return;
+
+    }
+
+
+    try{
+
+        const data =
+            await apiFetch(
+                "/api/admin/tasks/status",
+                {
+                    method:"POST",
+
+                    body:JSON.stringify({
+
+                        id,
+                        status
+
+                    })
+                }
+            );
+
+
+        if(data.success === false){
+
+            throw new Error(
+                data.message ||
+                "Task update failed"
+            );
+
+        }
+
+
+        showToast(
+            "Task status updated."
+        );
+
+
+        await loadTasks();
+
+        await loadDashboard();
+
+    }catch(error){
+
+        console.error(
+            "Task status:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Could not update task."
+        );
+
+    }
+
+}
+
+
+/* =========================
+   VIEW TASK
+========================= */
+
+function viewTask(
+    encodedId
+){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+
+    const task =
+        allTasks.find(
+            item =>
+                String(
+                    item.id ??
+                    item.taskId
+                ) === id
+        );
+
+
+    if(!task){
+
+        showToast(
+            "Task not found."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "taskModalId"
+    ).textContent =
+        "Task ID: " + id;
+
+
+    document.getElementById(
+        "taskDetails"
+    ).innerHTML = `
+
+        <strong>Task ID:</strong>
+        ${escapeHTML(id)}
+        <br>
+
+        <strong>User ID:</strong>
+        ${escapeHTML(
+            task.userId ??
+            task.user ??
+            "-"
+        )}
+        <br>
+
+        <strong>Task:</strong>
+        ${escapeHTML(
+            task.title ??
+            task.task ??
+            task.name ??
+            "-"
+        )}
+        <br>
+
+        <strong>Reward:</strong>
+        ${money(
+            task.reward ??
+            task.amount ??
+            0
+        )}
+        <br>
+
+        <strong>Status:</strong>
+        ${escapeHTML(
+            task.status ??
+            "pending"
+        )}
+        <br>
+
+        <strong>Date:</strong>
+        ${escapeHTML(
+            formatDate(
+                task.createdAt ??
+                task.date ??
+                task.submittedAt
+            )
+        )}
+
+    `;
+
+
+    document.getElementById(
+        "taskModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+function closeTaskModal(){
+
+    document.getElementById(
+        "taskModal"
+    ).classList.remove(
+        "show"
+    );
+
+  }
+  /* =========================
+   WITHDRAWALS
+========================= */
+
+async function loadWithdrawals(){
+
+    try{
+
+        const data = await apiFetch("/api/admin/withdrawals");
+
+        allWithdrawals =
+            Array.isArray(data)
+                ? data
+                : Array.isArray(data.withdrawals)
+                    ? data.withdrawals
+                    : [];
+
+        renderWithdrawals();
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Failed to load withdrawals",
+            "error"
+        );
+
+        const tbody =
+            document.getElementById(
+                "withdrawalsTable"
+            );
+
+        if(tbody){
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="8"
+                        style="text-align:center;padding:30px;">
+                        Failed to load withdrawals
+                    </td>
+                </tr>
+            `;
+
+        }
+
+    }
+
+}
+
+
+function renderWithdrawals(){
+
+    const tbody =
+        document.getElementById(
+            "withdrawalsTable"
+        );
+
+    if(!tbody) return;
+
+
+    const search =
+        String(
+            document.getElementById(
+                "withdrawSearch"
+            )?.value || ""
+        )
+        .toLowerCase()
+        .trim();
+
+
+    let withdrawals =
+        allWithdrawals.filter(item => {
+
+            const id =
+                String(
+                    item.id ??
+                    item.withdrawalId ??
+                    ""
+                ).toLowerCase();
+
+            const userId =
+                String(
+                    item.userId ??
+                    ""
+                ).toLowerCase();
+
+            const method =
+                String(
+                    item.method ??
+                    item.paymentMethod ??
+                    ""
+                ).toLowerCase();
+
+            const account =
+                String(
+                    item.account ??
+                    item.accountNumber ??
+                    ""
+                ).toLowerCase();
+
+            const status =
+                String(
+                    item.status ??
+                    "pending"
+                ).toLowerCase();
+
+
+            const matchesSearch =
+                !search ||
+                id.includes(search) ||
+                userId.includes(search) ||
+                method.includes(search) ||
+                account.includes(search);
+
+
+            const matchesFilter =
+                currentWithdrawFilter === "all" ||
+                status === currentWithdrawFilter;
+
+
+            return (
+                matchesSearch &&
+                matchesFilter
+            );
+
+        });
+
+
+    if(!withdrawals.length){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="8"
+                    style="text-align:center;padding:40px;">
+                    <div style="font-size:32px;margin-bottom:10px;">
+                        💸
+                    </div>
+
+                    <div style="font-weight:700;">
+                        No withdrawals found
+                    </div>
+
+                    <div style="opacity:.6;font-size:13px;margin-top:5px;">
+                        No withdrawal requests match your filter.
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+        withdrawals.map(item => {
+
+            const id =
+                item.id ??
+                item.withdrawalId ??
+                "—";
+
+            const userId =
+                item.userId ??
+                "—";
+
+            const method =
+                item.method ??
+                item.paymentMethod ??
+                "—";
+
+            const account =
+                item.account ??
+                item.accountNumber ??
+                "—";
+
+            const amount =
+                item.amount ??
+                item.balance ??
+                0;
+
+            const date =
+                item.createdAt ??
+                item.date ??
+                item.updatedAt ??
+                null;
+
+            const status =
+                String(
+                    item.status ??
+                    "pending"
+                ).toLowerCase();
+
+
+            const safeId =
+                encodeURIComponent(
+                    String(id)
+                );
+
+
+            return `
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${escapeHTML(id)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        <span class="user-id">
+                            ${escapeHTML(userId)}
+                        </span>
+                    </td>
+
+                    <td>
+                        ${escapeHTML(method)}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(account)}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${money(amount)}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${formatDate(date)}
+                    </td>
+
+                    <td>
+                        <span class="badge ${status}">
+                            ${escapeHTML(status)}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <div class="action-group">
+
+                            <button
+                                class="btn btn-small"
+                                onclick="viewWithdrawal('${safeId}')">
+                                View
+                            </button>
+
+                            ${
+                                status === "pending"
+                                ? `
+                                    <button
+                                        class="btn btn-small btn-success"
+                                        onclick="updateWithdrawal('${safeId}','approved')">
+                                        Approve
+                                    </button>
+
+                                    <button
+                                        class="btn btn-small btn-danger"
+                                        onclick="updateWithdrawal('${safeId}','rejected')">
+                                        Reject
+                                    </button>
+                                  `
+                                : ""
+                            }
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            `;
+
+        }).join("");
+
+}
+
+
+function filterWithdrawals(){
+
+    renderWithdrawals();
+
+}
+
+
+function setWithdrawFilter(
+    filter,
+    button
+){
+
+    currentWithdrawFilter =
+        String(filter)
+            .toLowerCase();
+
+
+    document
+        .querySelectorAll(
+            "#withdrawals .filter-btn"
+        )
+        .forEach(btn => {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if(button){
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    renderWithdrawals();
+
+}
+
+
+function viewWithdrawal(
+    encodedId
+){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+
+    const withdrawal =
+        allWithdrawals.find(item =>
+            String(
+                item.id ??
+                item.withdrawalId ??
+                ""
+            ) === String(id)
+        );
+
+
+    if(!withdrawal){
+
+        showToast(
+            "Withdrawal not found",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const modal =
+        document.getElementById(
+            "withdrawModal"
+        );
+
+    const title =
+        document.getElementById(
+            "withdrawModalId"
+        );
+
+    const details =
+        document.getElementById(
+            "withdrawDetails"
+        );
+
+
+    if(title){
+
+        title.textContent =
+            `Withdrawal #${id}`;
+
+    }
+
+
+    if(details){
+
+        details.innerHTML = `
+
+            <div class="detail-grid">
+
+                <div>
+                    <span>Withdrawal ID</span>
+                    <strong>
+                        ${escapeHTML(
+                            withdrawal.id ??
+                            withdrawal.withdrawalId ??
+                            "—"
+                        )}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>User ID</span>
+                    <strong>
+                        ${escapeHTML(
+                            withdrawal.userId ??
+                            "—"
+                        )}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Method</span>
+                    <strong>
+                        ${escapeHTML(
+                            withdrawal.method ??
+                            withdrawal.paymentMethod ??
+                            "—"
+                        )}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Account</span>
+                    <strong>
+                        ${escapeHTML(
+                            withdrawal.account ??
+                            withdrawal.accountNumber ??
+                            "—"
+                        )}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Amount</span>
+                    <strong>
+                        ${money(
+                            withdrawal.amount ??
+                            0
+                        )}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Status</span>
+                    <strong>
+                        ${escapeHTML(
+                            withdrawal.status ??
+                            "pending"
+                        )}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Date</span>
+                    <strong>
+                        ${formatDate(
+                            withdrawal.createdAt ??
+                            withdrawal.date ??
+                            null
+                        )}
+                    </strong>
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    if(modal){
+
+        modal.classList.add(
+            "show"
+        );
+
+    }
+
+}
+
+
+function closeWithdrawModal(){
+
+    const modal =
+        document.getElementById(
+            "withdrawModal"
+        );
+
+    if(modal){
+
+        modal.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+async function updateWithdrawal(
+    encodedId,
+    status
+){
+
+    const id =
+        decodeURIComponent(
+            encodedId
+        );
+
+
+    if(
+        !confirm(
+            `Are you sure you want to ${status} this withdrawal?`
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        showToast(
+            "Updating withdrawal..."
+        );
+
+
+        const data =
+            await apiFetch(
+                "/api/admin/withdrawals/status",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        id: id,
+
+                        withdrawalId: id,
+
+                        status: status
+
+                    })
+
+                }
+            );
+
+
+        if(
+            data &&
+            data.success === false
+        ){
+
+            throw new Error(
+                data.message ||
+                "Update failed"
+            );
+
+        }
+
+
+        showToast(
+            `Withdrawal ${status}`,
+            "success"
+        );
+
+
+        await loadWithdrawals();
+
+        await loadDashboard();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Failed to update withdrawal",
+            "error"
+        );
+
+    }
+
+  }
+  /* =========================
+   SUPPORT
+========================= */
+
+async function loadSupport(){
+
+    try{
+
+        const data =
+            await apiFetch(
+                "/api/admin/support"
+            );
+
+        allSupport =
+            Array.isArray(data)
+                ? data
+                : Array.isArray(data.messages)
+                    ? data.messages
+                    : [];
+
+        renderSupport();
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Failed to load support chats",
+            "error"
+        );
+
+        const grid =
+            document.getElementById(
+                "supportGrid"
+            );
+
+        if(grid){
+
+            grid.innerHTML = `
+                <div class="support-empty">
+
+                    <div class="support-empty-icon">
+                        ⚠️
+                    </div>
+
+                    <div class="support-empty-title">
+                        Failed to load support
+                    </div>
+
+                    <div class="support-empty-text">
+                        ${escapeHTML(
+                            error.message ||
+                            "Please try again."
+                        )}
+                    </div>
+
+                </div>
+            `;
+
+        }
+
+    }
+
+}
+
+
+function renderSupport(){
+
+    const grid =
+        document.getElementById(
+            "supportGrid"
+        );
+
+    if(!grid) return;
+
+
+    const search =
+        String(
+            document.getElementById(
+                "supportSearch"
+            )?.value || ""
+        )
+        .toLowerCase()
+        .trim();
+
+
+    const groups = {};
+
+
+    allSupport.forEach(message => {
+
+        const userId =
+            getSupportUserId(
+                message
+            );
+
+
+        if(!userId) return;
+
+
+        if(!groups[userId]){
+
+            groups[userId] = [];
+
+        }
+
+
+        groups[userId].push(
+            message
+        );
+
+    });
+
+
+    let userIds =
+        Object.keys(groups);
+
+
+    if(search){
+
+        userIds =
+            userIds.filter(userId => {
+
+                const messages =
+                    groups[userId];
+
+
+                const text =
+                    messages
+                        .map(
+                            getSupportText
+                        )
+                        .join(" ")
+                        .toLowerCase();
+
+
+                return (
+                    userId
+                        .toLowerCase()
+                        .includes(search) ||
+                    text.includes(search)
+                );
+
+            });
+
+    }
+
+
+    userIds.sort((a,b) => {
+
+        const aMessages =
+            groups[a] || [];
+
+        const bMessages =
+            groups[b] || [];
+
+
+        const aLast =
+            aMessages[
+                aMessages.length - 1
+            ];
+
+        const bLast =
+            bMessages[
+                bMessages.length - 1
+            ];
+
+
+        return (
+            new Date(
+                supportDate(bLast)
+            ) -
+            new Date(
+                supportDate(aLast)
+            )
+        );
+
+    });
+
+
+    if(!userIds.length){
+
+        grid.innerHTML = `
+
+            <div class="support-empty">
+
+                <div class="support-empty-icon">
+                    💬
+                </div>
+
+                <div class="support-empty-title">
+                    No Support Chats
+                </div>
+
+                <div class="support-empty-text">
+                    No user conversations found.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        userIds
+            .map(userId =>
+                buildSupportCard(
+                    userId,
+                    groups[userId]
+                )
+            )
+            .join("");
+
+}
+
+
+function filterSupport(){
+
+    renderSupport();
+
+}
+
+
+async function sendSupportMessage(
+    userId,
+    message,
+    fromModal = false
+){
+
+    const text =
+        String(
+            message || ""
+        ).trim();
+
+
+    if(!userId){
+
+        showToast(
+            "User ID is missing",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!text){
+
+        showToast(
+            "Please write a message",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const data =
+            await apiFetch(
+                "/api/admin/support",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        userId: userId,
+
+                        message: text
+
+                    })
+
+                }
+            );
+
+
+        if(
+            data &&
+            data.success === false
+        ){
+
+            throw new Error(
+                data.message ||
+                "Message failed"
+            );
+
+        }
+
+
+        showToast(
+            "Message sent",
+            "success"
+        );
+
+
+        if(fromModal){
+
+            const input =
+                document.getElementById(
+                    "supportModalInput"
+                );
+
+            if(input){
+
+                input.value = "";
+
+            }
+
+        }
+
+
+        await loadSupport();
+
+
+        if(fromModal){
+
+            openSupportModal(
+                userId
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Failed to send message",
+            "error"
+        );
+
+    }
+
+}
+
+
+function sendSupportReply(
+    encodedUserId
+){
+
+    const userId =
+        decodeURIComponent(
+            encodedUserId
+        );
+
+
+    const input =
+        document.querySelector(
+            `[data-support-input="${CSS.escape(userId)}"]`
+        );
+
+
+    if(!input){
+
+        showToast(
+            "Reply box not found",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const message =
+        input.value.trim();
+
+
+    sendSupportMessage(
+        userId,
+        message
+    );
+
+}
+
+
+/* =========================
+   MODAL BACKDROP
+========================= */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const target =
+            event.target;
+
+
+        if(
+            target.classList &&
+            target.classList.contains(
+                "modal"
+            )
+        ){
+
+            target.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key !== "Escape"){
+
+            return;
+
+        }
+
+
+        closeEditModal();
+
+        closeDeleteModal();
+
+        closeTaskModal();
+
+        closeWithdrawModal();
+
+        closeSupportModal();
+
+    }
+);
+
+
+/* =========================
+   SUPPORT ENTER KEY
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key !== "Enter" ||
+            event.shiftKey
+        ){
+
+            return;
+
+        }
+
+
+        const target =
+            event.target;
+
+
+        if(
+            target &&
+            target.id ===
+                "supportModalInput"
+        ){
+
+            event.preventDefault();
+
+            sendModalReply();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadDashboard();
+
+    }
+);
+
+
+/* =========================
+   AUTO REFRESH DISABLED
+========================= */
+
+// Auto refresh intentionally disabled.
+// Support will NOT refresh every few seconds.
+
+
+/* =========================
+   RESIZE
+========================= */
+
+window.addEventListener(
+    "resize",
+    function(){
+
+        if(
+            window.innerWidth > 900
+        ){
+
+            document.body.classList.remove(
+                "sidebar-open"
+            );
+
+        }
+
+    }
+);
+  </script>
+
+</div>
+</main>
+</div>
+
+</body>
+</html>

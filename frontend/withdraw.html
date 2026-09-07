@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FT TRADE | Withdraw</title>
+  <script src="config.js"></script>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5fbff;
+    color:#183b52;
+    min-height:100vh;
+    padding-bottom:85px;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.page-header{
+    padding:18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.back-btn{
+    width:40px;
+    height:40px;
+    border:0;
+    border-radius:12px;
+    background:#e9f6ff;
+    color:#087dcc;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.header-title{
+    font-size:21px;
+    font-weight:800;
+}
+
+.header-subtitle{
+    margin-top:3px;
+    font-size:12px;
+    color:#8299aa;
+}
+
+/* =====================================================
+   BALANCE CARD
+===================================================== */
+
+.balance-card{
+    margin:5px 16px 20px;
+    padding:22px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#e6f6ff,#ffffff);
+    border:1px solid #cdeaff;
+    box-shadow:0 8px 25px rgba(31,139,207,.08);
+}
+
+.balance-label{
+    font-size:12px;
+    color:#648198;
+    font-weight:700;
+}
+
+.balance-amount{
+    margin-top:6px;
+    font-size:30px;
+    font-weight:900;
+    color:#087dcc;
+}
+
+.balance-status{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:12px;
+    padding:7px 10px;
+    border-radius:20px;
+    background:#e9f9f0;
+    color:#199052;
+    font-size:11px;
+    font-weight:700;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#24b66f;
+}
+
+/* =====================================================
+   METHODS
+===================================================== */
+
+.method-title{
+    margin:0 16px 12px;
+    font-size:16px;
+    font-weight:800;
+}
+
+.method-grid{
+    padding:0 16px;
+    display:grid;
+    gap:12px;
+}
+
+.method-card{
+    width:100%;
+    border:1px solid #dcecf7;
+    background:#fff;
+    border-radius:17px;
+    padding:16px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    cursor:pointer;
+    box-shadow:0 5px 18px rgba(36,124,177,.06);
+    text-align:left;
+    transition:.2s;
+}
+
+.method-card:active{
+    transform:scale(.98);
+}
+
+.method-icon{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#eaf7ff;
+    font-size:23px;
+}
+
+.method-info{
+    flex:1;
+}
+
+.method-name{
+    font-size:15px;
+    font-weight:800;
+}
+
+.method-desc{
+    margin-top:4px;
+    font-size:11px;
+    color:#849aaa;
+}
+
+.method-arrow{
+    color:#8da5b6;
+    font-size:22px;
+}
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+.history-section{
+    padding:22px 16px 30px;
+}
+
+.history-title{
+    font-size:17px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.history-card{
+    background:#fff;
+    border:1px solid #e0edf5;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:10px;
+}
+
+.history-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.history-method{
+    font-size:14px;
+    font-weight:800;
+}
+
+.history-amount{
+    font-size:15px;
+    font-weight:900;
+    color:#087dcc;
+}
+
+.history-bottom{
+    margin-top:8px;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    font-size:11px;
+    color:#8a9dab;
+}
+
+.history-status{
+    padding:4px 8px;
+    border-radius:8px;
+    font-weight:700;
+    text-transform:capitalize;
+}
+
+.status-pending{
+    background:#fff6df;
+    color:#c48a00;
+}
+
+.status-approved{
+    background:#e8f9ef;
+    color:#198b50;
+}
+
+.status-rejected{
+    background:#ffeaea;
+    color:#d14343;
+}
+
+.empty-history{
+    text-align:center;
+    padding:28px 10px;
+    color:#8ca0ae;
+    background:#fff;
+    border:1px dashed #d9e8f2;
+    border-radius:15px;
+    font-size:13px;
+}
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(12,38,61,.45);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:5000;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:520px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#fff;
+    border-radius:25px 25px 0 0;
+    padding:24px 20px 30px;
+    animation:slideUp .25s ease;
+}
+
+@keyframes slideUp{
+    from{
+        transform:translateY(100%);
+    }
+
+    to{
+        transform:translateY(0);
+    }
+}
+
+.modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.modal-title{
+    font-size:20px;
+    font-weight:800;
+}
+
+.close-btn{
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:50%;
+    background:#eef7ff;
+    color:#39708f;
+    font-size:20px;
+    cursor:pointer;
+}
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-label{
+    display:block;
+    margin-bottom:7px;
+    font-size:13px;
+    font-weight:700;
+    color:#476579;
+}
+
+.form-input{
+    width:100%;
+    height:48px;
+    border:1px solid #d7e8f5;
+    border-radius:12px;
+    padding:0 14px;
+    outline:none;
+    font-size:14px;
+    color:#183b52;
+    background:#fafdff;
+    transition:.2s;
+}
+
+.form-input:focus{
+    border-color:#36a7f5;
+    box-shadow:0 0 0 3px rgba(54,167,245,.12);
+}
+
+.form-input::placeholder{
+    color:#9db0be;
+}
+
+.submit-btn{
+    width:100%;
+    height:50px;
+    border:0;
+    border-radius:13px;
+    background:linear-gradient(135deg,#1699ef,#0878d1);
+    color:#fff;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(22,153,239,.22);
+}
+
+.submit-btn:active{
+    transform:scale(.98);
+}
+
+.submit-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:90px;
+    transform:translateX(-50%) translateY(20px);
+    min-width:260px;
+    max-width:90%;
+    padding:14px 18px;
+    border-radius:14px;
+    background:#fff;
+    color:#12304a;
+    font-size:14px;
+    font-weight:600;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    opacity:0;
+    visibility:hidden;
+    transition:.3s ease;
+    z-index:9999;
+    text-align:center;
+}
+
+.toast.show{
+    opacity:1;
+    visibility:visible;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* =====================================================
+   BOTTOM NAV
+===================================================== */
+
+.bottom-nav{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    height:68px;
+    background:#fff;
+    border-top:1px solid #dcecff;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    z-index:1000;
+    box-shadow:0 -5px 20px rgba(40,130,200,.08);
+}
+
+.nav-item{
+    text-decoration:none;
+    color:#7b8fa3;
+    font-size:11px;
+    font-weight:600;
+    text-align:center;
+    min-width:60px;
+}
+
+.nav-icon{
+    display:block;
+    font-size:21px;
+    margin-bottom:3px;
+}
+
+.nav-item.active{
+    color:#168bea;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(min-width:600px){
+
+    .method-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .modal{
+        align-items:center;
+        padding:20px;
+    }
+
+    .modal-box{
+        border-radius:25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+  <!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div class="page-header">
+
+    <button
+        class="back-btn"
+        onclick="history.back()">
+        ‹
+    </button>
+
+    <div>
+
+        <div class="header-title">
+            Withdraw
+        </div>
+
+        <div class="header-subtitle">
+            Secure Withdrawal Center
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     BALANCE
+===================================================== -->
+
+<div class="balance-card">
+
+    <div class="balance-label">
+        AVAILABLE BALANCE
+    </div>
+
+    <div
+        class="balance-amount"
+        id="balanceAmount">
+        PKR 0.00
+    </div>
+
+    <div class="balance-status">
+
+        <span class="status-dot"></span>
+
+        Account Active
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     METHODS
+===================================================== -->
+
+<div class="method-title">
+    Choose Withdrawal Method
+</div>
+
+<div class="method-grid">
+
+
+    <!-- BANK -->
+
+    <button
+        class="method-card"
+        onclick="openModal('bankModal')">
+
+        <div class="method-icon">
+            🏦
+        </div>
+
+        <div class="method-info">
+
+            <div class="method-name">
+                Bank Account
+            </div>
+
+            <div class="method-desc">
+                Withdraw directly to your bank account
+            </div>
+
+        </div>
+
+        <div class="method-arrow">
+            ›
+        </div>
+
+    </button>
+
+
+    <!-- EASYPAISA -->
+
+    <button
+        class="method-card"
+        onclick="openModal('easypaisaModal')">
+
+        <div class="method-icon">
+            💚
+        </div>
+
+        <div class="method-info">
+
+            <div class="method-name">
+                Easypaisa
+            </div>
+
+            <div class="method-desc">
+                Fast mobile wallet withdrawal
+            </div>
+
+        </div>
+
+        <div class="method-arrow">
+            ›
+        </div>
+
+    </button>
+
+
+    <!-- JAZZCASH -->
+
+    <button
+        class="method-card"
+        onclick="openModal('jazzcashModal')">
+
+        <div class="method-icon">
+            📱
+        </div>
+
+        <div class="method-info">
+
+            <div class="method-name">
+                JazzCash
+            </div>
+
+            <div class="method-desc">
+                Withdraw to your JazzCash account
+            </div>
+
+        </div>
+
+        <div class="method-arrow">
+            ›
+        </div>
+
+    </button>
+
+
+</div>
+
+
+<!-- =====================================================
+     WITHDRAWAL HISTORY
+===================================================== -->
+
+<div class="history-section">
+
+    <div class="history-title">
+        Withdrawal History
+    </div>
+
+    <div id="historyList">
+
+        <div class="empty-history">
+            Loading withdrawal history...
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     BANK MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="bankModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div class="modal-title">
+                Bank Account
+            </div>
+
+            <button
+                class="close-btn"
+                onclick="closeModal('bankModal')">
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="bankForm">
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    ACCOUNT HOLDER
+                </label>
+
+                <input
+                    type="text"
+                    id="bankHolder"
+                    class="form-input"
+                    placeholder="Enter account holder name"
+                    autocomplete="name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    BANK NAME
+                </label>
+
+                <input
+                    type="text"
+                    id="bankName"
+                    class="form-input"
+                    placeholder="Enter bank name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    ACCOUNT NUMBER / IBAN
+                </label>
+
+                <input
+                    type="text"
+                    id="bankAccount"
+                    class="form-input"
+                    placeholder="Enter account number or IBAN"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    WITHDRAWAL AMOUNT
+                </label>
+
+                <input
+                    type="number"
+                    id="bankAmount"
+                    class="form-input"
+                    placeholder="Minimum PKR 120"
+                    min="120"
+                    step="0.01"
+                    required>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="bankSubmit">
+
+                SUBMIT WITHDRAWAL
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     EASYPAISA MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="easypaisaModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div class="modal-title">
+                Easypaisa
+            </div>
+
+            <button
+                class="close-btn"
+                onclick="closeModal('easypaisaModal')">
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="easypaisaForm">
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    ACCOUNT HOLDER
+                </label>
+
+                <input
+                    type="text"
+                    id="easyHolder"
+                    class="form-input"
+                    placeholder="Enter account holder name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    EASYPAISA NUMBER
+                </label>
+
+                <input
+                    type="tel"
+                    id="easyAccount"
+                    class="form-input"
+                    placeholder="03XXXXXXXXX"
+                    maxlength="11"
+                    inputmode="numeric"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    WITHDRAWAL AMOUNT
+                </label>
+
+                <input
+                    type="number"
+                    id="easyAmount"
+                    class="form-input"
+                    placeholder="Enter amount"
+                    min="120"
+                    step="0.01"
+                    required>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="easySubmit">
+
+                SUBMIT WITHDRAWAL
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     JAZZCASH MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="jazzcashModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div class="modal-title">
+                JazzCash
+            </div>
+
+            <button
+                class="close-btn"
+                onclick="closeModal('jazzcashModal')">
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="jazzcashForm">
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    ACCOUNT HOLDER
+                </label>
+
+                <input
+                    type="text"
+                    id="jazzHolder"
+                    class="form-input"
+                    placeholder="Enter account holder name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    JAZZCASH NUMBER
+                </label>
+
+                <input
+                    type="tel"
+                    id="jazzAccount"
+                    class="form-input"
+                    placeholder="03XXXXXXXXX"
+                    maxlength="11"
+                    inputmode="numeric"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label class="form-label">
+                    WITHDRAWAL AMOUNT
+                </label>
+
+                <input
+                    type="number"
+                    id="jazzAmount"
+                    class="form-input"
+                    placeholder="Enter amount"
+                    min="120"
+                    step="0.01"
+                    required>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="jazzSubmit">
+
+                SUBMIT WITHDRAWAL
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<!-- =====================================================
+     BOTTOM NAV
+===================================================== -->
+
+<div class="bottom-nav">
+
+
+    <a
+        href="dashboard.html"
+        class="nav-item">
+
+        <span class="nav-icon">
+            ⌂
+        </span>
+
+        Home
+
+    </a>
+
+
+    <a
+        href="tasks.html"
+        class="nav-item">
+
+        <span class="nav-icon">
+            ✓
+        </span>
+
+        Tasks
+
+    </a>
+
+
+    <a
+        href="withdraw.html"
+        class="nav-item active">
+
+        <span class="nav-icon">
+            💳
+        </span>
+
+        Withdraw
+
+    </a>
+
+
+    <a
+        href="profile.html"
+        class="nav-item">
+
+        <span class="nav-icon">
+            👤
+        </span>
+
+        Profile
+
+    </a>
+
+
+</div>
+
+
+<script>
+  /* =====================================================
+   API
+===================================================== */
+
+const API = API_BASE;
+
+
+/* =====================================================
+   GET USER
+===================================================== */
+
+function getUser(){
+
+    const keys = [
+        "ftUser",
+        "ft_user",
+        "user",
+        "currentUser",
+        "loggedUser"
+    ];
+
+    for(const key of keys){
+
+        try{
+
+            const raw =
+                localStorage.getItem(key);
+
+            if(!raw){
+                continue;
+            }
+
+            const data =
+                JSON.parse(raw);
+
+            if(
+                data &&
+                (data.id || data.userId)
+            ){
+
+                return data;
+
+            }
+
+        }catch(error){
+
+            console.log(
+                "LocalStorage error:",
+                error
+            );
+
+        }
+
+    }
+
+    return null;
+
+}
+
+
+const currentUser =
+    getUser();
+
+
+const userId =
+    currentUser?.id ||
+    currentUser?.userId ||
+    null;
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(function(){
+
+            toast.classList.remove("show");
+
+        },3000);
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function openModal(id){
+
+    const modal =
+        document.getElementById(id);
+
+    if(modal){
+
+        modal.classList.add("show");
+
+    }
+
+}
+
+
+function closeModal(id){
+
+    const modal =
+        document.getElementById(id);
+
+    if(modal){
+
+        modal.classList.remove("show");
+
+    }
+
+}
+
+
+/* =====================================================
+   CLOSE MODAL ON BACKDROP
+===================================================== */
+
+document
+.querySelectorAll(".modal")
+.forEach(function(modal){
+
+    modal.addEventListener(
+        "click",
+        function(event){
+
+            if(event.target === modal){
+
+                modal.classList.remove("show");
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =====================================================
+   LOAD USER BALANCE
+===================================================== */
+
+async function loadUser(){
+
+    if(!userId){
+
+        showToast(
+            "Please login first."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                `${API}/api/user/${encodeURIComponent(userId)}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+                data.message ||
+                "Unable to load account."
+            );
+
+        }
+
+
+        const user =
+            data.user ||
+            data.data ||
+            data;
+
+
+        const balance =
+            Number(
+                user.balance ?? 0
+            );
+
+
+        document
+        .getElementById(
+            "balanceAmount"
+        )
+        .textContent =
+            `PKR ${balance.toFixed(2)}`;
+
+
+    }catch(error){
+
+        console.error(error);
+
+        document
+        .getElementById(
+            "balanceAmount"
+        )
+        .textContent =
+            "PKR 0.00";
+
+    }
+
+}
+
+
+/* =====================================================
+   CURRENT BALANCE
+===================================================== */
+
+function getDisplayedBalance(){
+
+    const element =
+        document.getElementById(
+            "balanceAmount"
+        );
+
+
+    const text =
+        element.textContent
+        .replace(/[^\d.]/g,"");
+
+
+    return Number(
+        text || 0
+    );
+
+}
+
+
+/* =====================================================
+   PAKISTAN NUMBER VALIDATION
+===================================================== */
+
+function validPakNumber(number){
+
+    return /^03[0-9]{9}$/.test(
+        String(number).trim()
+    );
+
+}
+
+
+/* =====================================================
+   SUBMIT WITHDRAWAL
+===================================================== */
+
+async function submitWithdrawal(options){
+
+    const method =
+        options.method;
+
+    const account =
+        String(
+            options.account || ""
+        ).trim();
+
+    const amount =
+        Number(
+            options.amount
+        );
+
+    const accountHolder =
+        String(
+            options.accountHolder || ""
+        ).trim();
+
+    const bankName =
+        String(
+            options.bankName || ""
+        ).trim();
+
+
+    if(!userId){
+
+        showToast(
+            "Please login first."
+        );
+
+        return false;
+
+    }
+
+
+    if(accountHolder.length < 2){
+
+        showToast(
+            "Enter a valid account holder name."
+        );
+
+        return false;
+
+    }
+
+
+    if(!account){
+
+        showToast(
+            "Enter your account details."
+        );
+
+        return false;
+
+    }
+
+
+    if(
+        method === "Easypaisa" ||
+        method === "JazzCash"
+    ){
+
+        if(!validPakNumber(account)){
+
+            showToast(
+                "Enter a valid 11-digit mobile number."
+            );
+
+            return false;
+
+        }
+
+    }
+
+
+    if(
+        method === "Bank Account" &&
+        !bankName
+    ){
+
+        showToast(
+            "Enter your bank name."
+        );
+
+        return false;
+
+    }
+
+
+    if(
+        !Number.isFinite(amount) ||
+        amount <= 0
+    ){
+
+        showToast(
+            "Enter a valid withdrawal amount."
+        );
+
+        return false;
+
+    }
+  if(amount < 120){
+    showToast("Minimum withdrawal amount is PKR 120.");
+    return false;
+      }
+
+
+    const balance =
+        getDisplayedBalance();
+
+
+    if(amount > balance){
+
+        showToast(
+            "Insufficient balance."
+        );
+
+        return false;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                `${API}/api/withdraw`,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        userId:userId,
+
+                        amount:amount,
+
+                        method:method,
+
+                        account:account,
+
+                        accountHolder:
+                            accountHolder,
+
+                        bankName:
+                            bankName
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+                data.message ||
+                "Withdrawal request failed."
+            );
+
+        }
+
+
+        showToast(
+            "Withdrawal request submitted successfully."
+        );
+
+
+        await loadUser();
+
+        await loadHistory();
+
+
+        return true;
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Unable to submit withdrawal."
+        );
+
+        return false;
+
+    }
+
+}
+
+
+/* =====================================================
+   BANK FORM
+===================================================== */
+
+document
+.getElementById("bankForm")
+.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        const button =
+            document.getElementById(
+                "bankSubmit"
+            );
+
+
+        button.disabled = true;
+
+        button.textContent =
+            "SUBMITTING...";
+
+
+        const success =
+            await submitWithdrawal({
+
+                method:
+                    "Bank Account",
+
+                account:
+                    document
+                    .getElementById(
+                        "bankAccount"
+                    )
+                    .value,
+
+                amount:
+                    document
+                    .getElementById(
+                        "bankAmount"
+                    )
+                    .value,
+
+                accountHolder:
+                    document
+                    .getElementById(
+                        "bankHolder"
+                    )
+                    .value,
+
+                bankName:
+                    document
+                    .getElementById(
+                        "bankName"
+                    )
+                    .value
+
+            });
+
+
+        button.disabled = false;
+
+        button.textContent =
+            "SUBMIT WITHDRAWAL";
+
+
+        if(success){
+
+            this.reset();
+
+            closeModal(
+                "bankModal"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   EASYPAISA FORM
+===================================================== */
+
+document
+.getElementById("easypaisaForm")
+.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        const button =
+            document.getElementById(
+                "easySubmit"
+            );
+
+
+        button.disabled = true;
+
+        button.textContent =
+            "SUBMITTING...";
+
+
+        const success =
+            await submitWithdrawal({
+
+                method:
+                    "Easypaisa",
+
+                account:
+                    document
+                    .getElementById(
+                        "easyAccount"
+                    )
+                    .value,
+
+                amount:
+                    document
+                    .getElementById(
+                        "easyAmount"
+                    )
+                    .value,
+
+                accountHolder:
+                    document
+                    .getElementById(
+                        "easyHolder"
+                    )
+                    .value
+
+            });
+
+
+        button.disabled = false;
+
+        button.textContent =
+            "SUBMIT WITHDRAWAL";
+
+
+        if(success){
+
+            this.reset();
+
+            closeModal(
+                "easypaisaModal"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   JAZZCASH FORM
+===================================================== */
+
+document
+.getElementById("jazzcashForm")
+.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        const button =
+            document.getElementById(
+                "jazzSubmit"
+            );
+
+
+        button.disabled = true;
+
+        button.textContent =
+            "SUBMITTING...";
+
+
+        const success =
+            await submitWithdrawal({
+
+                method:
+                    "JazzCash",
+
+                account:
+                    document
+                    .getElementById(
+                        "jazzAccount"
+                    )
+                    .value,
+
+                amount:
+                    document
+                    .getElementById(
+                        "jazzAmount"
+                    )
+                    .value,
+
+                accountHolder:
+                    document
+                    .getElementById(
+                        "jazzHolder"
+                    )
+                    .value
+
+            });
+
+
+        button.disabled = false;
+
+        button.textContent =
+            "SUBMIT WITHDRAWAL";
+
+
+        if(success){
+
+            this.reset();
+
+            closeModal(
+                "jazzcashModal"
+            );
+
+        }
+
+    }
+);
+  /* =====================================================
+   LOAD WITHDRAWAL HISTORY
+===================================================== */
+
+async function loadHistory(){
+
+    const historyList =
+        document.getElementById(
+            "historyList"
+        );
+
+
+    if(!userId){
+
+        historyList.innerHTML = `
+            <div class="empty-history">
+                Please login to view withdrawal history.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                `${API}/api/withdrawals/${encodeURIComponent(userId)}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(
+            !response.ok ||
+            !data.success
+        ){
+
+            throw new Error(
+                data.message ||
+                "Unable to load history."
+            );
+
+        }
+
+
+        const withdrawals =
+            Array.isArray(
+                data.withdrawals
+            )
+            ? data.withdrawals
+            : [];
+
+
+        if(withdrawals.length === 0){
+
+            historyList.innerHTML = `
+                <div class="empty-history">
+                    No withdrawal history yet.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        historyList.innerHTML =
+            withdrawals
+            .slice()
+            .reverse()
+            .map(function(item){
+
+                const amount =
+                    Number(
+                        item.amount || 0
+                    );
+
+
+                const status =
+                    String(
+                        item.status ||
+                        "pending"
+                    ).toLowerCase();
+
+
+                let statusClass =
+                    "status-pending";
+
+
+                if(status === "approved"){
+
+                    statusClass =
+                        "status-approved";
+
+                }
+
+                else if(status === "rejected"){
+
+                    statusClass =
+                        "status-rejected";
+
+                }
+
+
+                return `
+
+                    <div class="history-card">
+
+                        <div class="history-top">
+
+                            <div class="history-method">
+                                ${escapeHTML(
+                                    item.method ||
+                                    "Withdrawal"
+                                )}
+                            </div>
+
+                            <div class="history-amount">
+                                PKR ${amount.toFixed(2)}
+                            </div>
+
+                        </div>
+
+
+                        <div class="history-bottom">
+
+                            <span>
+                                ${formatDate(
+                                    item.createdAt
+                                )}
+                            </span>
+
+                            <span
+                                class="history-status ${statusClass}">
+                                ${escapeHTML(status)}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            })
+            .join("");
+
+
+    }catch(error){
+
+        console.error(error);
+
+        historyList.innerHTML = `
+            <div class="empty-history">
+                Unable to load withdrawal history.
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(value){
+
+    if(!value){
+
+        return "Date unavailable";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "Date unavailable";
+
+    }
+
+
+    return date.toLocaleString(
+        "en-PK",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PHONE INPUT FILTER
+===================================================== */
+
+[
+    "easyAccount",
+    "jazzAccount"
+].forEach(function(id){
+
+    const input =
+        document.getElementById(id);
+
+
+    input.addEventListener(
+        "input",
+        function(){
+
+            this.value =
+                this.value
+                .replace(/\D/g,"")
+                .slice(0,11);
+
+        }
+    );
+
+});
+
+
+/* =====================================================
+   AMOUNT INPUT
+===================================================== */
+
+[
+    "bankAmount",
+    "easyAmount",
+    "jazzAmount"
+].forEach(function(id){
+
+    const input =
+        document.getElementById(id);
+
+
+    input.addEventListener(
+        "input",
+        function(){
+
+            if(Number(this.value) < 0){
+
+                this.value = "";
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =====================================================
+   ESC KEY CLOSE MODAL
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            document
+            .querySelectorAll(".modal.show")
+            .forEach(function(modal){
+
+                modal.classList.remove(
+                    "show"
+                );
+
+            });
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function(){
+
+        await loadUser();
+
+        await loadHistory();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#2496ff">
+
+<title>FT TRADE — Events</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+    --blue:#2496ff;
+    --blue-dark:#1477d4;
+    --blue-light:#eaf6ff;
+    --text:#152235;
+    --muted:#718096;
+    --white:#ffffff;
+    --border:#e1edf7;
+    --bg:#f5faff;
+    --green:#16a34a;
+    --shadow:0 10px 30px rgba(36,150,255,.10);
+}
+
+body{
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    padding-bottom:105px;
+}
+
+
+/* ================= HEADER ================= */
+
+.header{
+    background:#fff;
+    padding:18px 16px 20px;
+    border-bottom:1px solid var(--border);
+    box-shadow:0 5px 20px rgba(36,150,255,.06);
+}
+
+.topbar{
+    width:100%;
+    max-width:720px;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.back{
+    width:48px;
+    height:48px;
+
+    border:1px solid var(--border);
+    border-radius:15px;
+
+    background:#f7fbff;
+    color:var(--blue);
+
+    font-size:32px;
+    font-weight:500;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    box-shadow:0 5px 15px rgba(36,150,255,.07);
+}
+
+.title{
+    flex:1;
+}
+
+.title h1{
+    color:var(--text);
+    font-size:23px;
+    font-weight:900;
+}
+
+.title p{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.6px;
+}
+
+
+/* ================= MAIN ================= */
+
+.container{
+    width:calc(100% - 24px);
+    max-width:720px;
+    margin:18px auto;
+}
+
+
+/* ================= HERO ================= */
+
+.hero{
+    position:relative;
+    overflow:hidden;
+
+    padding:30px 20px 28px;
+
+    text-align:center;
+
+    border:1px solid #d8ebfa;
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f0f8ff
+        );
+
+    box-shadow:var(--shadow);
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    top:-95px;
+    right:-75px;
+
+    border-radius:50%;
+
+    background:rgba(36,150,255,.08);
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+
+    width:140px;
+    height:140px;
+
+    bottom:-90px;
+    left:-65px;
+
+    border-radius:50%;
+
+    background:rgba(36,150,255,.06);
+}
+
+
+/* ================= BIG ICON ================= */
+
+.event-icon{
+    position:relative;
+    z-index:2;
+
+    width:100px;
+    height:100px;
+
+    margin:0 auto 19px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:29px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            #52b5ff
+        );
+
+    font-size:52px;
+
+    box-shadow:
+        0 14px 30px
+        rgba(36,150,255,.25);
+}
+
+.hero h2{
+    position:relative;
+    z-index:2;
+
+    color:var(--text);
+
+    font-size:24px;
+    font-weight:900;
+}
+
+.hero p{
+    position:relative;
+    z-index:2;
+
+    max-width:390px;
+
+    margin:10px auto 0;
+
+    color:var(--muted);
+
+    font-size:12px;
+    line-height:1.65;
+    font-weight:600;
+}
+
+
+/* ================= COMING SOON ================= */
+
+.coming{
+    margin-top:15px;
+
+    padding:25px 20px;
+
+    text-align:center;
+
+    border:1px solid var(--border);
+    border-radius:24px;
+
+    background:#fff;
+
+    box-shadow:var(--shadow);
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:9px 17px;
+
+    border-radius:30px;
+
+    background:#eaf6ff;
+    border:1px solid #cce8fb;
+
+    color:var(--blue-dark);
+
+    font-size:11px;
+    font-weight:900;
+
+    letter-spacing:.7px;
+}
+
+.coming h3{
+    margin-top:15px;
+
+    color:var(--text);
+
+    font-size:20px;
+    font-weight:900;
+}
+
+.coming p{
+    max-width:420px;
+
+    margin:8px auto 0;
+
+    color:var(--muted);
+
+    font-size:11px;
+    line-height:1.65;
+}
+
+
+/* ================= INFO CARDS ================= */
+
+.info-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+
+    margin-top:15px;
+}
+
+.info{
+    min-height:145px;
+
+    padding:20px 8px;
+
+    text-align:center;
+
+    border:1px solid var(--border);
+    border-radius:20px;
+
+    background:#fff;
+
+    box-shadow:var(--shadow);
+}
+
+.info-icon{
+    width:64px;
+    height:64px;
+
+    margin:0 auto 11px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:19px;
+
+    background:var(--blue-light);
+
+    font-size:32px;
+}
+
+.info strong{
+    display:block;
+
+    color:var(--text);
+
+    font-size:12px;
+    font-weight:900;
+}
+
+.info span{
+    display:block;
+
+    margin-top:5px;
+
+    color:var(--muted);
+
+    font-size:9px;
+    font-weight:700;
+}
+
+
+/* ================= EVENT STATUS ================= */
+
+.status-box{
+    margin-top:15px;
+
+    padding:19px;
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    border:1px solid var(--border);
+    border-radius:22px;
+
+    background:#fff;
+
+    box-shadow:var(--shadow);
+}
+
+.status-icon{
+    width:56px;
+    height:56px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:17px;
+
+    background:#eaf6ff;
+
+    font-size:30px;
+}
+
+.status-content{
+    flex:1;
+}
+
+.status-content h4{
+    color:var(--text);
+
+    font-size:14px;
+    font-weight:900;
+}
+
+.status-content p{
+    margin-top:4px;
+
+    color:var(--muted);
+
+    font-size:10px;
+    line-height:1.5;
+}
+
+.status{
+    padding:8px 12px;
+
+    border-radius:20px;
+
+    background:#fff7ed;
+
+    border:1px solid #fed7aa;
+
+    color:#ea580c;
+
+    font-size:9px;
+    font-weight:900;
+}
+
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav{
+    position:fixed;
+
+    z-index:100;
+
+    left:12px;
+    right:12px;
+    bottom:10px;
+
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+
+    border:1px solid var(--border);
+    border-radius:25px;
+
+    background:
+        rgba(255,255,255,.97);
+
+    box-shadow:
+        0 12px 35px
+        rgba(36,150,255,.16);
+
+    backdrop-filter:blur(15px);
+}
+
+.nav-item{
+    width:23%;
+    height:57px;
+
+    border:0;
+    border-radius:17px;
+
+    background:transparent;
+
+    color:#8191a5;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap:3px;
+
+    font-size:8px;
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+.nav-item.active{
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            #51b4ff
+        );
+
+    box-shadow:
+        0 7px 20px
+        rgba(36,150,255,.25);
+}
+
+.nav-icon{
+    font-size:25px;
+    line-height:25px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:500px){
+
+    .hero{
+        padding:27px 17px 25px;
+    }
+
+    .event-icon{
+        width:94px;
+        height:94px;
+
+        font-size:49px;
+    }
+
+    .hero h2{
+        font-size:22px;
+    }
+
+    .info{
+        min-height:138px;
+        padding:18px 6px;
+    }
+
+    .info-icon{
+        width:60px;
+        height:60px;
+
+        font-size:30px;
+    }
+
+}
+
+@media(max-width:380px){
+
+    .title h1{
+        font-size:21px;
+    }
+
+    .event-icon{
+        width:88px;
+        height:88px;
+
+        font-size:45px;
+    }
+
+    .hero h2{
+        font-size:20px;
+    }
+
+    .info-icon{
+        width:54px;
+        height:54px;
+
+        font-size:27px;
+    }
+
+    .info strong{
+        font-size:10px;
+    }
+
+}
+
+
+/* DESKTOP */
+
+@media(min-width:721px){
+
+    .container{
+        margin-top:25px;
+    }
+
+    .hero{
+        padding:38px 30px;
+    }
+
+    .event-icon{
+        width:110px;
+        height:110px;
+
+        font-size:58px;
+    }
+
+    .hero h2{
+        font-size:27px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="topbar">
+
+        <button
+            class="back"
+            type="button"
+            onclick="go('dashboard.html')">
+
+            ‹
+
+        </button>
+
+        <div class="title">
+
+            <h1>
+                Events
+            </h1>
+
+            <p>
+                FT TRADE • EVENTS CENTER
+            </p>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="event-icon">
+            🎁
+        </div>
+
+        <h2>
+            Events Coming Soon
+        </h2>
+
+        <p>
+            Exciting events, special rewards
+            and new opportunities are being
+            prepared for FT TRADE members.
+        </p>
+
+    </section>
+
+
+    <!-- COMING -->
+
+    <section class="coming">
+
+        <span class="badge">
+            COMING SOON
+        </span>
+
+        <h3>
+            Stay Tuned
+        </h3>
+
+        <p>
+            New FT TRADE events will appear
+            here when they are officially
+            launched.
+        </p>
+
+    </section>
+
+
+    <!-- INFO -->
+
+    <section class="info-grid">
+
+        <div class="info">
+
+            <div class="info-icon">
+                🎁
+            </div>
+
+            <strong>
+                Events
+            </strong>
+
+            <span>
+                Coming Soon
+            </span>
+
+        </div>
+
+
+        <div class="info">
+
+            <div class="info-icon">
+                🏆
+            </div>
+
+            <strong>
+                Rewards
+            </strong>
+
+            <span>
+                Coming Soon
+            </span>
+
+        </div>
+
+
+        <div class="info">
+
+            <div class="info-icon">
+                🔔
+            </div>
+
+            <strong>
+                Updates
+            </strong>
+
+            <span>
+                Stay Tuned
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATUS -->
+
+    <section class="status-box">
+
+        <div class="status-icon">
+            📢
+        </div>
+
+        <div class="status-content">
+
+            <h4>
+                Event Updates
+            </h4>
+
+            <p>
+                New events and announcements
+                will be displayed here.
+            </p>
+
+        </div>
+
+        <span class="status">
+            SOON
+        </span>
+
+    </section>
+
+
+</main>
+
+
+<!-- ================= BOTTOM NAV ================= -->
+
+<nav class="bottom-nav">
+
+
+    <button
+        class="nav-item"
+        type="button"
+        onclick="go('dashboard.html')">
+
+        <span class="nav-icon">
+            ⌂
+        </span>
+
+        HOME
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        type="button"
+        onclick="go('tasks.html')">
+
+        <span class="nav-icon">
+            ✓
+        </span>
+
+        TASKS
+
+    </button>
+
+
+    <button
+        class="nav-item active"
+        type="button">
+
+        <span class="nav-icon">
+            🎁
+        </span>
+
+        EVENTS
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        type="button"
+        onclick="go('profile.html')">
+
+        <span class="nav-icon">
+            ●
+        </span>
+
+        PROFILE
+
+    </button>
+
+
+</nav>
+
+
+<script>
+
+function go(page){
+
+    location.href = page;
+
+}
+
+</script>
+
+
+</body>
+
+</html>

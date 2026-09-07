@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2496ff">
+
+<title>FT TRADE | Dashboard</title>
+<script src="config.js"></script>
+  
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+    --blue:#2496ff;
+    --blue-dark:#1477d4;
+    --blue-light:#eaf6ff;
+    --text:#152235;
+    --muted:#718096;
+    --white:#fff;
+    --border:#e1edf7;
+    --bg:#f5faff;
+    --shadow:0 10px 30px rgba(36,150,255,.10);
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    padding-bottom:95px;
+}
+
+/* HEADER */
+
+.header{
+    height:70px;
+    padding:0 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,255,255,.97);
+    border-bottom:1px solid var(--border);
+    backdrop-filter:blur(12px);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--blue-dark);
+    font-size:20px;
+    font-weight:900;
+}
+
+.logo-box{
+    width:43px;
+    height:43px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:13px;
+    background:linear-gradient(135deg,#54b4ff,#1679d9);
+    color:#fff;
+    font-size:16px;
+    font-weight:900;
+    box-shadow:0 7px 18px rgba(36,150,255,.25);
+}
+
+.settings{
+    width:44px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:#fff;
+    color:var(--blue-dark);
+    text-decoration:none;
+    font-size:25px;
+}
+
+/* CONTAINER */
+
+.container{
+    width:100%;
+    max-width:1050px;
+    margin:auto;
+    padding:22px 16px;
+}
+
+/* WELCOME */
+
+.welcome{
+    margin-bottom:20px;
+}
+
+.welcome small{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.welcome h1{
+    margin-top:6px;
+    font-size:27px;
+    font-weight:900;
+}
+
+.welcome h1 span{
+    color:var(--blue);
+}
+
+/* BALANCE */
+
+.balance-card{
+    position:relative;
+    overflow:hidden;
+    margin-bottom:20px;
+    padding:25px;
+    border-radius:25px;
+    color:#fff;
+    background:linear-gradient(135deg,#2496ff,#1477d4);
+    box-shadow:0 15px 35px rgba(36,150,255,.25);
+}
+
+.balance-card::before{
+    content:"";
+    position:absolute;
+    width:190px;
+    height:190px;
+    right:-75px;
+    top:-90px;
+    border-radius:50%;
+    background:rgba(255,255,255,.10);
+}
+
+.balance-card::after{
+    content:"";
+    position:absolute;
+    width:145px;
+    height:145px;
+    left:-80px;
+    bottom:-80px;
+    border-radius:50%;
+    background:rgba(255,255,255,.07);
+}
+
+.balance-top{
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.balance-label{
+    font-size:13px;
+    opacity:.88;
+}
+
+.balance{
+    margin-top:10px;
+    font-size:36px;
+    font-weight:900;
+}
+
+.balance-icon{
+    width:56px;
+    height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:17px;
+    background:rgba(255,255,255,.18);
+    font-size:29px;
+}
+
+.balance-bottom{
+    position:relative;
+    z-index:2;
+    display:flex;
+    justify-content:space-between;
+    margin-top:19px;
+    font-size:12px;
+    opacity:.9;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:22px;
+}
+
+.stat{
+    padding:17px 14px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:19px;
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    width:55px;
+    height:55px;
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    background:var(--blue-light);
+    color:var(--blue);
+    font-size:29px;
+    font-weight:900;
+}
+
+.stat-value{
+    font-size:21px;
+    font-weight:900;
+}
+
+.stat-label{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* LEVEL */
+
+.level-card{
+    margin-bottom:25px;
+    padding:21px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:21px;
+    box-shadow:var(--shadow);
+}
+
+.level-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+}
+
+.level-title{
+    font-size:15px;
+    font-weight:900;
+}
+
+.level-number{
+    color:var(--blue);
+    font-size:14px;
+    font-weight:900;
+}
+
+.progress{
+    height:11px;
+    overflow:hidden;
+    border-radius:20px;
+    background:#e9f3fb;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(90deg,#54b4ff,#1679d9);
+    transition:width .5s ease;
+}
+
+.xp-text{
+    display:flex;
+    justify-content:space-between;
+    margin-top:10px;
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* SECTION */
+
+.section-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+}
+
+.section-title h2{
+    font-size:19px;
+    font-weight:900;
+}
+
+.section-title span{
+    color:var(--blue);
+    font-size:11px;
+    font-weight:900;
+}
+
+/* QUICK ACCESS */
+
+.menu{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:12px;
+}
+
+.menu-btn{
+    width:100%;
+    min-width:0;
+    padding:16px 6px;
+    border:1px solid var(--border);
+    border-radius:18px;
+    background:#fff;
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    text-align:center;
+    transition:.2s;
+}
+
+.menu-btn:active{
+    transform:scale(.96);
+}
+
+.menu-icon{
+    width:54px;
+    height:54px;
+    margin:0 auto 10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    background:var(--blue-light);
+    font-size:28px;
+}
+
+.menu-btn strong{
+    display:block;
+    color:var(--text);
+    font-size:12px;
+    font-weight:900;
+}
+
+.menu-btn small{
+    display:block;
+    margin-top:4px;
+    color:var(--muted);
+    font-size:9px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    left:0;
+    bottom:0;
+    z-index:200;
+    width:100%;
+    height:78px;
+    display:flex;
+    justify-content:center;
+    background:rgba(255,255,255,.98);
+    border-top:1px solid var(--border);
+    box-shadow:0 -5px 25px rgba(0,0,0,.06);
+}
+
+.bottom-inner{
+    width:100%;
+    max-width:600px;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+}
+
+.nav-btn{
+    min-width:65px;
+    border:0;
+    background:none;
+    color:#8a99aa;
+    cursor:pointer;
+    text-align:center;
+    font-size:11px;
+}
+
+.nav-btn div{
+    margin-bottom:5px;
+    font-size:28px;
+    line-height:1;
+}
+
+.nav-btn.active{
+    color:var(--blue);
+    font-weight:900;
+}
+
+/* DESKTOP */
+
+@media(min-width:800px){
+
+    .container{
+        padding-top:30px;
+    }
+
+    .menu-btn:hover{
+        transform:translateY(-3px);
+        border-color:#b9ddf8;
+    }
+
+    .settings:hover{
+        background:var(--blue-light);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .container{
+        padding:19px 12px;
+    }
+
+    .stats{
+        gap:7px;
+    }
+
+    .stat{
+        padding:14px 8px;
+    }
+
+    .stat-icon{
+        width:50px;
+        height:50px;
+        font-size:26px;
+    }
+
+    .stat-value{
+        font-size:19px;
+    }
+
+    .stat-label{
+        font-size:10px;
+    }
+
+    .balance{
+        font-size:31px;
+    }
+
+    /* IMPORTANT:
+       Always 3 cards per row */
+    .menu{
+        grid-template-columns:repeat(3,1fr);
+        gap:8px;
+    }
+
+    .menu-btn{
+        padding:14px 4px;
+        border-radius:16px;
+    }
+
+    .menu-icon{
+        width:50px;
+        height:50px;
+        font-size:26px;
+        border-radius:15px;
+    }
+
+    .menu-btn strong{
+        font-size:11px;
+    }
+
+    .menu-btn small{
+        font-size:8px;
+    }
+}
+  .ft-poster{
+    width:100%;
+    margin:18px 0;
+    border-radius:18px;
+    overflow:hidden;
+    background:#fff;
+    border:1px solid #e1edf7;
+    box-shadow:0 10px 30px rgba(36,150,255,.10);
+}
+
+.ft-poster img{
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:260px;
+    object-fit:cover;
+}
+</style>
+</head>
+
+<body>
+  
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <div class="logo-box">
+            FT
+        </div>
+
+        FT TRADE
+
+    </div>
+
+    <a
+        href="settings.html"
+        class="settings">
+        ⚙️
+    </a>
+
+</header>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+    <!-- WELCOME -->
+
+    <section class="welcome">
+
+        <small>
+            Welcome back 👋
+        </small>
+
+        <h1>
+            Hello <span id="userName">User</span>
+        </h1>
+
+    </section>
+
+
+    <!-- BALANCE -->
+
+    <section class="balance-card">
+
+        <div class="balance-top">
+
+            <div>
+
+                <div class="balance-label">
+                    Available Balance
+                </div>
+
+                <div class="balance">
+                    PKR <span id="balance">0.00</span>
+                </div>
+
+            </div>
+
+            <div class="balance-icon">
+                💳
+            </div>
+
+        </div>
+
+        <div class="balance-bottom">
+
+            <span>
+                Your Account
+            </span>
+
+            <span>
+                ● Active
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                ★ 
+            </div>
+
+            <div
+                class="stat-value"
+                id="completed">
+                0
+            </div>
+
+            <div class="stat-label">
+                Completed Tasks
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                🏁
+            </div>
+
+            <div
+                class="stat-value"
+                id="level">
+                1
+            </div>
+
+            <div class="stat-label">
+                Current Level
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                ⚡
+            </div>
+
+            <div
+                class="stat-value"
+                id="xp">
+                0
+            </div>
+
+            <div class="stat-label">
+                Total XP
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LEVEL -->
+
+    <section class="level-card">
+
+        <div class="level-head">
+
+            <div class="level-title">
+                Level Progress
+            </div>
+
+            <div class="level-number">
+                LV <span id="levelSmall">1</span>
+            </div>
+
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="progress-bar"
+                id="progressBar">
+            </div>
+
+        </div>
+
+        <div class="xp-text">
+
+            <span id="currentXP">
+                0 XP
+            </span>
+
+            <span id="nextXP">
+                25 XP
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUICK ACCESS -->
+
+    <div class="section-title">
+
+        <h2>
+            Quick Access
+        </h2>
+
+        <span>
+            FT TRADE
+        </span>
+
+    </div>
+
+
+    <section class="menu">
+
+        <!-- ROW 1 -->
+
+        <button
+            class="menu-btn"
+            onclick="go('tasks.html')">
+
+            <div class="menu-icon">
+                📋
+            </div>
+
+            <strong>
+                Tasks
+            </strong>
+
+            <small>
+                Earn
+            </small>
+
+        </button>
+
+
+        <button
+            class="menu-btn"
+            onclick="go('withdraw.html')">
+
+            <div class="menu-icon">
+                💰
+            </div>
+
+            <strong>
+                Withdraw
+            </strong>
+
+            <small>
+                Cash out
+            </small>
+
+        </button>
+
+
+        <button
+            class="menu-btn"
+            onclick="go('events.html')">
+
+            <div class="menu-icon">
+                🎁
+            </div>
+
+            <strong>
+                Events
+            </strong>
+
+            <small>
+                Rewards
+            </small>
+
+        </button>
+
+
+        <!-- ROW 2 -->
+
+        <button
+            class="menu-btn"
+            onclick="go('team.html')">
+
+            <div class="menu-icon">
+                👥
+            </div>
+
+            <strong>
+                My Team
+            </strong>
+
+            <small>
+                Friends
+            </small>
+
+        </button>
+
+
+        <button
+            class="menu-btn"
+            onclick="go('profile.html')">
+
+            <div class="menu-icon">
+                👤
+            </div>
+
+            <strong>
+                Profile
+            </strong>
+
+            <small>
+                Account
+            </small>
+
+        </button>
+
+
+        <button
+            class="menu-btn"
+            onclick="go('support.html')">
+
+            <div class="menu-icon">
+                💬
+            </div>
+
+            <strong>
+                Support
+            </strong>
+
+            <small>
+                Help
+            </small>
+
+        </button>
+
+    </section>
+<div class="ft-poster">
+    <img src="fttrade.png" alt="FT TRADE Poster">
+</div>
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+    <div class="bottom-inner">
+
+        <button
+            class="nav-btn active"
+            onclick="go('dashboard.html')">
+
+            <div>⌂</div>
+            Home
+
+        </button>
+
+
+        <button
+            class="nav-btn"
+            onclick="go('tasks.html')">
+
+            <div>✓</div>
+            Tasks
+
+        </button>
+
+
+        <button
+            class="nav-btn"
+            onclick="go('withdraw.html')">
+
+            <div>💳</div>
+            Withdraw
+
+        </button>
+
+
+        <button
+            class="nav-btn"
+            onclick="go('profile.html')">
+
+            <div>👤</div>
+            Profile
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+<script>
+
+/* FT TRADE API */
+
+const API = API_BASE;
+
+/* GET USER */
+
+let user = null;
+
+try{
+
+    user = JSON.parse(
+        localStorage.getItem("ftUser") || "null"
+    );
+
+}catch(error){
+
+    user = null;
+
+}
+
+
+/* LOGIN CHECK */
+
+if(!user){
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* NAVIGATION */
+
+function go(page){
+
+    window.location.href = page;
+
+}
+
+
+/* USER NAME */
+
+function setUserName(){
+
+    if(!user)
+        return;
+
+    const name =
+        user.name ||
+        user.username ||
+        user.fullName ||
+        "User";
+
+    document.getElementById(
+        "userName"
+    ).textContent = name;
+
+}
+
+
+/* LOAD USER */
+
+async function loadUser(){
+
+    if(!user || !user.id)
+        return;
+
+    try{
+
+        const response =
+            await fetch(
+                `${API}/api/user/${encodeURIComponent(user.id)}`
+            );
+
+        if(!response.ok){
+
+            throw new Error(
+                "Server returned " +
+                response.status
+            );
+
+        }
+
+        const data =
+            await response.json();
+
+        if(!data.success && !data.user){
+
+            throw new Error(
+                data.message ||
+                "Unable to load user"
+            );
+
+        }
+
+        const u =
+            data.user || data;
+
+
+        /* BALANCE */
+
+        const balance =
+            Number(u.balance || 0);
+
+        document.getElementById(
+            "balance"
+        ).textContent =
+            balance.toFixed(2);
+
+
+        /* COMPLETED */
+
+        const completed =
+            Number(
+                u.completedTasks ||
+                u.completed ||
+                u.tasksCompleted ||
+                0
+            );
+
+        document.getElementById(
+            "completed"
+        ).textContent =
+            completed;
+
+
+        /* XP */
+
+        const xp =
+            Math.max(
+                0,
+                Number(u.xp || 0)
+            );
+
+        document.getElementById(
+            "xp"
+        ).textContent =
+            xp;
+
+        document.getElementById(
+            "currentXP"
+        ).textContent =
+            xp + " XP";
+
+
+        /* LEVEL */
+
+        const level =
+            Math.floor(xp / 25) + 1;
+
+        document.getElementById(
+            "level"
+        ).textContent =
+            level;
+
+        document.getElementById(
+            "levelSmall"
+        ).textContent =
+            level;
+
+
+        /* PROGRESS */
+
+        const currentLevelStart =
+            (level - 1) * 25;
+
+        const nextLevelXP =
+            level * 25;
+
+        const xpInsideLevel =
+            xp - currentLevelStart;
+
+        const xpNeeded =
+            nextLevelXP -
+            currentLevelStart;
+
+        let progress =
+            (xpInsideLevel /
+            xpNeeded) * 100;
+
+        progress =
+            Math.max(
+                0,
+                Math.min(100,progress)
+            );
+
+        document.getElementById(
+            "progressBar"
+        ).style.width =
+            progress + "%";
+
+
+        /* NEXT XP */
+
+        document.getElementById(
+            "nextXP"
+        ).textContent =
+            nextLevelXP + " XP";
+
+
+    }catch(error){
+
+        console.log(
+            "Failed to load user:",
+            error
+        );
+
+    }
+
+}
+
+
+/* START */
+
+setUserName();
+loadUser();
+
+</script>
+
+</body>
+</html>

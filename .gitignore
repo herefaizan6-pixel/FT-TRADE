@@ -1,0 +1,16 @@
+**/node_modules/
+*.log
+.env
+backend-backup/
+*-backup*.html
+admin-old.html
+admin-before-*.html
+ft-trade-api/
+backend/data/*.json
+backend/*.backup*.js
+backend/data/
+backend/users.json
+backend/withdrawals.json
+backend/support.json
+backend/tasks.backup.json
+backend/server-backup.js

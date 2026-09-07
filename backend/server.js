@@ -2798,8 +2798,8 @@ app.post(
                 String(req.body.password || "");
 
             // Change these to your own admin credentials
-            const ADMIN_USERNAME = "ftadmin";
-            const ADMIN_PASSWORD = "FT@Admin2026";
+            const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+            const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
             if (
                 username === ADMIN_USERNAME &&
